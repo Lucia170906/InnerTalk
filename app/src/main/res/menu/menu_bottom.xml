@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/chatFragment"
+        android:icon="@drawable/chat_icon"
+        android:title="Chat"/>
+
+    <item
+        android:id="@+id/newEntryFragment"
+        android:icon="@drawable/new_entry_icon"
+        android:title="Nueva Entrada"/>
+
+    <item
+        android:id="@+id/statisticsFragment"
+        android:icon="@drawable/statistics_icon"
+        android:title="Estadísticas"/>
+</menu>

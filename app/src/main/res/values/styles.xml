@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MiApp" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorOnPrimary">#1D1B20</item>
+    </style>
+</resources>
