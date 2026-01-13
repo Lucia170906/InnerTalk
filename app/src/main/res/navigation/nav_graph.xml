@@ -25,4 +25,9 @@
         android:name="com.example.innertalk.NewEntryFragment"
         android:label="fragment_new_entry"
         tools:layout="@layout/fragment_new_entry" />
+    <fragment
+        android:id="@+id/chatFragment2"
+        android:name="com.example.innertalk.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
 </navigation>

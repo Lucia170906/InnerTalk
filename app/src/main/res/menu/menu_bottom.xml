@@ -2,15 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/chatFragment"
+        android:id="@+id/chatFragment2"
         android:icon="@drawable/chat_icon"
         android:title="Chat"/>
+    <item
+        android:id="@+id/startFragment"
+        android:icon="@drawable/start_icon"
+        android:title="Inicio"/>
 
     <item
         android:id="@+id/newEntryFragment"
         android:icon="@drawable/new_entry_icon"
         android:title="Nueva Entrada"/>
-
     <item
         android:id="@+id/statisticsFragment"
         android:icon="@drawable/statistics_icon"
