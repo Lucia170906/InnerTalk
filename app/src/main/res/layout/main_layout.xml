@@ -39,7 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:menu="@menu/menu_bottom"
-        android:background="?android:attr/windowBackground" />
+        android:background="@drawable/toolbar_rounded"
+
+        app:menu="@menu/menu_bottom"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

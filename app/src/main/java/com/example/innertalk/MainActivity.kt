@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.chatFragment2,
                 R.id.newEntryFragment,
-                R.id.statisticsFragment
+                R.id.statisticsFragment,
+                R.id.startFragment
             )
         )
 
@@ -66,5 +67,23 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+//    // ... después de onSupportNavigateUp ...
+//
+//    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+//        // Infla el menú de la toolbar (asegúrate de que el nombre del archivo sea correcto)
+//        menuInflater.inflate(R.menu.menu_options, menu)
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+//        // Maneja el clic en el botón de ajustes
+//        return when (item.itemId) {
+//            R.id.configFragment -> { // El ID debe coincidir con el de tu nav_graph
+//                navController.navigate(R.id.configFragment)
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 }
 

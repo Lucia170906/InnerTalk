@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/startFragment"
         android:name="com.example.innertalk.StartFragment"
-        android:label="fragment_start"
+        android:label="@string/label_start"
         tools:layout="@layout/fragment_start" />
     <fragment
         android:id="@+id/statisticsFragment"
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/newEntryFragment"
         android:name="com.example.innertalk.NewEntryFragment"
-        android:label="fragment_new_entry"
+        android:label="@string/label_new_entry"
         tools:layout="@layout/fragment_new_entry" />
     <fragment
         android:id="@+id/chatFragment2"

@@ -4,18 +4,18 @@
     <item
         android:id="@+id/chatFragment2"
         android:icon="@drawable/chat_icon"
-        android:title="Chat"/>
+        android:title="@string/chat"/>
     <item
         android:id="@+id/startFragment"
         android:icon="@drawable/start_icon"
-        android:title="Inicio"/>
+        android:title="@string/start"/>
 
     <item
         android:id="@+id/newEntryFragment"
         android:icon="@drawable/new_entry_icon"
-        android:title="Nueva Entrada"/>
+        android:title="@string/add_entry"/>
     <item
         android:id="@+id/statisticsFragment"
         android:icon="@drawable/statistics_icon"
-        android:title="Estadísticas"/>
+        android:title="@string/statistics"/>
 </menu>

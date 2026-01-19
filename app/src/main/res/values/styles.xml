@@ -3,4 +3,14 @@
     <style name="Theme.MiApp" parent="Theme.MaterialComponents.DayNight">
         <item name="colorOnPrimary">#1D1B20</item>
     </style>
+    <style name="FaceButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_weight">1</item>
+
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:padding">10dp</item>
+    </style>
 </resources>

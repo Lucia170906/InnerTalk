@@ -1,5 +1,22 @@
 <resources>
-    <string name="app_name">InnerTalk</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+<!--    texto menu bottom-->
+
+    <string name="chat">Chat</string>
+    <string name="start">Inicio</string>
+    <string name="add_entry">Nueva entrada</string>
+    <string name="statistics">Estadísticas</string>
+
+    <string name="app_name">InnerTalk</string>
+    <string name="label_start">Inicio</string>
+    <string name="calendar">Calendario</string>
+
+
+
+    <string name="label_new_entry">Nueva Entrada</string>
+    <string name="select_text">Selecciona como te sientes</string>
+    <string name="write_here_text">Escribe aquí...</string>
+    <string name="save_button">Guardar</string>
+
+
 </resources>
