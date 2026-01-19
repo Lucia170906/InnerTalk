@@ -1,0 +1,192 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4FAFB"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_header_auth"
+            android:elevation="4dp"
+            android:padding="32dp"
+            android:text="InnerTalk"
+            android:textAlignment="center"
+            android:textColor="#4A148C"
+            android:textSize="32sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_card_white"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acceso de Usuario"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                android:letterSpacing="0.1"
+                android:textColor="#4A148C"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:weightSum="10">
+
+                <EditText
+                    android:id="@+id/etLoginUser"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="3.5"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="Usuario"
+                    android:paddingStart="12dp"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp"/>
+
+                <EditText
+                    android:id="@+id/etLoginPass"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="3.5"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:paddingStart="12dp"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp"/>
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="3"
+                    android:text="Entrar"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#D1C4FF"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    app:cornerRadius="12dp"
+                    android:textColor="#4A148C"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_card_white"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nueva Cuenta"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                android:letterSpacing="0.1"
+                android:textColor="#4A148C"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:orientation="vertical">
+
+                    <EditText android:layout_width="match_parent" android:layout_height="42dp"
+                        android:hint="Nombre" android:background="@drawable/bg_input_field"
+                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
+
+                    <EditText android:layout_width="match_parent" android:layout_height="42dp"
+                        android:hint="Apellidos" android:background="@drawable/bg_input_field"
+                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
+
+                    <EditText android:layout_width="match_parent" android:layout_height="42dp"
+                        android:hint="F. Nacimiento" android:background="@drawable/bg_input_field"
+                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
+
+                    <EditText android:layout_width="match_parent" android:layout_height="42dp"
+                        android:hint="Género" android:background="@drawable/bg_input_field"
+                        android:paddingStart="12dp" android:textSize="14sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_input_field"
+                    android:backgroundTint="#F3E5F5"
+                    android:padding="10dp"
+                    android:orientation="vertical">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Intereses:" android:textSize="11sp" android:textColor="#4A148C" android:textStyle="bold"/>
+                    <CheckBox android:layout_width="wrap_content" android:layout_height="32dp" android:text="Estrés" android:textSize="12sp" />
+                    <CheckBox android:layout_width="wrap_content" android:layout_height="32dp" android:text="Ansiedad" android:textSize="12sp" />
+                    <CheckBox android:layout_width="wrap_content" android:layout_height="32dp" android:text="Sueño" android:textSize="12sp" />
+                    <CheckBox android:layout_width="wrap_content" android:layout_height="32dp" android:text="Ánimo" android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Nombre de usuario deseado"
+                android:background="@drawable/bg_input_field"
+                android:paddingStart="12dp"
+                android:layout_marginTop="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:background="@drawable/bg_input_field"
+                android:paddingStart="12dp"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="20dp"
+                android:text="CREAR CUENTA"
+                android:textStyle="bold"
+                android:backgroundTint="#D1C4FF"
+                app:cornerRadius="12dp"
+                android:textColor="#4A148C"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
