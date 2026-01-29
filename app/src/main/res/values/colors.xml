@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lavanda_claro">#DCD0FF</color>
     <color name="lavanda_texto">#6A5ACD</color>
-    <color name="fondo_app">#F5F9FF</color>
+    <color name="fondo_app">#ECFDFF</color>
     <color name="boton_salir">#FFD1D1</color>
     <color name="texto_salir">#FF5A5A</color>
 </resources>

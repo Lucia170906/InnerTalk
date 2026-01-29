@@ -16,6 +16,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.navigateUp
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.navigateUp
 import com.example.innertalk.databinding.MainLayoutBinding
 import com.example.innertalk.ui.theme.InnerTalkTheme
@@ -63,27 +65,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
-//    // ... después de onSupportNavigateUp ...
-//
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
         // Infla el menú de la toolbar (asegúrate de que el nombre del archivo sea correcto)
         menuInflater.inflate(R.menu.menu_options, menu)
         return true
     }
+
 //
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
         // Maneja el clic en el botón de ajustes
-        return when (item.itemId) {
-            R.id.nav_host_fragment-> { // El ID debe coincidir con el de tu nav_graph
-                navController.navigate(R.id.configFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+        return onNavDestinationSelected(item, navController)
+                ||super.onOptionsItemSelected(item)
+
     }
+    override fun onSupportNavigateUp(): Boolean {
+        return navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp()
+    }
+//    // ... después de onSupportNavigateUp ...
+//
+
 }
 
