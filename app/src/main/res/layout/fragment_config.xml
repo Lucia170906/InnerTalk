@@ -1,14 +1,143 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfigFragment">
+    android:background="@color/fondo_app"
+    android:orientation="vertical"
+    android:padding="24dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPerfil"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="64dp"
+        android:text="Perfil"
+        android:textColor="@color/lavanda_texto"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
+        android:paddingStart="20dp"
+        app:backgroundTint="@color/lavanda_claro"
+        app:cornerRadius="32dp"
+        app:icon="@drawable/icon_config"
+        app:iconGravity="textStart"
+        app:iconSize="24dp"
+        app:iconPadding="16dp"
+        app:iconTint="@color/lavanda_texto" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajustes"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/lavanda_texto" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:cardBackgroundColor="@color/lavanda_claro"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/notification_icon"
+                app:tint="@color/lavanda_texto" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:text="Recordatorio"
+                android:textColor="@color/lavanda_texto" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchNotificaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIdioma"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="10dp"
+        android:text="Idioma"
+        android:textColor="@color/lavanda_texto"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
+        android:paddingStart="20dp"
+        app:backgroundTint="@color/lavanda_claro"
+        app:cornerRadius="32dp"
+        app:icon="@drawable/lenguage_icon"
+        app:iconGravity="textStart"
+        app:iconSize="24dp"
+        app:iconPadding="16dp"
+        app:iconTint="@color/lavanda_texto" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soporte"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/lavanda_texto" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIncidencia"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="Enviar incidencia"
+        android:textColor="@color/lavanda_texto"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
+        android:paddingStart="20dp"
+        app:backgroundTint="@color/lavanda_claro"
+        app:cornerRadius="32dp"
+        app:icon="@drawable/incidence_icon"
+        app:iconGravity="textStart"
+        app:iconSize="24dp"
+        app:iconPadding="16dp"
+        app:iconTint="@color/lavanda_texto" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPoliticas"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="10dp"
+        android:text="Políticas"
+        android:textColor="@color/lavanda_texto"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
+        android:paddingStart="20dp"
+        app:backgroundTint="@color/lavanda_claro"
+        app:cornerRadius="32dp"
+        app:icon="@drawable/policy_icon"
+        app:iconGravity="textStart"
+        app:iconSize="24dp"
+        app:iconPadding="16dp"
+        app:iconTint="@color/lavanda_texto" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Cerrar Sesión"
+        android:textColor="@color/texto_salir"
+        android:textAllCaps="false"
+        android:paddingHorizontal="30dp"
+        app:backgroundTint="@color/boton_salir"
+        app:cornerRadius="24dp" />
+
+</LinearLayout>

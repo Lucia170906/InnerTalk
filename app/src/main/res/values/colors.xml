@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="lavanda_claro">#DCD0FF</color>
+    <color name="lavanda_texto">#6A5ACD</color>
+    <color name="fondo_app">#F5F9FF</color>
+    <color name="boton_salir">#FFD1D1</color>
+    <color name="texto_salir">#FF5A5A</color>
 </resources>

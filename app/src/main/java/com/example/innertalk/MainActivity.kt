@@ -69,21 +69,21 @@ class MainActivity : AppCompatActivity() {
     }
 //    // ... después de onSupportNavigateUp ...
 //
-//    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
-//        // Infla el menú de la toolbar (asegúrate de que el nombre del archivo sea correcto)
-//        menuInflater.inflate(R.menu.menu_options, menu)
-//        return true
-//    }
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        // Infla el menú de la toolbar (asegúrate de que el nombre del archivo sea correcto)
+        menuInflater.inflate(R.menu.menu_options, menu)
+        return true
+    }
 //
-//    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
-//        // Maneja el clic en el botón de ajustes
-//        return when (item.itemId) {
-//            R.id.configFragment -> { // El ID debe coincidir con el de tu nav_graph
-//                navController.navigate(R.id.configFragment)
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        // Maneja el clic en el botón de ajustes
+        return when (item.itemId) {
+            R.id.nav_host_fragment-> { // El ID debe coincidir con el de tu nav_graph
+                navController.navigate(R.id.configFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
 

@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/toolbar_rounded"
+            app:menu="@menu/menu_options"
             app:titleCentered="true"
+
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:titleTextColor="#1D1B20"/>
 
