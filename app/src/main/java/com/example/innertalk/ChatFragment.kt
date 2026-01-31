@@ -1,59 +1,101 @@
-package com.example.innertalk
+package com.example.innertalk.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.innertalk.adapter.ChatAdapter
+import com.example.innertalk.databinding.FragmentChatBinding
+import com.example.innertalk.model.Message
+import com.google.ai.client.generativeai.GenerativeModel
+import com.google.ai.client.generativeai.type.content
+import kotlinx.coroutines.launch
+import com.google.ai.client.generativeai.type.generationConfig
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ChatFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ChatFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private var _binding: FragmentChatBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var chatAdapter: ChatAdapter
+    private val messageList = mutableListOf<Message>()
+
+    // CONFIGURACIÓN DE GEMINI
+    private val generativeModel = GenerativeModel(
+        modelName = "gemini-1.5-flash",
+        apiKey = "AIzaSyDeBbLMIBnLrkMe8MCwqTfAy6zvWIMcXsA",
+        generationConfig = generationConfig {
+            // Esto a veces ayuda a resetear la comunicación con el servidor
+            temperature = 0.7f
+        }
+        // Opcional: Esto le da personalidad a la IA
+      //  systemInstruction = content { text("Eres InnerTalk, un asistente empático y colaborador.") }
+
+
+    )
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentChatBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 1. Configurar el RecyclerView usando Binding
+        chatAdapter = ChatAdapter(messageList)
+        binding.rvChat.apply {
+            layoutManager = LinearLayoutManager(requireContext()).apply {
+                stackFromEnd = true
+            }
+            adapter = chatAdapter
+        }
+
+        // 2. Lógica del botón enviar usando Binding
+        binding.btnSend.setOnClickListener {
+            val userText = binding.etMessage.text.toString().trim()
+            if (userText.isNotEmpty()) {
+                binding.etMessage.setText("")
+                enviarMensaje(userText)
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+    private fun enviarMensaje(texto: String) {
+        val userMsg = Message(texto, isUser = true)
+        chatAdapter.addMessage(userMsg)
+
+        // Scroll al final
+        binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
+
+        lifecycleScope.launch {
+            try {
+                // Llamada a la API
+                val response = generativeModel.generateContent(texto)
+                val respuestaTexto = response.text ?: "La IA no pudo generar una respuesta."
+
+                val aiMsg = Message(respuestaTexto, isUser = false)
+                chatAdapter.addMessage(aiMsg)
+
+                binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
+
+            } catch (e: Exception) {
+                Log.e("GeminiError", "Error: ${e.message}")
+                chatAdapter.addMessage(Message("Error de API: ${e.message}", false))
+            }
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ChatFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChatFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // Importante para evitar fugas de memoria
     }
 }
