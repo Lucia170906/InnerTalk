@@ -65,4 +65,5 @@ dependencies {
     //implementation("com.github.AAChartModel:AAChartCore-Kotlin:7.2.0")
     //implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+    implementation("com.github.AAChartModel:AAChartCore-Kotlin:7.4.0")
 }

@@ -25,19 +25,16 @@ class ChatFragment : Fragment() {
     private val messageList = mutableListOf<Message>()
 
     // CONFIGURACIÓN DE GEMINI
-    private val generativeModel = GenerativeModel(
-        modelName = "gemini-1.5-flash",
-        apiKey = "AIzaSyDeBbLMIBnLrkMe8MCwqTfAy6zvWIMcXsA",
-        generationConfig = generationConfig {
-            // Esto a veces ayuda a resetear la comunicación con el servidor
-            temperature = 0.7f
-        }
-        // Opcional: Esto le da personalidad a la IA
-      //  systemInstruction = content { text("Eres InnerTalk, un asistente empático y colaborador.") }
-
-
-    )
-
+    private val generativeModel by lazy {
+        GenerativeModel(
+            // Cambiado a la versión preview específica
+            modelName = "gemini-1.5-pro-preview-0409",
+            apiKey = "AIzaSyDeBbLMIBnLrkMe8MCwqTfAy6zvWIMcXsA",
+            generationConfig = generationConfig {
+                temperature = 0.8f
+            }
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
