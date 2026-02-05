@@ -12,11 +12,34 @@
     <string name="calendar">Calendario</string>
 
 
+    <!--    texto fragment nueva entrada-->
 
     <string name="label_new_entry">Nueva Entrada</string>
     <string name="select_text">Selecciona como te sientes</string>
     <string name="write_here_text">Escribe aquí...</string>
     <string name="save_button">Guardar</string>
+
+    <!--    texto fragment estadisticas-->
+    <string name="label_statistics">Estadísticas</string>
+
+    <string name="angry">Enfado</string>
+    <string name="sad">Triste</string>
+    <string name="normal">Apático</string>
+    <string name="calm">Calma</string>
+    <string name="happy">Felicidad</string>
+
+    <!--    texto fragment config-->
+    <string name="label_config">Configuración</string>
+
+    <!--    texto fragment chat-->
+    <string name="label_chat">Chat</string>
+
+
+
+
+
+
+
 
 
 </resources>

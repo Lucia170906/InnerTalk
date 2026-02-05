@@ -13,12 +13,12 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.innertalk.StatisticsFragment"
-        android:label="fragment_statistics"
+        android:label="@string/label_statistics"
         tools:layout="@layout/fragment_statistics" />
     <fragment
         android:id="@+id/configFragment"
         android:name="com.example.innertalk.ConfigFragment"
-        android:label="fragment_config"
+        android:label="@string/label_config"
         tools:layout="@layout/fragment_config" />
     <fragment
         android:id="@+id/newEntryFragment"
@@ -28,6 +28,6 @@
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.innertalk.ui.ChatFragment"
-        android:label="fragment_chat"
+        android:label="@string/label_chat"
         tools:layout="@layout/fragment_chat" />
 </navigation>

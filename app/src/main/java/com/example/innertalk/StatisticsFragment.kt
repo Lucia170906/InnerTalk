@@ -5,55 +5,62 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.innertalk.databinding.FragmentStatisticsBinding
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
+import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [StatisticsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StatisticsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    // 1. El _binding es el que realmente guarda la referencia y es nuleable
+    private var _binding: FragmentStatisticsBinding? = null
+
+    // 2. Esta propiedad 'binding' solo es válida entre onCreateView y onDestroyView
+    // El get() !! asegura que no tengas que poner '?' en todo tu código
+    private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistics, container, false)
+    ): View {
+        // Inicializamos el _binding
+        _binding = FragmentStatisticsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StatisticsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StatisticsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 3. Aquí ya puedes usar 'binding' para configurar tu gráfico
+        configurarGrafico()
+    }
+
+    private fun configurarGrafico() {
+        val aaChartModel: AAChartModel = AAChartModel()
+            .chartType(AAChartType.Pie)
+            .title("Análisis de Emociones")
+            .backgroundColor("#F5F9FF")
+            .dataLabelsEnabled(true)
+            .series(arrayOf(
+                AASeriesElement()
+                    .name("Frecuencia")
+                    .data(arrayOf(
+                        arrayOf("Felicidad", 10),
+                        arrayOf("Calma", 7),
+                        arrayOf("Apático", 3),
+                        arrayOf("Triste", 2),
+                        arrayOf("Enfado",4)
+                    ))
+            ))
+
+        // Acceso directo gracias al binding
+        binding.aaChartView.aa_drawChartWithChartModel(aaChartModel)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // 4. Importantísimo: limpiar el binding para evitar fugas de memoria
+        _binding = null
     }
 }

@@ -85,6 +85,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:text="@string/save_button"
+            android:textColor="@color/black"
         android:paddingHorizontal="40dp"
         android:textAllCaps="false"
         android:background="@drawable/bg_rounded"
