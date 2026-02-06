@@ -42,6 +42,7 @@ class StatisticsFragment : Fragment() {
             .title("Análisis de Emociones")
             .backgroundColor("#F5F9FF")
             .dataLabelsEnabled(true)
+            //.colorsTheme() para añadir colores deseados
             .series(arrayOf(
                 AASeriesElement()
                     .name("Frecuencia")

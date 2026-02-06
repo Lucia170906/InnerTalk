@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#ECFDFF"
-
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECFDFF"
     tools:context=".StartFragment">
 
-
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:background="@drawable/bg_calendar_item"
             android:orientation="vertical"
             android:padding="16dp"
-            app:layout_collapseMode="parallax">
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,26 +34,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:theme="@style/Theme.AppCompat.Light" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvActividades"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:padding="16dp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp"
-        tools:listitem="@layout/viewholder_actividades"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actividades sugeridas"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textColor="#1D1B20" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/viewholder_actividades" />
 
-
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

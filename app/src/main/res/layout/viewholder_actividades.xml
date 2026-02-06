@@ -5,60 +5,76 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
+    android:layout_marginHorizontal="16dp"
     app:cardCornerRadius="35dp"
     app:cardElevation="0dp"
     app:cardBackgroundColor="#D1C4FF">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
         android:paddingHorizontal="20dp">
 
         <ImageView
-            android:id="@+id/imgIcono"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/ivIcon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_centerVertical="true"
-            />
+            android:src="@drawable/ic_meditation" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/imgIcono"
-            android:layout_toStartOf="@id/btnPlay"
+            android:layout_toEndOf="@id/ivIcon"
+            android:layout_toStartOf="@id/layoutActions"
             android:layout_marginStart="16dp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvNombreActividad"
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Título"
+                android:text="Título Actividad"
                 android:textColor="#1D1B20"
-
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/tvSubtitulo"
+                android:id="@+id/tvDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripción corta "
-                android:textColor="#1D1B20"
-                android:textSize="12sp" />
+                android:text="⏱ 15 min"
+                android:textColor="#4A4458"
+                android:textSize="13sp"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btnPlay"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+        <LinearLayout
+            android:id="@+id/layoutActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="fitCenter"
-            android:src="@drawable/btn_play"
-            app:tint="#5E35B1" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnPlay"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitCenter"
+                android:src="@drawable/btn_play"
+                app:tint="#5E35B1"
+                android:layout_marginEnd="8dp"/>
+
+            <CheckBox
+                android:id="@+id/cbDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#5E35B1" />
+        </LinearLayout>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
