@@ -1,11 +1,11 @@
-package com.example.innertalk.viewModel
+package com.example.innertalk
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.innertalk.MainActivity
 import com.example.innertalk.databinding.AuthLayoutBinding
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -18,6 +18,12 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        val currentUser = FirebaseAuth.getInstance().currentUser
+//        if (currentUser != null) {
+//            // Si existe, saltamos directamente a la Main
+//            goToHome()
+//            return // Importante para que no cargue el resto de esta pantalla
+//        }
 
         // 2. Inicializamos Binding
         binding = AuthLayoutBinding.inflate(layoutInflater)
@@ -47,12 +53,48 @@ class AuthActivity : AppCompatActivity() {
                             saveUserData(userId, name, lastName)
                         }
                     } else {
-                        Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Error: ${task.exception?.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             } else {
-                Toast.makeText(this, "Por favor, rellena al menos nombre, email y clave", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Por favor, rellena al menos nombre, email y clave",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
+            binding.btnLogin.setOnClickListener {
+                val email = binding.etLoginUser.text.toString().trim()
+                val pass = binding.etLoginPass.text.toString().trim()
+
+                // 1. Validaciones previas (no enviar campos vacíos a Firebase)
+                if (email.isEmpty()) {
+                    binding.etLoginUser.error = "Introduce tu correo"
+                    return@setOnClickListener
+                }
+                if (pass.isEmpty()) {
+                    binding.etLoginPass.error = "Introduce tu contraseña"
+                    return@setOnClickListener
+                }
+
+                // 2. Comprobación con Firebase
+                // signInWithEmailAndPassword es la función que verifica las credenciales
+                auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // SI LAS CREDENCIALES SON VÁLIDAS:
+                        Toast.makeText(this, "¡Bienvenido de nuevo!", Toast.LENGTH_SHORT).show()
+                        goToHome() // Función que hace el salto a MainActivity
+                    } else {
+                        // SI LAS CREDENCIALES SON INCORRECTAS (O no hay internet, etc.):
+                        // task.exception te da el motivo (contraseña mal, usuario no existe...)
+                        Toast.makeText(this, "Error: las credenciales son incorrectas", Toast.LENGTH_LONG).show()
+                    }
+                }
         }
     }
 
@@ -62,7 +104,7 @@ class AuthActivity : AppCompatActivity() {
             "name" to name,
             "lastName" to lastName,
             "role" to "user",
-            "createdAt" to com.google.firebase.Timestamp.now()
+            "createdAt" to Timestamp.now()
         )
 
         // Guardamos en la colección "users" usando el UID como nombre del documento
