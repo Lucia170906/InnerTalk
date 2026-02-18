@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1025134358537",
+    "project_id": "innertalk-ca928",
+    "storage_bucket": "innertalk-ca928.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025134358537:android:6e8956b1ce416e80ba88d8",
+        "android_client_info": {
+          "package_name": "com.example.innertalk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzwB5HLBRk3Cz_bmJAUhEcu3qFf12zUB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

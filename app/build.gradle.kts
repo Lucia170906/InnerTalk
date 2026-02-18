@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services") // El plugin de Google
 }
 
 android {
@@ -51,6 +52,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.ink.geometry)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,4 +69,12 @@ dependencies {
     //implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
     implementation("com.github.AAChartModel:AAChartCore-Kotlin:7.4.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+
+    // Librería para la base de datos Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Opcional: para usar  login en el futuro
+    implementation("com.google.firebase:firebase-auth-ktx")
 }
