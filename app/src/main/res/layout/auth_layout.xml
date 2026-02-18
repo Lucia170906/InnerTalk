@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/fondo_app"
     android:fillViewport="true">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -121,10 +121,13 @@
                     android:orientation="vertical">
 
                     <EditText android:layout_width="match_parent" android:layout_height="42dp"
+                        android:id="@+id/etRegisterName"
                         android:hint="Nombre" android:background="@drawable/bg_input_field"
                         android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
 
                     <EditText android:layout_width="match_parent" android:layout_height="42dp"
+                        android:id="@+id/etRegisterLastName"
+
                         android:hint="Apellidos" android:background="@drawable/bg_input_field"
                         android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
 
@@ -157,15 +160,18 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/etRegisterEmail"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Nombre de usuario deseado"
+                android:hint="Correo electrónico"
+                android:inputType="textEmailAddress"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginTop="12dp"
                 android:textSize="14sp"/>
 
             <EditText
+                android:id="@+id/etRegisterPass"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:hint="Contraseña"
