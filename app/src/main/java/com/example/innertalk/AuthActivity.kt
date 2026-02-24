@@ -55,7 +55,7 @@ class AuthActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             this,
-                            "Error: ${task.exception?.message}",
+                            "Error: ",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -115,7 +115,7 @@ class AuthActivity : AppCompatActivity() {
                 goToHome()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al guardar perfil: ${e.message}", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "Error al guardar perfil", Toast.LENGTH_SHORT)
                     .show()
             }
     }
