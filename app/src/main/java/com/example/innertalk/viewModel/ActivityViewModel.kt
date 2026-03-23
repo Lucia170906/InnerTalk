@@ -38,6 +38,10 @@ class ActivityViewModel : ViewModel() {
         }
     }
 
+    fun activityPlay(activityId : Int){
+
+    }
+
 
 
 }

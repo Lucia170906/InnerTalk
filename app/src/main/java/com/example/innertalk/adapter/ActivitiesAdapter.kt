@@ -1,4 +1,5 @@
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -8,7 +9,9 @@ import com.example.innertalk.model.ActivityModel
 import com.example.innertalk.databinding.ViewholderActividadesBinding
 
 //  Recibimos una "función" (callback) que se activará cuando cliquemos el checkbox.
+//  Añadimos un segundo callback para la acción del botón Play.
 class ActivitiesAdapter(
+    private val onPlayClicked: (String) -> Unit,
     private val onCheckClicked: (Int) -> Unit
 ) : ListAdapter<ActivityModel, ActivitiesAdapter.ViewHolder>(ActivityDiffCallback) {
 
@@ -35,6 +38,16 @@ class ActivitiesAdapter(
             tvTitle.text = activity.title
             tvDuration.text = activity.duration
             ivIcon.setImageResource(activity.iconRes)
+
+            // Lógica para el botón Play: Solo aparece si hay una URL
+            if (!activity.url.isNullOrEmpty()) {
+                btnPlay.visibility = View.VISIBLE
+                btnPlay.setOnClickListener {
+                    onPlayClicked(activity.url) // Abre el video sin marcar la actividad
+                }
+            } else {
+                btnPlay.visibility = View.GONE // Si no hay video, el botón no ocupa espacio
+            }
 
             // Pnemos el checkbox como esté en el modelo (true o false)
             cbDone.isChecked = activity.isCompleted

@@ -1,6 +1,8 @@
 package com.example.innertalk
 
 import ActivitiesAdapter
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -35,9 +37,18 @@ class StartFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity()).get(ActivityViewModel::class.java)
 
-        adapter = ActivitiesAdapter { id ->
-            viewModel.activityCompletion(id)
-        }
+        adapter = ActivitiesAdapter (
+            onPlayClicked = {url ->
+                //cogemos la url y entramos en youtube/ navegador
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+            },
+            onCheckClicked = {id ->
+                //marcamos la actividad como completada
+                viewModel.activityCompletion(id)
+
+            }
+        )
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
