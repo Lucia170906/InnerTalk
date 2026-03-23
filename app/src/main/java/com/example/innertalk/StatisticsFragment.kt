@@ -67,13 +67,18 @@ class StatisticsFragment : Fragment() {
                     val sad = snapshot.child("emocion_4").getValue(Int::class.java) ?: 0
                     val angry = snapshot.child("emocion_5").getValue(Int::class.java) ?: 0
 
+
+
                     //llamamos a la funcion para actualizar los datos del grafico
                     actualizarGrafico(veryHappy, happy, neutral, sad, angry)
+
+                    //vamos a hacer un mapa con clave valo r
                 }else{
                     Toast.makeText(requireContext(), "No hay datos en Firebase aún", Toast.LENGTH_SHORT).show()
                     // Dibujamos uno vacío para que al menos se vea el título
                     actualizarGrafico(0, 0, 0, 0, 0)
                 }
+
 
             }
 
@@ -105,6 +110,7 @@ class StatisticsFragment : Fragment() {
                         arrayOf("Enfadado",v5)
                     ))
             ))
+
 
         // Acceso directo gracias al binding
         binding.aaChartView.aa_drawChartWithChartModel(aaChartModel)
