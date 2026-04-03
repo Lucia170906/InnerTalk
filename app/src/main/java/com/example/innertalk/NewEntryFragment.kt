@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,8 +32,20 @@ class NewEntryFragment : Fragment() {
     private val pickMedia = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             imageUri = uri
-            binding.ivPreview.setImageURI(uri)
+
+            // 1. Mostramos el contenedor
             binding.cardPreview.visibility = View.VISIBLE
+
+            // 2. Cargamos la imagen
+            try {
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                binding.ivPreview.setImageBitmap(bitmap)
+            } catch (e: Exception) {
+                Log.e("NewEntry", "Error al cargar preview: ${e.message}")
+                // Fallback por si acaso
+                binding.ivPreview.setImageURI(uri)
+            }
         }
     }
 

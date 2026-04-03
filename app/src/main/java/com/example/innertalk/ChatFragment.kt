@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.innertalk.R
 import com.example.innertalk.adapter.ChatAdapter
 import com.example.innertalk.databinding.FragmentChatBinding
 import com.example.innertalk.model.Message
@@ -80,6 +82,7 @@ class ChatFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     val aiMsg = Message(respuestaTexto, isUser = false)
                     chatAdapter.addMessage(aiMsg)
+                   //analizarSentimientosYRecomendar(respuestaTexto)
                     binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
                 }
 
@@ -176,6 +179,37 @@ class ChatFragment : Fragment() {
             Log.e("ApiKeyError", "No se puede leer la API Key: ${e.message}")
             "" //Devolvemos vacío si falla
         }
+    }
+
+//    private fun analizarSentimientosYRecomendar (respuestaIA : String){
+//        val respuestaMinusculas = respuestaIA.lowercase()
+//
+//        //1.Definimos los trigegrs (disparadores)
+//         val esTriste = respuestaMinusculas.contains("triste")|| respuestaMinusculas.contains("ánimo") || respuestaMinusculas.contains("llorar") || respuestaMinusculas.contains("frustración")
+//         val esAnsioso = respuestaMinusculas.contains("respira") || respuestaMinusculas.contains("calma") || respuestaMinusculas.contains("ansiedad")
+//
+//        //2.Lógica de recomendación visual
+//        when{
+//            esTriste->{
+//                mostrarSugerencia("Parece que necesitas un abrazo virtual. ¿Qué tal si escribes en tu Diario de Gratitud?")
+//            }
+//            esAnsioso -> {
+//                mostrarSugerencia("He notado algo de inquietud. Te recomiendo 5 minutos de Meditación ahora mismo.")
+//            }
+//        }
+//    }
+
+    private fun mostrarSugerencia(mensaje: String) {
+        // Aquí puedes usar un Toast, un SnackBar o un cuadro de diálogo bonito
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("InnerTalk te cuida 🌿")
+            .setMessage(mensaje)
+            .setPositiveButton("Ir a Actividades") { _, _ ->
+
+                findNavController().navigate(R.id.action_chatFragment_to_startFragment)
+            }
+            .setNegativeButton("Luego", null)
+            .show()
     }
 
     override fun onDestroyView() {

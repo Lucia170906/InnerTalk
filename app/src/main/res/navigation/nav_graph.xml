@@ -29,5 +29,9 @@
         android:id="@+id/chatFragment"
         android:name="com.example.innertalk.ui.ChatFragment"
         android:label="@string/label_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
 </navigation>
