@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Seguridad: No subir la API Key de Groq
+app/src/main/assets/config.txt

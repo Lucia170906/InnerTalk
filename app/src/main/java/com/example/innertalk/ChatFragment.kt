@@ -11,10 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.innertalk.adapter.ChatAdapter
 import com.example.innertalk.databinding.FragmentChatBinding
 import com.example.innertalk.model.Message
-import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.type.content
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import com.google.ai.client.generativeai.type.generationConfig
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
 
 class ChatFragment : Fragment() {
 
@@ -24,17 +30,12 @@ class ChatFragment : Fragment() {
     private lateinit var chatAdapter: ChatAdapter
     private val messageList = mutableListOf<Message>()
 
-    // CONFIGURACIÓN DE GEMINI
-    private val generativeModel by lazy {
-        GenerativeModel(
-            // Cambiado a la versión preview específica
-            modelName = "gemini-1.5-pro-preview-0409",
-            apiKey = "AIzaSyDeBbLMIBnLrkMe8MCwqTfAy6zvWIMcXsA",
-            generationConfig = generationConfig {
-                temperature = 0.8f
-            }
-        )
-    }
+    // 1. LA APIKEY
+    private val apiKey by lazy { leerApiKey() }
+
+    // 2. EL MODELO
+    private val modeloGroq = "llama-3.1-8b-instant"
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,7 +48,6 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Configurar el RecyclerView usando Binding
         chatAdapter = ChatAdapter(messageList)
         binding.rvChat.apply {
             layoutManager = LinearLayoutManager(requireContext()).apply {
@@ -56,7 +56,6 @@ class ChatFragment : Fragment() {
             adapter = chatAdapter
         }
 
-        // 2. Lógica del botón enviar usando Binding
         binding.btnSend.setOnClickListener {
             val userText = binding.etMessage.text.toString().trim()
             if (userText.isNotEmpty()) {
@@ -69,30 +68,118 @@ class ChatFragment : Fragment() {
     private fun enviarMensaje(texto: String) {
         val userMsg = Message(texto, isUser = true)
         chatAdapter.addMessage(userMsg)
-
-        // Scroll al final
         binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
 
-        lifecycleScope.launch {
+        // Hacemos la llamada a la red en un hilo secundario
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Llamada a la API
-                val response = generativeModel.generateContent(texto)
-                val respuestaTexto = response.text ?: "La IA no pudo generar una respuesta."
+                // Llamamos a nuestra propia función de conexión a Groq
+                val respuestaTexto = llamarApiGroq()
 
-                val aiMsg = Message(respuestaTexto, isUser = false)
-                chatAdapter.addMessage(aiMsg)
-
-                binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
+                // Volvemos al hilo principal para actualizar la pantalla
+                withContext(Dispatchers.Main) {
+                    val aiMsg = Message(respuestaTexto, isUser = false)
+                    chatAdapter.addMessage(aiMsg)
+                    binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
+                }
 
             } catch (e: Exception) {
-                Log.e("GeminiError", "Error: ${e.message}")
-                chatAdapter.addMessage(Message("Error de API: ${e.message}", false))
+                withContext(Dispatchers.Main) {
+                    Log.e("GroqError", "Error técnico detallado: ", e)
+                    chatAdapter.addMessage(Message("Error de conexión: ${e.message}", false))
+                }
             }
+        }
+    }
+
+    // 3.CONEXIÓN NATIVA A LA API DE GROQ
+    private fun llamarApiGroq(): String {
+        val url = URL("https://api.groq.com/openai/v1/chat/completions")
+        val connection = url.openConnection() as HttpURLConnection
+
+        try {
+            // Configuramos la petición
+            connection.requestMethod = "POST"
+            connection.setRequestProperty("Authorization", "Bearer $apiKey")
+            connection.setRequestProperty("Content-Type", "application/json")
+            connection.doOutput = true
+
+            // Creamos el JSON con los datos que espera Groq
+            val jsonBody = JSONObject()
+            jsonBody.put("model", modeloGroq)
+            jsonBody.put("temperature", 0.6) // 0.6 para equilibrar empatía y coherencia
+
+            val messagesArray = JSONArray()
+
+            // A. EL SYSTEM PROMPT (La personalidad del psicólogo)
+            val systemMsg = JSONObject()
+            systemMsg.put("role", "system")
+            systemMsg.put("content", "Eres un asistente virtual especializado en apoyo emocional y bienestar psicológico. Tu tono debe ser cálido, empático, validante y libre de juicios. Usa respuestas concisas y conversacionales. No diagnostiques condiciones médicas, sugiere buscar ayuda profesional si detectas peligro grave.")
+            messagesArray.put(systemMsg)
+
+            // B. EL HISTORIAL DE CHAT (Para que tenga memoria)
+            for (msg in messageList) {
+                val role = if (msg.isUser) "user" else "assistant"
+                val msgJson = JSONObject()
+                msgJson.put("role", role)
+                msgJson.put("content", msg.text)
+                messagesArray.put(msgJson)
+            }
+
+            jsonBody.put("messages", messagesArray)
+
+            // Enviamos los datos
+            val outputStream = OutputStreamWriter(connection.outputStream)
+            outputStream.write(jsonBody.toString())
+            outputStream.flush()
+            outputStream.close()
+
+            // Leemos la respuesta
+            val responseCode = connection.responseCode
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val reader = BufferedReader(InputStreamReader(connection.inputStream))
+                val responseString = reader.readText()
+                reader.close()
+
+                // Extraemos el texto exacto que dijo la IA del JSON de respuesta
+                val jsonResponse = JSONObject(responseString)
+                val choices = jsonResponse.getJSONArray("choices")
+                val firstChoice = choices.getJSONObject(0)
+                val message = firstChoice.getJSONObject("message")
+                return message.getString("content")
+            } else {
+                // Si falla (por ejemplo, cuota excedida), leemos el error
+                val errorReader = BufferedReader(InputStreamReader(connection.errorStream))
+                val errorString = errorReader.readText()
+                errorReader.close()
+                throw Exception("Código $responseCode - Detalle: $errorString")
+            }
+        } finally {
+            connection.disconnect()
+        }
+    }
+
+    //FUNCIÓN PARA LEER EL TXT CON LA APIKEY
+    private fun leerApiKey():String{
+        return try{
+            //abrimos el archivo que esta en assets
+            val inputStream = requireContext().assets.open("config.txt")
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+
+            inputStream.read(buffer)
+            inputStream.close()
+
+            //Convertimos los bytes del Array a un String y quitamos posibles espacios
+            String(buffer).trim()
+        }catch (e : Exception){
+            Log.e("ApiKeyError", "No se puede leer la API Key: ${e.message}")
+            "" //Devolvemos vacío si falla
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null // Importante para evitar fugas de memoria
+        _binding = null
     }
 }
