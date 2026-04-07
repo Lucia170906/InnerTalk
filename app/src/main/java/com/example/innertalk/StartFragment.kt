@@ -66,7 +66,6 @@ class StartFragment : Fragment() {
         viewModel.loadActivities()
     }
 
-    // CORRECCIÓN IMPORTANTE DE CICLO DE VIDA
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
