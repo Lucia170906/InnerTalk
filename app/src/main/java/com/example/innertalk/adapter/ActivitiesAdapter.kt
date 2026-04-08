@@ -12,7 +12,8 @@ import com.example.innertalk.databinding.ViewholderActividadesBinding
 //  Añadimos un segundo callback para la acción del botón Play.
 class ActivitiesAdapter(
     private val onPlayClicked: (String) -> Unit,
-    private val onCheckClicked: (Int) -> Unit
+    private val onCheckClicked: (Int) -> Unit,
+    private val onItemClicked : (ActivityModel) -> Unit
 ) : ListAdapter<ActivityModel, ActivitiesAdapter.ViewHolder>(ActivityDiffCallback) {
 
     //  El ViewHolder es el "contenedor" de la vista.
@@ -56,6 +57,11 @@ class ActivitiesAdapter(
             cbDone.setOnClickListener {
                 // Avisamos al ViewModel pasándole el ID de esta actividad
                 onCheckClicked(activity.id)
+            }
+
+            //Configuramos el click en la tarjeta
+            root.setOnClickListener {
+                onItemClicked(activity)
             }
         }
     }
