@@ -42,10 +42,11 @@ class StatisticsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 3. Aquí ya puedes usar 'binding' para configurar tu gráfico
-        //configurarGrafico()
-        //Habra que borrar est llamada y sustituarla por leerEstadisticas
-        leerEstadisticasFirebase()
+        leerEstadisticasFirebase()//para poner las estadisticas desde primer momento
+        contarEntradasTotales() // para mostar el numero de enrdas dsde el principio
+        mostrarFraseAleatoria() // frase motivadora
+
+
 
 
     }
@@ -118,6 +119,28 @@ class StatisticsFragment : Fragment() {
         binding.aaChartView.aa_drawChartWithChartModel(aaChartModel)
     }
 
+    private fun contarEntradasTotales(){
+        val uid = auth.currentUser?.uid ?: return
+
+        //Apuntamo al nodo donde guardamos los diarios del currenrUser
+
+        val diarioRef = database.child("usuarios").child(uid).child("diario")
+
+        diarioRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                //.childrenCount nos da el número de elementos en la lista
+                val total = snapshot.childrenCount
+                binding.tvTotalEntries.text = total.toString()
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                binding.tvTotalEntries.text="-" // si da error ponemos un guión por estética
+            }
+        })
+
+
+    }
+
     private fun generarAnalisisEmocional (v1: Int, v2: Int, v3: Int, v4: Int, v5: Int){
         //1. Guardamos los valores en un mapa para saber a que emoción correcponde cada número
         val emociones = mapOf(
@@ -182,6 +205,21 @@ class StatisticsFragment : Fragment() {
         //5. Actualizamos los textos en la pantalla
         binding.tvEmotionTitle.text = titulo
         binding.tvAnalysisText.text = analisis
+    }
+
+    //sisema de frase provisional, tal vez se evolucione a sistema de rachas
+
+    private fun mostrarFraseAleatoria(){
+        val frases = listOf(
+                "Está bien no estar bien siempre.",
+                "Tu progreso no tiene que ser perfecto.",
+                "Respira. Has superado el 100% de tus días malos.",
+                "Hoy es un buen día para cuidarte.",
+                "Tus emociones son válidas.",
+                "Un paso a la vez, no hay prisa."
+        )
+
+        binding.tvQuote.text= frases.random()
     }
 
 

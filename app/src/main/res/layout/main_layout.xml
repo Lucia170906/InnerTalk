@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ECFDFF"
     android:layout_width="match_parent"
@@ -11,9 +11,11 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:elevation="0dp"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Toolbar -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -21,28 +23,31 @@
             android:background="@drawable/toolbar_rounded"
             app:menu="@menu/menu_options"
             app:titleCentered="true"
-
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:titleTextColor="#1D1B20"/>
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        app:layout_constraintTop_toBottomOf="@id/appbar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:background="@drawable/toolbar_rounded"
+        app:menu="@menu/menu_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        app:menu="@menu/menu_bottom"/>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

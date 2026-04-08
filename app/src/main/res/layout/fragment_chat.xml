@@ -16,11 +16,9 @@
 
     <LinearLayout
         android:id="@+id/layoutInput"
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
         android:background="#D1C4FF"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -33,7 +31,6 @@
             android:layout_weight="1"
             android:hint="Pregúntame algo..."
             android:padding="12dp"
-
             android:layout_marginHorizontal="8dp"
             android:textColor="#2D1B4E"
             android:background="@android:color/white"
