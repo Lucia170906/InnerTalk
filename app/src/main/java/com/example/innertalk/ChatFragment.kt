@@ -13,6 +13,8 @@ import com.example.innertalk.R
 import com.example.innertalk.adapter.ChatAdapter
 import com.example.innertalk.databinding.FragmentChatBinding
 import com.example.innertalk.model.Message
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,6 +25,7 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
+
 
 class ChatFragment : Fragment() {
 
@@ -38,6 +41,11 @@ class ChatFragment : Fragment() {
     // 2. EL MODELO
     private val modeloGroq = "llama-3.1-8b-instant"
 
+    //3. Datos del usuario
+    private var nombreUsuario: String = "Usuario"
+    private var interesesUsuario: List<String> = listOf()
+    //private var generoUsuario: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +57,9 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Cargamos los datos del usuario:
+        cargarDatosPerfilFirestore()
 
         chatAdapter = ChatAdapter(messageList)
         binding.rvChat.apply {
@@ -65,6 +76,23 @@ class ChatFragment : Fragment() {
                 enviarMensaje(userText)
             }
         }
+    }
+    private fun cargarDatosPerfilFirestore() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+
+        db.collection("users").document(uid).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    nombreUsuario = document.getString("name") ?: "Usuario"
+                    //generoUsuario = document.getString("gender") ?: "" // de momento no voy a usar el género, pero asi sería la lína para la ampliación en el futuro
+                    // Extraemos la lista de intereses
+                    interesesUsuario = document.get("intereses") as? List<String> ?: listOf()
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("FirestoreError", "Error al leer perfil: ${e.message}")
+            }
     }
 
     private fun enviarMensaje(texto: String) {
@@ -117,7 +145,14 @@ class ChatFragment : Fragment() {
             // A. EL SYSTEM PROMPT (La personalidad del psicólogo)
             val systemMsg = JSONObject()
             systemMsg.put("role", "system")
-            systemMsg.put("content", "Eres un asistente virtual especializado en apoyo emocional y bienestar psicológico. Tu tono debe ser cálido, empático, validante y libre de juicios. Usa respuestas concisas y conversacionales. No diagnostiques condiciones médicas, sugiere buscar ayuda profesional si detectas peligro grave.")
+            systemMsg.put("content", "Eres un asistente virtual especializado en " +
+                    "apoyo emocional y bienestar psicológico. Tu tono debe ser cálido," +
+                    " empático, validante y libre de juicios. " +
+                    "Usa respuestas conversacionales. " +
+                    "No diagnostiques condiciones médicas, sugiere buscar ayuda profesional si detectas peligro grave." +
+                    "El usuario ha indicado que sus principales preocupaciones son: ${interesesUsuario.joinToString {(", ")  }}." +
+                     "Por favor, adapta tus consejos a estas condiciones." +
+                    "Estás hablando con $nombreUsuario")
             messagesArray.put(systemMsg)
 
             // B. EL HISTORIAL DE CHAT (Para que tenga memoria)

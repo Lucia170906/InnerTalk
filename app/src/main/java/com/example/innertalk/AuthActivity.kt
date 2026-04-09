@@ -3,6 +3,7 @@ package com.example.innertalk
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.innertalk.databinding.AuthLayoutBinding
@@ -36,6 +37,14 @@ class AuthActivity : AppCompatActivity() {
 
         setupButtons()
     }
+    private fun obtenerInteresesSeleccionados(): List<String> {
+        val intereses = mutableListOf<String>()
+        if (binding.cbEstres.isChecked) intereses.add("Estrés")
+        if (binding.cbAnsiedad.isChecked) intereses.add("Ansiedad")
+        if (binding.cbSueno.isChecked) intereses.add("Sueño")
+        if (binding.cbAnimo.isChecked) intereses.add("Ánimo")
+        return intereses
+    }
 
     private fun setupButtons() {
         // Evento para abrir el calendario
@@ -45,6 +54,7 @@ class AuthActivity : AppCompatActivity() {
             val email = binding.etRegisterEmail.text.toString()
             val pass = binding.etRegisterPass.text.toString()
             val name = binding.etRegisterName.text.toString()
+
             val lastName = binding.etRegisterLastName.text.toString()
             val gender = binding.etRegisterGender.text.toString().trim()
 
@@ -139,24 +149,29 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun saveUserData(uid: String, name: String, lastName: String, gender: String) {
-        // Creamos un mapa de datos (clave-valor)
+        // Obtenemos la fecha del EditText y los intereses
+        val birthDate = binding.etRegisterBirth.text.toString()
+        val intereses = obtenerInteresesSeleccionados()
+
         val userMap = hashMapOf(
             "name" to name,
             "lastName" to lastName,
-            "role" to "user",
-            "createdAt" to Timestamp.now()
+            "gender" to gender,
+            "birthDate" to birthDate,
+            "intereses" to intereses,
+            //"createdAt" to com.google.firebase.Timestamp.now()
         )
 
-        // Guardamos en la colección "users" usando el UID como nombre del documento
+        // Esta línea creará automáticamente la colección "users" en tu 2ª foto
         db.collection("users").document(uid)
             .set(userMap)
             .addOnSuccessListener {
-                Toast.makeText(this, "¡Perfil creado correctamente!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "¡Cuenta creada con éxito!", Toast.LENGTH_SHORT).show()
                 goToHome()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al guardar perfil", Toast.LENGTH_SHORT)
-                    .show()
+                Log.e("FirestoreError", "Error al guardar: ${e.message}")
+                Toast.makeText(this, "Error en base de datos: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
 

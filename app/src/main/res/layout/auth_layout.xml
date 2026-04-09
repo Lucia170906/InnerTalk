@@ -153,10 +153,10 @@
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="Intereses:" android:textSize="11sp" android:textColor="#4A148C" android:textStyle="bold"/>
-                    <CheckBox android:layout_width="wrap_content" android:layout_height="32dp" android:text="Estrés" android:textSize="12sp" />
-                    <CheckBox android:layout_width="wrap_content" android:layout_height="32dp" android:text="Ansiedad" android:textSize="12sp" />
-                    <CheckBox android:layout_width="wrap_content" android:layout_height="32dp" android:text="Sueño" android:textSize="12sp" />
-                    <CheckBox android:layout_width="wrap_content" android:layout_height="32dp" android:text="Ánimo" android:textSize="12sp" />
+                    <CheckBox android:id="@+id/cbEstres" android:layout_width="wrap_content" android:layout_height="32dp" android:text="Estrés" android:textSize="12sp" />
+                    <CheckBox android:id="@+id/cbAnsiedad" android:layout_width="wrap_content" android:layout_height="32dp" android:text="Ansiedad" android:textSize="12sp" />
+                    <CheckBox android:id="@+id/cbSueno" android:layout_width="wrap_content" android:layout_height="32dp" android:text="Sueño" android:textSize="12sp" />
+                    <CheckBox android:id="@+id/cbAnimo" android:layout_width="wrap_content" android:layout_height="32dp" android:text="Ánimo" android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
