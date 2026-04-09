@@ -79,4 +79,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     //Librería para implementar FiresTore en tiempo real
     implementation("com.google.firebase:firebase-database-ktx")
+
+    // libreria para el work (usado en as notificaciones)
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 }
