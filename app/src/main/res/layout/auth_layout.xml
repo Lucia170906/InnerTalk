@@ -131,11 +131,12 @@
                         android:hint="Apellidos" android:background="@drawable/bg_input_field"
                         android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
 
-                    <EditText android:layout_width="match_parent" android:layout_height="42dp"
+                    <EditText  android:id="@+id/etRegisterBirth" android:layout_width="match_parent" android:layout_height="42dp"
                         android:hint="F. Nacimiento" android:background="@drawable/bg_input_field"
-                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
+                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"
+                        android:focusable="false" android:clickable="true"/>
 
-                    <EditText android:layout_width="match_parent" android:layout_height="42dp"
+                    <EditText android:id="@+id/etRegisterGender"  android:layout_width="match_parent" android:layout_height="42dp"
                         android:hint="Género" android:background="@drawable/bg_input_field"
                         android:paddingStart="12dp" android:textSize="14sp"/>
                 </LinearLayout>

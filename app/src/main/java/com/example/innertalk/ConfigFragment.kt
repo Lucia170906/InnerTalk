@@ -1,5 +1,6 @@
 package com.example.innertalk
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.work.WorkManager
 import com.example.innertalk.databinding.FragmentConfigBinding
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.google.firebase.auth.FirebaseAuth
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
@@ -51,6 +53,19 @@ class ConfigFragment : Fragment() {
                 cancelarNotificacion()
                 preferencia.edit().putBoolean("notif_active", false).apply()
             }
+        }
+        binding.btnCerrarSesion.setOnClickListener {
+            // 1. Cerramos sesión en Firebase
+            FirebaseAuth.getInstance().signOut()
+
+            //2. Limpiamos las shared preferences de las notificaciones
+            val prefs = requireContext().getSharedPreferences("config_prefs", 0)
+            prefs.edit().clear().apply()
+
+            // 3. Mandamos al usuario de vuelta al Login (AuthActivity)
+            val intent = Intent(requireContext(), AuthActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
     }
 

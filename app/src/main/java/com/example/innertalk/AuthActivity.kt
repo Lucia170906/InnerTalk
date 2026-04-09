@@ -1,6 +1,7 @@
 package com.example.innertalk
 
 import android.content.Intent
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,15 +16,16 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var binding: AuthLayoutBinding
     private lateinit var auth: FirebaseAuth
     private val db = FirebaseFirestore.getInstance()
+    private var fechaSeleccionada: Calendar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val currentUser = FirebaseAuth.getInstance().currentUser
-//        if (currentUser != null) {
-//            // Si existe, saltamos directamente a la Main
-//            goToHome()
-//            return // Importante para que no cargue el resto de esta pantalla
-//        }
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            // Si existe, saltamos directamente a la Main
+            goToHome()
+            return // Importante para que no cargue el resto de esta pantalla
+        }
 
         // 2. Inicializamos Binding
         binding = AuthLayoutBinding.inflate(layoutInflater)
@@ -36,13 +38,23 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun setupButtons() {
+        // Evento para abrir el calendario
+        binding.etRegisterBirth.setOnClickListener { showDatePicker() }
+
         binding.btnRegister.setOnClickListener {
             val email = binding.etRegisterEmail.text.toString()
             val pass = binding.etRegisterPass.text.toString()
             val name = binding.etRegisterName.text.toString()
             val lastName = binding.etRegisterLastName.text.toString()
+            val gender = binding.etRegisterGender.text.toString().trim()
 
-            if (email.isNotEmpty() && pass.isNotEmpty() && name.isNotEmpty()) {
+            if (email.isNotEmpty() && pass.isNotEmpty() && name.isNotEmpty() && fechaSeleccionada!=null) {
+
+                if (!esMayorDeEdad(fechaSeleccionada!!)) {
+                    Toast.makeText(this, "Lo sentimos, debes ser mayor de 18 años para usar InnerTalk", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
                 auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // 1. Obtenemos el ID único del usuario recién creado
@@ -50,7 +62,7 @@ class AuthActivity : AppCompatActivity() {
 
                         // 2. Guardamos los datos extras en Firestore
                         if (userId != null) {
-                            saveUserData(userId, name, lastName)
+                            saveUserData(userId, name, lastName, gender)
                         }
                     } else {
                         Toast.makeText(
@@ -90,7 +102,6 @@ class AuthActivity : AppCompatActivity() {
                         Toast.makeText(this, "¡Bienvenido de nuevo!", Toast.LENGTH_SHORT).show()
                         goToHome() // Función que hace el salto a MainActivity
                     } else {
-                        // SI LAS CREDENCIALES SON INCORRECTAS (O no hay internet, etc.):
                         // task.exception te da el motivo (contraseña mal, usuario no existe...)
                         Toast.makeText(this, "Error: las credenciales son incorrectas", Toast.LENGTH_LONG).show()
                     }
@@ -98,7 +109,36 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveUserData(uid: String, name: String, lastName: String) {
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = android.app.DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            // Guardamos la fecha elegida
+            fechaSeleccionada = Calendar.getInstance().apply {
+                set(selectedYear, selectedMonth, selectedDay)
+            }
+            // Mostramos la fecha en el EditText
+            binding.etRegisterBirth.setText("$selectedDay/${selectedMonth + 1}/$selectedYear")
+        }, year, month, day)
+
+        datePicker.show()
+    }
+
+    private fun esMayorDeEdad(fechaNacimiento: Calendar): Boolean {
+        val hoy = Calendar.getInstance()
+        var edad = hoy.get(Calendar.YEAR) - fechaNacimiento.get(Calendar.YEAR)
+
+        // Ajuste si aún no ha cumplido años en el mes actual
+        if (hoy.get(Calendar.DAY_OF_YEAR) < fechaNacimiento.get(Calendar.DAY_OF_YEAR)) {
+            edad--
+        }
+        return edad >= 18
+    }
+
+    private fun saveUserData(uid: String, name: String, lastName: String, gender: String) {
         // Creamos un mapa de datos (clave-valor)
         val userMap = hashMapOf(
             "name" to name,

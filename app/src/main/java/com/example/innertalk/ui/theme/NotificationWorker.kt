@@ -55,7 +55,7 @@ class NotificationWorker (context :Context, params : WorkerParameters ): Worker(
          // Aquí definimos el aspecto visual: título, texto, icono y comportamiento.
 
         val builder = NotificationCompat.Builder(applicationContext, channelId)
-            .setSmallIcon(R.drawable.ic_launcher_foreground) // Asegúrate de tener un icono válido aquí
+            .setSmallIcon(R.drawable.happy_icon) //Icono valido
             .setContentTitle("¿Cómo te sientes hoy? :)") // Título principal
             .setContentText("Es un buen momento para escribir en tu diario") // Cuerpo del mensaje
             .setPriority(NotificationCompat.PRIORITY_DEFAULT) // Prioridad para Android 7.1 e inferiores
