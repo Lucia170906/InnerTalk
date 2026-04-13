@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.navigation.fragment.findNavController
 import com.example.innertalk.databinding.FragmentStatisticsBinding
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
@@ -46,8 +47,12 @@ class StatisticsFragment : Fragment() {
         contarEntradasTotales() // para mostar el numero de enrdas dsde el principio
         mostrarFraseAleatoria() // frase motivadora
 
+        binding.cardTotalEntries.setOnClickListener {
+
+            findNavController().navigate(R.id.action_statisticsFragment_to_entriesFragment)
 
 
+        }
 
     }
 

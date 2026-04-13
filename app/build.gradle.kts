@@ -82,4 +82,9 @@ dependencies {
 
     // libreria para el work (usado en as notificaciones)
     implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    // Glide: Librería para cargar imágenes
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    // Kapt es necesario para procesar las anotaciones de Glide (opcional pero recomendado)
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 }

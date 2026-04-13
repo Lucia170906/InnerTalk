@@ -14,7 +14,11 @@
         android:id="@+id/statisticsFragment"
         android:name="com.example.innertalk.StatisticsFragment"
         android:label="@string/label_statistics"
-        tools:layout="@layout/fragment_statistics" />
+        tools:layout="@layout/fragment_statistics" >
+        <action
+            android:id="@+id/action_statisticsFragment_to_entriesFragment"
+            app:destination="@id/entriesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/configFragment"
         android:name="com.example.innertalk.ConfigFragment"
@@ -34,4 +38,9 @@
             android:id="@+id/action_chatFragment_to_startFragment"
             app:destination="@id/startFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/entriesFragment"
+        android:name="com.example.innertalk.EntriesFragment"
+        android:label="@string/label_entries"
+        tools:layout="@layout/fragment_entries" />
 </navigation>
