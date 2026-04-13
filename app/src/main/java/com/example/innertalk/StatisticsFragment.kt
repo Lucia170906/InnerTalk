@@ -47,6 +47,7 @@ class StatisticsFragment : Fragment() {
         contarEntradasTotales() // para mostar el numero de enrdas dsde el principio
         mostrarFraseAleatoria() // frase motivadora
 
+        // listener para pasar al otro frgament cuando se pulse y ver la lista
         binding.cardTotalEntries.setOnClickListener {
 
             findNavController().navigate(R.id.action_statisticsFragment_to_entriesFragment)
