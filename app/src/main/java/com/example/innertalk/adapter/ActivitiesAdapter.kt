@@ -12,7 +12,7 @@ import com.example.innertalk.databinding.ViewholderActividadesBinding
 //  Añadimos un segundo callback para la acción del botón Play.
 class ActivitiesAdapter(
     private val onPlayClicked: (String) -> Unit,
-    private val onCheckClicked: (Int) -> Unit,
+    private val onCheckClicked: (String) -> Unit,
     private val onItemClicked : (ActivityModel) -> Unit
 ) : ListAdapter<ActivityModel, ActivitiesAdapter.ViewHolder>(ActivityDiffCallback) {
 
@@ -65,6 +65,7 @@ class ActivitiesAdapter(
             }
         }
     }
+
 
     //Compara la lista vieja con la nueva.
     // Esto hace que si solo cambias un checkbox, no se refresque toda la lista, solo ese item.

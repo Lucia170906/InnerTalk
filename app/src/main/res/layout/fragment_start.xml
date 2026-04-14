@@ -37,6 +37,28 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvTituloNotasDiario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Tus pensamientos de este día:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNotasCalendario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <TextView
+            android:id="@+id/tvSugeridasTitulo"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Actividades sugeridas"

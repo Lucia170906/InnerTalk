@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.innertalk.model.ActivityModel
 import com.example.innertalk.repository.ActivityRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class ActivityViewModel : ViewModel() {
 
@@ -12,36 +14,61 @@ class ActivityViewModel : ViewModel() {
     private val _activities = MutableLiveData<List<ActivityModel>>()
     val activities : LiveData<List<ActivityModel>> get() = _activities
 
-    //funcion para cargar las actividades
-    fun loadActivities(){
-//        val listaPrueba = listOf(
-//            ActivityModel(1, "Meditación", "Relaja tu mente", "10 min", R.drawable.ic_meditation),
-//            ActivityModel(2, "Caminar", "Sal a dar una vuelta", "30 min", R.drawable.ic_walk)
-//        )
-        _activities.value = repository.getSuggestedActivities()
+    // 1. Nos da el catálogo sin checks siempre que lo necesitemos
+    fun getCatalogoLimpio(): List<ActivityModel> {
+        return repository.getSuggestedActivities()
     }
 
-    //funcion para actualizar el estado de la tarea ( heha o no)
+    // 2. Guarda la lista actual (la que viene de Firebase) para que no se borren los checks
+    fun actualizarListaMostrada(lista: List<ActivityModel>) {
+        _activities.value = lista
+    }
 
-    fun activityCompletion(activityId : Int) {
-        val currentList = _activities.value.toMutableList()
-        val index =
-            currentList.indexOfFirst { it.id == activityId } // esto recorre toda la lista hasta hasta encontrar el id que
-        //coincide con la actividad pulsada
-        if (index != null && index != -1) {
-            val activity = currentList[index]
+    // 3. Cuando marcas/desmarcas una casilla
+    fun activityCompletion(activityId: String) {
+        val listaActual = _activities.value?.toMutableList() ?: return
+        val index = listaActual.indexOfFirst { it.id == activityId }
 
-            // cambiamso estado del check
-            currentList[index] = activity.copy(isCompleted = !activity.isCompleted)// usamos copy porque al cambair tan solo una variable el sistema puede ignorarlo y np actuañizar la lista
-            //al ser una copia nos aseguramos que actulice al momento y con el nuevo atributo
-            _activities.value = currentList
+        if (index != -1) {
+            val nuevaActividad = listaActual[index].copy(isCompleted = !listaActual[index].isCompleted)
+            listaActual[index] = nuevaActividad
+            _activities.value = listaActual // Actualiza la UI de hoy conservando el resto
+
+            guardarActividadEnFirebase(activityId, nuevaActividad.isCompleted)
         }
     }
 
-    fun activityPlay(activityId : Int){
+    private fun guardarActividadEnFirebase(activityId: String, isChecked: Boolean) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val sdf = java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.getDefault())
+        val fechaHoy = sdf.format(java.util.Date())
 
+        val dbRef =
+            FirebaseDatabase.getInstance("https://innertalk-ca928-default-rtdb.europe-west1.firebasedatabase.app/")
+                .reference
+                .child("usuarios")
+                .child(uid)
+                .child("actividades_diarias")
+                .child(fechaHoy)
+
+        if (isChecked) {
+            dbRef.child(activityId).setValue(true)
+        } else {
+            dbRef.child(activityId).removeValue()
+        }
     }
 
 
+        fun sincronizarChecksDeHoy(
+            catalogoMaestro: List<ActivityModel>,
+            idsDeFirebase: List<String>
+        ): List<ActivityModel> {
 
-}
+            // Recorremos todas las actividades del catálogo maestro una por una
+            return catalogoMaestro.map { actividad ->
+
+                // Copiamos la actividad dejándola exactamente igual, pero actualizando su check.
+                actividad.copy(isCompleted = idsDeFirebase.equals(actividad.id))
+            }
+        }
+    }

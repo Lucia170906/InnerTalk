@@ -8,7 +8,7 @@ enum class ActivityFrequency{
 }
 
 data class ActivityModel(
-    val id: Int,
+    val id: String,
     val title: String,
     val description: String,
     val duration: String,

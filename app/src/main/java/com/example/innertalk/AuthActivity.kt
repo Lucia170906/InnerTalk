@@ -1,7 +1,10 @@
 package com.example.innertalk
 
+import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -118,6 +121,7 @@ class AuthActivity : AppCompatActivity() {
                 }
         }
     }
+
 
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
