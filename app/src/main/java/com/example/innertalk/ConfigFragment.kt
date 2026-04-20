@@ -62,8 +62,8 @@ class ConfigFragment : Fragment() {
             val prefs = requireContext().getSharedPreferences("config_prefs", 0)
             prefs.edit().clear().apply()
 
-            // 3. Mandamos al usuario de vuelta al Login (AuthActivity)
-            val intent = Intent(requireContext(), AuthActivity::class.java)
+            // 3. Mandamos al usuario de vuelta al Login (LogInActivity)
+            val intent = Intent(requireContext(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
