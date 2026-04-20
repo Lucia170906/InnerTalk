@@ -95,6 +95,10 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, mensajeError, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (!binding.cbPoliticas.isChecked) {
+                Toast.makeText(this, "Debes aceptar las Políticas de Privacidad para registrarte.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             // 4. Verifico que el usuario sea mayor de edad con la fecha que he guardado
             if (!esMayorDeEdad(fechaSeleccionada!!)) {

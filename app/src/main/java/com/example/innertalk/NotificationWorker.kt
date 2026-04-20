@@ -34,6 +34,7 @@ class NotificationWorker (context :Context, params : WorkerParameters ): Worker(
 
         val builder = NotificationCompat.Builder(applicationContext, channelId)
             .setContentTitle("¿Cómo te sientes hoy? :)")
+            .setSmallIcon(R.drawable.notification_icon)
             .setContentText("Es un buen momento para escribir en tu diario")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
