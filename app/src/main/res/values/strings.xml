@@ -37,6 +37,9 @@
     <!--    texto fragment lidtado entradas-->
     <string name="label_entries">Tus entradas</string>
 
+    <!--    texto fragment  editar datos personales-->
+    <string name="label_edit_profile">Edita tus datos personales</string>
+
 
 
 

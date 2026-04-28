@@ -23,7 +23,11 @@
         android:id="@+id/configFragment"
         android:name="com.example.innertalk.ConfigFragment"
         android:label="@string/label_config"
-        tools:layout="@layout/fragment_config" />
+        tools:layout="@layout/fragment_config" >
+        <action
+            android:id="@+id/action_configFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newEntryFragment"
         android:name="com.example.innertalk.NewEntryFragment"
@@ -43,4 +47,9 @@
         android:name="com.example.innertalk.EntriesFragment"
         android:label="@string/label_entries"
         tools:layout="@layout/fragment_entries" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.innertalk.EditProfileFragment"
+        android:label="@string/label_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

@@ -3,6 +3,7 @@ package com.example.innertalk
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,9 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
@@ -58,6 +61,12 @@ class ConfigFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //configuración del botón de editar
+        binding.btnPerfil.setOnClickListener {
+            //pasamos al fragment de edicion
+            findNavController().navigate(R.id.action_configFragment_to_editProfileFragment)
+        }
+
         // Recuperamos el estado previo del Switch desde SharedPreferences
         // "config_prefs" es el nombre del archivo de preferencias
         val preferencia = requireContext().getSharedPreferences("config_prefs", 0)
@@ -90,9 +99,14 @@ class ConfigFragment : Fragment() {
             }
         }
 
+
         //Listener para el botón de politicas
         binding.btnPoliticas.setOnClickListener {
             mostrarPoliticasPopUp()
+        }
+        // Listener para el botón de enviar incidencia
+        binding.btnIncidencia.setOnClickListener {
+            abrirAppDeCorreo()
         }
 
         //Listener para el boton de cerrar sesión
@@ -207,6 +221,26 @@ class ConfigFragment : Fragment() {
 
         //creamos u mostramos el pop up
         builder.create().show()
+
+    }
+    //Función para enviar el correo de incidencias
+    private fun abrirAppDeCorreo(){
+
+        //Configuramos el intente para que solo responda a aplicaciones de correo (mailto:)
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            //Ponemos nuestro correo
+            putExtra(Intent.EXTRA_EMAIL, arrayOf("innertalk@gmail.com"))
+            //Ponemos un asunto en el correo
+            putExtra(Intent.EXTRA_SUBJECT, "Incidencia de uso")
+        }
+        try{
+            //Intentamos abrir el correo
+            startActivity(intent)
+        }catch(e : Exception){
+            Toast.makeText(requireContext(), "No hemos encontrado ninguna aplicación de correo ", LENGTH_SHORT)
+
+        }
 
     }
 
