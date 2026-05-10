@@ -29,8 +29,29 @@ class EntriesFragment : Fragment(R.layout.fragment_entries) {
     }
 
     private fun setupRecyclerView() {
-        // Inicializamos el adapter y le pasamos nuestra lista al principio vacía
-        adapter = EntriesAdapter(entriesList)
+        // Inicializamos el adapter y le pasamos nuestra lista al principio vacía y la funcion de click
+
+        adapter = EntriesAdapter(entriesList){
+             notaPulsada ->
+            //Cuando se pulse preparamos ls datos para enviarlos
+            val bundle = Bundle().apply {
+                putString("id_nota", notaPulsada.id)
+                putString("texto_nota", notaPulsada.texto)
+                putInt("emocion_nota", notaPulsada.emocion)
+            }
+
+            //Creamos el fragmento de destino y le pasamos el bundle con la informacion
+            //de la nota pulsada
+            val destinoFragment = NewEntryFragment().apply {
+                arguments = bundle
+            }
+
+            //Hacemos el cambio en la pantalla
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, destinoFragment) // <-- ¡AQUÍ PONES TU ID REAL!
+                .addToBackStack(null)
+                .commit()
+        }
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.rvHistory.adapter = adapter
     }
@@ -52,7 +73,11 @@ class EntriesFragment : Fragment(R.layout.fragment_entries) {
                 // Recorremos cada cada nota que hay en el nodo diario
                 for (data in snapshot.children) {
                     val entry = data.getValue(EntryModel::class.java)
-                    entry?.let { entriesList.add(it) }
+                    if(entry!=null){
+                        //Marcamos el id con el data.key que nos da firebase
+                        val notaConId = entry.copy(id = data.key ?: "")
+                        entriesList.add(notaConId)
+                    }
                 }
 
                 // Las entradas de Firebase vienen de vieja a nueva, así que les damos la vuelta

@@ -27,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.example.innertalk.model.EntryModel
 import com.example.innertalk.adapter.EntriesAdapter
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class StartFragment : Fragment() {
     // Variables para el ViewBinding (así no tengo que usar findViewById)
@@ -53,12 +55,28 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         viewModel = ViewModelProvider(requireActivity()).get(ActivityViewModel::class.java)
 
         // 1. RECYCLER DE NOTAS DEL DIARIO ---
         // Empiezo con una lista vacía para que no pete la app
-        notasAdapter = EntriesAdapter(emptyList())
+        notasAdapter = EntriesAdapter(emptyList()) { notaPulsada ->
+            // Reutilizamos la misma lógica de viaje que en el EntriesFragment
+            val bundle = Bundle().apply {
+                putString("id_nota", notaPulsada.id)
+                putString("texto_nota", notaPulsada.texto)
+                putInt("emocion_nota", notaPulsada.emocion)
+            }
 
+            val destinoFragment = NewEntryFragment().apply {
+                arguments = bundle
+            }
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, destinoFragment) // <-- ¡AQUÍ PONES TU ID REAL!
+                .addToBackStack(null)
+                .commit()
+        }
         // Configuro la lista de las notas
         binding.rvNotasCalendario.apply {
             adapter = notasAdapter
@@ -73,7 +91,6 @@ class StartFragment : Fragment() {
             hoy.set(java.util.Calendar.MINUTE, 0)
             hoy.set(java.util.Calendar.SECOND, 0)
             hoy.set(java.util.Calendar.MILLISECOND, 0)
-
             // Saco el día que el usuario ha pulsado también a las 00:00:00
             val pulsado = java.util.Calendar.getInstance()
             pulsado.set(year, month, dayOfMonth, 0, 0, 0)
@@ -148,10 +165,21 @@ class StartFragment : Fragment() {
         cargarActividadesDeHoy()
     }
 
+    //usamos onResume para que si hay cehacks se actualicen al volver al fragment
+    override fun onResume() {
+        super.onResume()
+        val sfd = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+
+        binding.tvSugeridasTitulo.text = "Actividades sugeridas"
+
+        cargarActividadesDeHoy()
+    }
+
     private fun mostrarModalActividad(activity : ActivityModel){
         val dialog = android.app.Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_activity_detail) //conectamos con el layout
+
 
         //2.Hacemos el fondo tranparente para consegui las esquinas redondeadas
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

@@ -12,7 +12,8 @@ import com.example.innertalk.databinding.ItemsEntriesCardBinding
 import com.example.innertalk.model.EntryModel
 
 // 1. CORRECCIÓN: var en lugar de val, y List<EntryModel>
-class EntriesAdapter(private var entries: List<EntryModel>) :
+class EntriesAdapter(private var entries: List<EntryModel>,
+    private val onItemClick : (EntryModel) -> Unit) :
     RecyclerView.Adapter<EntriesAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemsEntriesCardBinding) : RecyclerView.ViewHolder(binding.root)
@@ -84,6 +85,10 @@ class EntriesAdapter(private var entries: List<EntryModel>) :
             } else {
                 // Si no hay foto en esta entrada, el CardView no debe ocupar espacio
                 cardHistoryImage.visibility = View.GONE
+            }
+            //Le pasamos la nota a editar entera al fragment
+            root.setOnClickListener {
+                onItemClick(entry)
             }
         }
     }

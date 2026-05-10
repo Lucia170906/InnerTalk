@@ -63,12 +63,14 @@ class ActivityViewModel : ViewModel() {
             catalogoMaestro: List<ActivityModel>,
             idsDeFirebase: List<String>
         ): List<ActivityModel> {
+            val idsLimpias = idsDeFirebase.map { it.trim().lowercase() }
 
             // Recorremos todas las actividades del catálogo maestro una por una
             return catalogoMaestro.map { actividad ->
+                val idLocal = actividad.id.trim().lowercase()
 
-                // Copiamos la actividad dejándola exactamente igual, pero actualizando su check.
-                actividad.copy(isCompleted = idsDeFirebase.equals(actividad.id))
+                // Comparamos los IDs limpios
+                actividad.copy(isCompleted = idsLimpias.contains(idLocal))
             }
         }
     }
