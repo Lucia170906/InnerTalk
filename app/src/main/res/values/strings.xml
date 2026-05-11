@@ -40,6 +40,9 @@
     <!--    texto fragment  editar datos personales-->
     <string name="label_edit_profile">Edita tus datos personales</string>
 
+    <!--    texto fragment  editar entradas -->
+    <string name="label_edit_entries">Edita tu entrada</string>
+
 
 
 

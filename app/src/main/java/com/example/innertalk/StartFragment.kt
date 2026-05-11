@@ -20,6 +20,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -66,16 +67,12 @@ class StartFragment : Fragment() {
                 putString("id_nota", notaPulsada.id)
                 putString("texto_nota", notaPulsada.texto)
                 putInt("emocion_nota", notaPulsada.emocion)
+                putString("foto_nota", notaPulsada.fotoBase64)
             }
 
-            val destinoFragment = NewEntryFragment().apply {
-                arguments = bundle
-            }
 
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, destinoFragment) // <-- ¡AQUÍ PONES TU ID REAL!
-                .addToBackStack(null)
-                .commit()
+            findNavController().navigate(R.id.editEntryFragment, bundle)
+
         }
         // Configuro la lista de las notas
         binding.rvNotasCalendario.apply {
@@ -298,16 +295,24 @@ class StartFragment : Fragment() {
                         val listaNotasDelDia = mutableListOf<EntryModel>()
 
                         // Recorro todas mis notas...
+                        // Recorro todas mis notas...
                         for (data in snapshot.children) {
-                            val entry = data.getValue(EntryModel::class.java)
-                            if (entry != null) {
-                                // ... y si alguna cae dentro del rango de horas de ese día, la saca
-                                if (entry.fecha in inicioDia..finDia) { // el campo se llama fecha en Firebase
-                                    listaNotasDelDia.add(entry)
+                            try {
+                                val entry = data.getValue(EntryModel::class.java)
+                                if (entry != null) {
+                                    // ... y si alguna cae dentro del rango de horas de ese día, la saca
+                                    if (entry.fecha in inicioDia..finDia) {
+                                        // Le inyectamos el ID real de Firebase a la nota
+                                        val notaConId = entry.copy(id = data.key ?: "")
+
+                                        //Añadimos la nota que SÍ tiene el ID
+                                        listaNotasDelDia.add(notaConId)
+                                    }
                                 }
+                            } catch (e: Exception) {
+                                android.util.Log.e("FirebaseData", "Dato ignorado en StartFragment")
                             }
                         }
-
 
                             if (listaNotasDelDia.isNotEmpty()) {
                                 // Muestro la lista si hay notas
@@ -344,6 +349,9 @@ class StartFragment : Fragment() {
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                //Si la pantalla no esta visible (binding nulo) cortamos y no hacemos nada
+                //para evitar crasheos
+                if (_binding ==null) return
                 // 1. Obtenemos la lista de IDs que ya marqué hoy
                 val idsHechasHoy = snapshot.children.mapNotNull { it.key }
 

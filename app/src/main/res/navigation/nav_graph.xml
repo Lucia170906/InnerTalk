@@ -9,7 +9,11 @@
         android:id="@+id/startFragment"
         android:name="com.example.innertalk.StartFragment"
         android:label="@string/label_start"
-        tools:layout="@layout/fragment_start" />
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_editEntryFragment"
+            app:destination="@id/editEntryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.innertalk.StatisticsFragment"
@@ -46,10 +50,19 @@
         android:id="@+id/entriesFragment"
         android:name="com.example.innertalk.EntriesFragment"
         android:label="@string/label_entries"
-        tools:layout="@layout/fragment_entries" />
+        tools:layout="@layout/fragment_entries" >
+        <action
+            android:id="@+id/action_entriesFragment_to_editEntryFragment"
+            app:destination="@id/editEntryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.innertalk.EditProfileFragment"
         android:label="@string/label_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/editEntryFragment"
+        android:name="com.example.innertalk.EditEntryFragment"
+        android:label="@string/label_edit_entries"
+        tools:layout="@layout/fragment_edit_entry" />
 </navigation>

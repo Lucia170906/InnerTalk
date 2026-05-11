@@ -3,6 +3,7 @@ package com.example.innertalk
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.innertalk.adapter.EntriesAdapter
 import com.example.innertalk.databinding.FragmentEntriesBinding
@@ -38,19 +39,13 @@ class EntriesFragment : Fragment(R.layout.fragment_entries) {
                 putString("id_nota", notaPulsada.id)
                 putString("texto_nota", notaPulsada.texto)
                 putInt("emocion_nota", notaPulsada.emocion)
+                putString("foto_nota", notaPulsada.fotoBase64)
             }
+            findNavController().navigate(R.id.editEntryFragment, bundle)
 
             //Creamos el fragmento de destino y le pasamos el bundle con la informacion
             //de la nota pulsada
-            val destinoFragment = NewEntryFragment().apply {
-                arguments = bundle
-            }
 
-            //Hacemos el cambio en la pantalla
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, destinoFragment) // <-- ¡AQUÍ PONES TU ID REAL!
-                .addToBackStack(null)
-                .commit()
         }
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.rvHistory.adapter = adapter
@@ -67,6 +62,10 @@ class EntriesFragment : Fragment(R.layout.fragment_entries) {
         // Escuchamos los cambios: si el usuario añade una nota nueva
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
+                //Si la pantalla no esta visible (binding nulo) cortamos y no hacemos nada
+                //para evitar crasheos
+                if (_binding ==null) return
                 // Limpiamos la lista para no duplicar datos al refrescar
                 entriesList.clear()
 
