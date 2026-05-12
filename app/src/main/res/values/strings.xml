@@ -1,49 +1,55 @@
 <resources>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!--    texto menu bottom-->
-
-    <string name="chat">Chat</string>
-    <string name="start">Inicio</string>
-    <string name="add_entry">Nueva entrada</string>
-    <string name="statistics">Estadísticas</string>
-
     <string name="app_name">InnerTalk</string>
+
+    <string name="menu_chat">Chat</string>
+    <string name="menu_start">Inicio</string>
+    <string name="menu_add">Nueva entrada</string>
+    <string name="menu_stats">Estadísticas</string>
+    <string name="menu_config">Configuración</string>
+
     <string name="label_start">Inicio</string>
-    <string name="calendar">Calendario</string>
-
-
-    <!--    texto fragment nueva entrada-->
-
-    <string name="label_new_entry">Nueva Entrada</string>
-    <string name="select_text">Selecciona como te sientes</string>
-    <string name="write_here_text">Escribe aquí...</string>
-    <string name="save_button">Guardar</string>
-
-    <!--    texto fragment estadisticas-->
-    <string name="label_statistics">Estadísticas</string>
-
-    <string name="angry">Enfado</string>
-    <string name="sad">Triste</string>
-    <string name="normal">Apático</string>
-    <string name="calm">Calma</string>
-    <string name="happy">Felicidad</string>
-
-    <!--    texto fragment config-->
     <string name="label_config">Configuración</string>
-
-    <!--    texto fragment chat-->
-    <string name="label_chat">Chat</string>
-
-    <!--    texto fragment lidtado entradas-->
+    <string name="label_chat">Chat con IA</string>
+    <string name="label_statistics">Estadísticas</string>
     <string name="label_entries">Tus entradas</string>
-
-    <!--    texto fragment  editar datos personales-->
-    <string name="label_edit_profile">Edita tus datos personales</string>
-
-    <!--    texto fragment  editar entradas -->
+    <string name="label_edit_profile">Datos personales</string>
     <string name="label_edit_entries">Edita tu entrada</string>
 
+    <string name="start_calendar_title">Calendario de bienestar</string>
+    <string name="start_suggested_activities">Actividades sugeridas</string>
+    <string name="start_journal_notes">Notas del diario</string>
+    <string name="start_no_activities">No hay actividades para este día</string>
+    <string name="start_future_date">No te preocupes por mañana, aún es pronto</string>
 
+    <string name="label_new_entry">Nueva Entrada</string>
+    <string name="select_mood">¿Cómo te sientes?</string>
+    <string name="hint_write_here">Escribe aquí tus pensamientos...</string>
+    <string name="btn_save">Guardar entrada</string>
+    <string name="btn_update">Actualizar entrada</string>
+    <string name="msg_validation_error">Escribe algo y elige un emoji</string>
+    <string name="msg_save_success">¡Entrada guardada con éxito!</string>
+    <string name="msg_update_success">¡Entrada actualizada!</string>
 
+    <string name="stats_total_entries">Entradas Totales</string>
+    <string name="stats_streak_title">Días seguidos</string>
+    <string name="stats_chart_title">Distribución Emocional</string>
+    <string name="stats_quote_default">Un paso a la vez, no hay prisa.</string>
+    <string name="stats_streak_flame">🔥</string>
 
+    <string name="emotion_very_happy">Muy Feliz</string>
+    <string name="emotion_happy">Contento</string>
+    <string name="emotion_neutral">Apático</string>
+    <string name="emotion_sad">Triste</string>
+    <string name="emotion_angry">Enfadado</string>
+
+    <string name="config_notif_switch">Recordatorio diario</string>
+    <string name="config_btn_profile">Editar Perfil</string>
+    <string name="config_btn_policies">Políticas y Privacidad</string>
+    <string name="config_btn_support">Enviar Incidencia</string>
+    <string name="config_btn_logout">Cerrar Sesión</string>
+    <string name="config_time_picker_title">¿A qué hora quieres el recordatorio?</string>
+
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_accept">Aceptar</string>
+    <string name="loading">Cargando...</string>
 </resources>

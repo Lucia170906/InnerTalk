@@ -1,24 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:background="@color/fondo_app">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:gravity="center_horizontal">
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvQuote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_rounded"
+            android:backgroundTint="#ECFDFF"
+            android:padding="16dp"
+            android:text="Un paso a la vez."
+            android:textAlignment="center"
+            android:textColor="#006064"
+            android:textSize="14sp"
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:weightSum="2">
 
             <com.google.android.material.card.MaterialCardView
@@ -27,6 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="#D1C4FF"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp">
@@ -34,9 +48,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp"
-                    android:gravity="center">
+                    android:padding="20dp">
 
                     <ImageView
                         android:layout_width="32dp"
@@ -49,54 +63,60 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="0"
+                        android:text="-"
                         android:textColor="#5E35B1"
-                        android:textSize="28sp"
+                        android:textSize="32sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Entradas Totales"
-                        android:textColor="#333333"
-                        android:textSize="12sp" />
+                        android:text="Entradas"
+                        android:textColor="#5E35B1"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardStreak"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                app:cardBackgroundColor="#ECFDFF"
+                app:cardBackgroundColor="#FFF3E0"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp"
-                    android:gravity="center">
+                    android:padding="20dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="💡 Recuerda:"
-                        android:textColor="#00838F"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="🔥"
+                        android:textSize="24sp"
+                        android:textAlignment="center"/>
 
                     <TextView
-                        android:id="@+id/tvQuote"
+                        android:id="@+id/tvStreakDays"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Un paso a la vez."
-                        android:textAlignment="center"
-                        android:textColor="#006064"
-                        android:textSize="13sp"
-                        android:textStyle="italic" />
+                        android:text="1"
+                        android:textColor="#E65100"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Días seguidos"
+                        android:textColor="#E65100"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
@@ -104,35 +124,31 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/morado_principal"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp">
-
-            <TextView
-                android:id="@+id/tvEmotionTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="24dp"
-                android:text="Emoción más típica"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/morado_principal"
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="24dp"
             app:cardElevation="2dp">
 
-            <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
-                android:id="@+id/aaChartView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:padding="16dp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Distribución Emocional"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+                    android:id="@+id/aaChartView"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp" />
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -142,15 +158,45 @@
             app:cardCornerRadius="24dp"
             app:cardElevation="0dp">
 
-            <TextView
-                android:id="@+id/tvAnalysisText"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="24dp"
-                android:text="Análisis sobre\nfrecuencia de\nemociones"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/ivDominantEmotion"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/neutral_icon"
+                    android:layout_marginEnd="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvEmotionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Calculando..."
+                        android:textColor="#333333"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tvAnalysisText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Recopilando datos de tu diario para crear un perfil."
+                        android:textColor="#555555"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>

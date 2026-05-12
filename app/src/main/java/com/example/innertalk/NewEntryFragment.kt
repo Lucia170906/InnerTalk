@@ -105,8 +105,8 @@ class NewEntryFragment : Fragment() {
         val texto = binding.editTextNote.text.toString().trim()
         val uid = auth.currentUser?.uid ?: return
 
-        if (texto.isEmpty() || emocionSeleccionada == 0) {
-            Toast.makeText(requireContext(), "Escribe algo y elige un emoji", Toast.LENGTH_SHORT).show()
+        if ( emocionSeleccionada == 0) {
+            Toast.makeText(requireContext(), "Al menos elije una emoción", Toast.LENGTH_SHORT).show()
             return
         }
 

@@ -4,7 +4,7 @@
     <item
         android:id="@+id/configFragment"
         android:icon="@drawable/icon_config"
-        android:title="Configuracion"
+        android:title="@string/menu_config"
         app:showAsAction="always" />
 
 </menu>

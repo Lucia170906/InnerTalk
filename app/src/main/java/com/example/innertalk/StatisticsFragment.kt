@@ -17,6 +17,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class StatisticsFragment : Fragment() {
 
@@ -44,7 +48,7 @@ class StatisticsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         leerEstadisticasFirebase()//para poner las estadisticas desde primer momento
-        contarEntradasTotales() // para mostar el numero de enrdas dsde el principio
+        calcularRachaYEntradas() // para mostar el numero de enrdas dsde el principio
         mostrarFraseAleatoria() // frase motivadora
 
         // listener para pasar al otro frgament cuando se pulse y ver la lista
@@ -66,6 +70,8 @@ class StatisticsFragment : Fragment() {
         //Vamos a  usar addValueEventListener para que el grafico pueda actualizarse en tiempo rea
         statsRef.addValueEventListener(object  : ValueEventListener{
             override fun onDataChange (snapshot: DataSnapshot){
+
+                if (_binding == null) return
                 // Extraemos los valores, si aún no existen (el usuario no ha hecho ninguna entrada) ponemos 0
                 if(snapshot.exists()){
                     val veryHappy = snapshot.child("emocion_1").getValue(Int::class.java)?:0
@@ -94,6 +100,7 @@ class StatisticsFragment : Fragment() {
             // si hay un error al obtener los datos de la base
 
             override fun onCancelled(p0: DatabaseError) {
+                if (_binding == null) return
                 Toast.makeText(context, "Error al cargar los datos", LENGTH_SHORT).show()
             }
 
@@ -125,26 +132,88 @@ class StatisticsFragment : Fragment() {
         binding.aaChartView.aa_drawChartWithChartModel(aaChartModel)
     }
 
-    private fun contarEntradasTotales(){
+    private fun calcularRachaYEntradas (){
         val uid = auth.currentUser?.uid ?: return
-
-        //Apuntamo al nodo donde guardamos los diarios del currenrUser
-
         val diarioRef = database.child("usuarios").child(uid).child("diario")
 
-        diarioRef.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                //.childrenCount nos da el número de elementos en la lista
+        //Usamos addValueEventoListener para que cuando el usuario escriba ua nota hoy la racha suba
+        diarioRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot){
+                //Por si el fragment se cierra mientras carga
+                if(_binding == null) return
+
+                //Mostrar entradas totalers
+
                 val total = snapshot.childrenCount
                 binding.tvTotalEntries.text = total.toString()
+
+                //Preparar el formato de fecha para ignorar las horas
+                val sdf= SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val  fechasUnicas= mutableSetOf<String>()
+
+                //Recogemos todas las fechas en las que se ha escrito algo y las limpiamos
+                for (data in snapshot.children) {
+                    try {
+                        val fechaMillis = data.child("fecha").getValue(Long::class.java)
+                        if (fechaMillis != null) {
+                            val fechaLimpia = sdf.format(java.util.Date(fechaMillis))
+                            fechasUnicas.add(fechaLimpia) // Set elimina automáticamente los días duplicados
+                        }
+                    } catch (e: Exception) {
+                        // Ignoramos datos corruptos
+                    }
+                }
+
+                //Convertimos a fechas reales y las ordenamos de viejas a nuevas
+                val fechasOrdenadas = fechasUnicas.map {
+                    sdf.parse(it)!!
+                }.sortedDescending()
+                var rachaActual = 0
+                if(fechasOrdenadas.isNotEmpty()){
+                    //Calculamos que dia es hoy y que dia fue ayer
+                    val hoyStr = sdf.format(Date())
+                    val calendarioAyer = Calendar.getInstance()
+                    calendarioAyer.add(Calendar.DAY_OF_YEAR,-1)
+                    val ayerStr = sdf.format(calendarioAyer.time)
+
+                    val fechaMasRescientStr = sdf.format(fechasOrdenadas[0])
+
+                    //Solo hay racha si la ultima nota fue ayer u hoy
+                    if(fechaMasRescientStr == hoyStr || fechaMasRescientStr == ayerStr){
+                        rachaActual = 1
+                        val calendarioEvaluador = Calendar.getInstance()
+                        calendarioEvaluador.time = fechasOrdenadas[0]
+
+                       // Vamos mirando hacia atrás si el siguiente día es exactamente el día anterior, sumamos 1
+                        for( i in 1 until fechasOrdenadas.size){
+                            //Calculamos cual deberia ser el dia anterior
+                            val diaEsperado = calendarioEvaluador.clone() as Calendar
+                            diaEsperado.add(Calendar.DAY_OF_YEAR, -1)
+                            val esperadoStr = sdf.format(diaEsperado.time)
+
+                            val fechaAComprobarStr = sdf.format(fechasOrdenadas[i])
+
+                            if(fechaAComprobarStr == esperadoStr){
+                                rachaActual++
+                                calendarioEvaluador.add(Calendar.DAY_OF_YEAR, -1) //Retrocedemos un dia mas
+
+                            }else{
+                                break//Hueco encontrado, se rompe el bucle
+                            }
+                        }
+                    }
+
+                }
+                binding.tvStreakDays.text = rachaActual.toString()
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                binding.tvTotalEntries.text="-" // si da error ponemos un guión por estética
+                if(_binding==null){
+                    binding.tvTotalEntries.text = "-"
+                    binding.tvStreakDays.text = "0"
+                }
             }
         })
-
-
     }
 
     private fun generarAnalisisEmocional (v1: Int, v2: Int, v3: Int, v4: Int, v5: Int){
@@ -208,9 +277,20 @@ class StatisticsFragment : Fragment() {
             }
 
         }
+        val iconRes = when (emocionPrincipal) {
+            "Muy Feliz" -> R.drawable.very_happy_icon
+            "Contento" -> R.drawable.happy_icon
+            "Apático" -> R.drawable.neutral_icon
+            "Triste" -> R.drawable.sad_icon
+            "Enfadado" -> R.drawable.angry_icon
+            else -> R.drawable.neutral_icon
+        }
+        binding.ivDominantEmotion.setImageResource(iconRes)
+
         //5. Actualizamos los textos en la pantalla
         binding.tvEmotionTitle.text = titulo
         binding.tvAnalysisText.text = analisis
+
     }
 
     //sisema de frase provisional, tal vez se evolucione a sistema de rachas

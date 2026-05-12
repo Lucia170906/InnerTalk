@@ -150,6 +150,17 @@ class ConfigFragment : Fragment() {
 
             Toast.makeText(context, "Recordatorio programado a las ${String.format("%02d:%02d", picker.hour, picker.minute)}", Toast.LENGTH_SHORT).show()
         }
+
+        picker.addOnNegativeButtonClickListener {
+            //Devolvemos el switvh a off
+            binding.switchNotificaciones.isChecked = false
+        }
+
+        //Si el usuario toca fuera del recuadro
+        picker.addOnCancelListener {
+            // Devolvemos el switch a su estado apagado
+            binding.switchNotificaciones.isChecked = false
+        }
     }
 
 

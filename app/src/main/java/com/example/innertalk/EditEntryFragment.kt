@@ -1,15 +1,22 @@
 package com.example.innertalk
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.innertalk.databinding.FragmentNewEntryBinding // ¡Usamos el diseño que ya existe!
+import com.example.innertalk.databinding.FragmentNewEntryBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.io.ByteArrayOutputStream
 
 class EditEntryFragment : Fragment() {
     //Usamos el binding de new entry
@@ -24,6 +31,30 @@ class EditEntryFragment : Fragment() {
     private  var  textoNota : String = ""
 
     private  var emocionSeleccionada: Int = 0
+
+    //Variable para la imagen
+    private var nuevaImagenUri : Uri?= null
+    //Guardamos la foto vieja por si el usuario no la cambia
+    private var fotoBase64Actual : String ?=null
+
+
+    //Selector de imagen
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) {
+            nuevaImagenUri = uri // Guardamos la nueva Uri
+            binding.cardPreview.visibility = View.VISIBLE
+
+            // Mostramos preview
+            try {
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                binding.ivPreview.setImageBitmap(bitmap)
+            } catch (e: Exception) {
+                binding.ivPreview.setImageURI(uri)
+            }
+        }
+    }
+
 
 
 
@@ -48,13 +79,22 @@ class EditEntryFragment : Fragment() {
             idNotaActual = bundle.getString("id_nota", "")
             textoNota = bundle.getString("texto_nota", "")
             emocionSeleccionada = bundle.getInt("emocion_nota", 0)
-
+            fotoBase64Actual = bundle.getString("foto_nota")
             // Escribimos el texto que ya había en la base de datos
             binding.editTextNote.setText(textoNota)
 
-            // Disparamos tu animación para marcar la carita correcta al entrar
+            // Disparamos animación para marcar la carita correcta al entrar
             val listaCaritas = listOf(binding.face1, binding.face2, binding.face3, binding.face4, binding.face5)
             actualizarDisenoCaritas(listaCaritas, emocionSeleccionada)
+
+            //Cargamo la imagen
+            if (!fotoBase64Actual.isNullOrEmpty()){
+                cargarFotoActualEnPreview(fotoBase64Actual!!)
+            }
+        }
+
+        binding.btnAdd.setOnClickListener {
+            pickMedia.launch("image/*")
         }
 
         //Preparamos el boton para guaradar
@@ -79,6 +119,22 @@ class EditEntryFragment : Fragment() {
             }
         }
     }
+
+    private fun cargarFotoActualEnPreview(base64String: String){
+        try {
+            //Convertimos el texto en Base 64 de Firebadr  vuelta a bytes
+            val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
+            //ConVERTIMOS BTES A BITMAP
+            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+            //Mostramos el contenedor y la foto
+            binding.cardPreview.visibility = View.VISIBLE
+            binding.ivPreview.setImageBitmap(decodedImage)
+        }catch (e : Exception){
+            Log.e("EditEntry", "Error al cargar foto vieja: ${e.message}")
+            binding.cardPreview.visibility = View.GONE
+        }
+    }
     private fun actualizarDisenoCaritas(caritas: List<android.widget.ImageButton>, seleccionada: Int) {
         val colores = listOf("#4CAF50", "#FFEB3B", "#9E9E9E", "#FF9800", "#F44336")
         caritas.forEachIndexed { index, button ->
@@ -93,9 +149,27 @@ class EditEntryFragment : Fragment() {
         }
     }
 
+
+
+
+
+
     fun actualizarEnFirebase (){
         val nuevoTexto = binding.editTextNote.text.toString().trim()
         val uid = auth.currentUser?.uid ?: return
+
+        var fotoFinalBase64 : String ?= fotoBase64Actual //Por defecto mantenemos al vieja
+
+        //el usuario ha elegido una foto nueva ==
+        if( nuevaImagenUri != null){
+            //si hay foto nueva la comprimimos
+            fotoFinalBase64 = comprimirImagen(nuevaImagenUri!!)
+
+            if (fotoBase64Actual == null){
+                Toast.makeText(requireContext(), "Error al procesar la nueva imagen", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
 
         if (idNotaActual.isEmpty()) {
             Toast.makeText(requireContext(), "Error: No se encontró el ID de la nota", Toast.LENGTH_LONG).show()
@@ -105,7 +179,9 @@ class EditEntryFragment : Fragment() {
         // Solo actualizamos texto y emoción. La fecha y la foto se mantienen como estaban.
         val actualizaciones = mapOf(
             "texto" to nuevoTexto,
-            "emocion" to emocionSeleccionada
+            "emocion" to emocionSeleccionada,
+            "fotoBase64" to fotoFinalBase64 // Esta será la vieja o la nueva procesada
+
         )
 
         //Accedemos a la ruta exacta de esta nota y usamos updateChildren
@@ -120,6 +196,22 @@ class EditEntryFragment : Fragment() {
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Error al conectar con la base de datos", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    //Funiando para la compresion
+    private fun comprimirImagen(uri: Uri): String? {
+        return try {
+            val inputStream = requireContext().contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            // Usamos tus mismos valores de compresión
+            val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 400, 400, false)
+            val outputStream = ByteArrayOutputStream()
+            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 60, outputStream)
+            Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+        } catch (e: Exception) {
+            Log.e("EditEntry", "Error comprimiendo: ${e.message}")
+            null
+        }
     }
 
     override fun onDestroyView() {
