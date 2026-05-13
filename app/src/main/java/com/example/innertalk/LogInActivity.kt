@@ -36,8 +36,37 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
             // No hacemos finish() aquí para que el usuario pueda darle al botón de 'Atrás'
         }
+        binding.tvForgotPassword.setOnClickListener {
+            val email = binding.etLoginUser.text.toString().trim()
+
+            if (email.isEmpty()) {
+                // Si el campo está vacío, le pedimos que lo rellene para saber a quién enviarlo
+                binding.etLoginUser.error = getString(R.string.auth_error_login_email)
+                binding.etLoginUser.requestFocus()
+            } else {
+                //verificamos si el correo existe
+                verificarEmail(email){
+                    existe ->
+                    if(existe){
+                        // Método oficial de Firebase
+                        auth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Toast.makeText(this, getString(R.string.auth_reset_password_sent), Toast.LENGTH_LONG).show()
+                                } else {
+                                    Toast.makeText(this, getString(R.string.auth_reset_password_error), Toast.LENGTH_LONG).show()
+                                }
+                            }
+                    }else{
+                        binding.etLoginUser.error = getString(R.string.auth_error_email_not_found)
+                    }
+                }
+
+            }
+        }
 
         binding.btnLogin.setOnClickListener {
+
             //primero comprobamo si hay internet para hacer la consulta a firebase
             if (!isNetworkAvailable()) {
                 Toast.makeText(this, getString(R.string.error_no_internet), Toast.LENGTH_LONG).show()
@@ -63,16 +92,26 @@ class LoginActivity : AppCompatActivity() {
                 isValid = false
             }
 
+
+
             if (!isValid) return@setOnClickListener
 
-            auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, getString(R.string.login_msg_welcome), Toast.LENGTH_SHORT).show()
-                    goToHome()
-                } else {
-                    Toast.makeText(this, getString(R.string.login_error_credentials), Toast.LENGTH_LONG).show()
+            verificarEmail(email){
+                existe->
+                if(existe){
+                    auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, getString(R.string.login_msg_welcome), Toast.LENGTH_SHORT).show()
+                            goToHome()
+                        } else {
+                            Toast.makeText(this, getString(R.string.login_error_credentials), Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }else{
+                    binding.etLoginUser.error = getString(R.string.auth_error_email_not_found)
                 }
             }
+
         }
     }
 
@@ -94,6 +133,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private  fun verificarEmail(email : String, callbak: (Boolean) -> Unit){
+        auth.fetchSignInMethodsForEmail(email).addOnCompleteListener { task ->
+             if(task.isSuccessful){
+                 val result = task.result?.signInMethods
+                 //Si la lista no es nula y no esta vacia el correo exite
+                 callbak(!result.isNullOrEmpty())
+
+             }else{
+                 //En caso de error tecnico asumimos false
+                 callbak(false)
+             }
+        }
+    }
     private fun goToHome() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()

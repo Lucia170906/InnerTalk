@@ -83,6 +83,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
@@ -92,6 +93,18 @@
                 app:cornerRadius="12dp"
                 android:textColor="@color/lavanda_texto"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginBottom="24dp"
+                android:text="@string/auth_forgot_password"
+                android:textColor="@color/lavanda_texto"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:padding="4dp" />
 
             <TextView
                 android:id="@+id/tvGoToRegister"

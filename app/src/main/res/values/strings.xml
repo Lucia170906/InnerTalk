@@ -114,6 +114,15 @@
     <string name="auth_login_title">Iniciar Sesión</string>
     <string name="auth_btn_login">Entrar</string>
     <string name="auth_go_to_register">¿No tienes cuenta? Regístrate aquí</string>
+    <string name="auth_forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="auth_reset_password_sent">Se ha enviado un correo para restablecer tu contraseña.</string>
+    <string name="auth_reset_password_error">No se pudo enviar el correo. Verifica que el email sea correcto.</string>
+    <string name="auth_reset_title">Restablecer contraseña</string>
+    <string name="auth_reset_msg">Introduce tu email para enviarte un enlace de recuperación.</string>
+    <string name="auth_reset_btn_confirm">Enviar enlace</string>
+
+    <string name="auth_error_email_not_found">Este correo no está registrado en InnerTalk.</string>
+    <string name="auth_checking_email">Comprobando cuenta…</string>
 
     <string name="error_empty_fields">Por favor, rellena todos los campos</string>
     <string name="error_login_failed">Correo o contraseña incorrectos</string>
