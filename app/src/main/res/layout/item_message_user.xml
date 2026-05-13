@@ -13,6 +13,6 @@
         android:background="@drawable/bg_bubble_user"
         android:padding="12dp"
         android:text="Hola, ¿cómo estás?"
-        android:textColor="#2D1B4E"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 </LinearLayout>

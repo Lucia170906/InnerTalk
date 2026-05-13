@@ -27,7 +27,7 @@
                 android:text="@string/start_calendar_label"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/texto_titulos_seccion" />
 
             <CalendarView
                 android:id="@+id/calendarView"
@@ -44,7 +44,7 @@
             android:text="@string/start_thoughts_label"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/texto_titulos_seccion"
             android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -64,7 +64,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"
-            android:textColor="#1D1B20" />
+            android:textColor="@color/texto_titulos_seccion" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

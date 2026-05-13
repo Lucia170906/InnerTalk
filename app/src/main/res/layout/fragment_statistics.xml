@@ -19,11 +19,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:background="@drawable/bg_rounded"
-            android:backgroundTint="#ECFDFF"
+            android:backgroundTint="@color/stats_frase_fondo"
             android:padding="16dp"
             tools:text="@string/stats_quote_placeholder"
             android:textAlignment="center"
-            android:textColor="#006064"
+            android:textColor="@color/stats_frase_texto"
             android:textSize="14sp"
             android:textStyle="italic" />
 
@@ -42,7 +42,7 @@
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="#D1C4FF"
+                app:cardBackgroundColor="@color/morado_principal"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp">
 
@@ -58,7 +58,7 @@
                         android:layout_height="32dp"
                         android:src="@drawable/ic_journal"
                         android:contentDescription="@string/desc_stats_journal_icon"
-                        app:tint="#5E35B1" />
+                        app:tint="@color/iconos_acciones_card" />
 
                     <TextView
                         android:id="@+id/tvTotalEntries"
@@ -66,7 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         tools:text="12"
-                        android:textColor="#5E35B1"
+                        android:textColor="@color/iconos_acciones_card"
                         android:textSize="32sp"
                         android:textStyle="bold" />
 
@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/stats_label_entries"
-                        android:textColor="#5E35B1"
+                        android:textColor="@color/iconos_acciones_card"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                app:cardBackgroundColor="#FFF3E0"
+                app:cardBackgroundColor="@color/stats_racha_fondo"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp">
 
@@ -109,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         tools:text="5"
-                        android:textColor="#E65100"
+                        android:textColor="@color/stats_racha_texto"
                         android:textSize="32sp"
                         android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/stats_label_streak"
-                        android:textColor="#E65100"
+                        android:textColor="@color/stats_racha_texto"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -127,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:cardBackgroundColor="@android:color/white"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="24dp"
             app:cardElevation="2dp">
 
@@ -136,12 +136,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
                     android:id="@+id/aaChartView"
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/white"
-                    app:cardBackgroundColor="@android:color/white"
                     android:layout_height="280dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -178,7 +176,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/stats_analyzing_title"
-                        android:textColor="#333333"
+                        android:textColor="@color/stats_analisis_titulo"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp"/>
@@ -188,7 +186,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/stats_analyzing_desc"
-                        android:textColor="#555555"
+                        android:textColor="@color/stats_analisis_cuerpo"
                         android:textSize="14sp"
                         android:lineSpacingExtra="4dp"/>
                 </LinearLayout>

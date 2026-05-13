@@ -7,11 +7,33 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="input">#E0E0E0</color>
+
     <color name="morado_principal">#D1C4FF</color>
     <color name="lavanda_claro">#DCD0FF</color>
     <color name="lavanda_texto">#6A5ACD</color>
     <color name="fondo_app">#ECFDFF</color>
     <color name="boton_salir">#FFD1D1</color>
     <color name="texto_salir">#FF5A5A</color>
+
+    <color name="card_actividad_fondo">#D1C4FF</color>
+    <color name="texto_titulo_card">#1D1B20</color>
+    <color name="texto_duracion_card">#4A4458</color>
+    <color name="iconos_acciones_card">#5E35B1</color>
+
+    <color name="texto_secundario">#9E9E9E</color>
+    <color name="texto_cuerpo">#333333</color>
+
+    <color name="stats_racha_fondo">#FFF3E0</color>
+    <color name="stats_racha_texto">#E65100</color>
+
+    <color name="stats_frase_fondo">#ECFDFF</color>
+    <color name="stats_frase_texto">#006064</color>
+
+    <color name="stats_analisis_titulo">#333333</color>
+    <color name="stats_analisis_cuerpo">#555555</color>
+
+    <color name="texto_titulos_seccion">#1D1B20</color>
+    <color name="calendario_dia_texto">#000000</color>
 
 </resources>

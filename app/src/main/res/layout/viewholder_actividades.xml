@@ -8,7 +8,7 @@
     android:layout_marginHorizontal="16dp"
     app:cardCornerRadius="35dp"
     app:cardElevation="0dp"
-    app:cardBackgroundColor="#D1C4FF">
+    app:cardBackgroundColor="@color/morado_principal">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder_activity_title"
-                android:textColor="#1D1B20"
+                android:textColor="@color/texto_titulo_card"
                 android:textStyle="bold"
                 android:textSize="17sp" />
 
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder_activity_duration"
-                android:textColor="#4A4458"
+                android:textColor="@color/texto_duracion_card"
                 android:textSize="13sp"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
@@ -66,7 +66,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitCenter"
                 android:src="@drawable/btn_play"
-                app:tint="#5E35B1"
+                app:tint="@color/iconos_acciones_card"
                 android:layout_marginEnd="8dp"
                 android:contentDescription="@string/desc_play_activity"/>
 
@@ -74,7 +74,7 @@
                 android:id="@+id/cbDone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="#5E35B1" />
+                android:buttonTint="@color/iconos_acciones_card" />
         </LinearLayout>
 
     </RelativeLayout>

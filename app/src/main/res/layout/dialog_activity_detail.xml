@@ -7,7 +7,7 @@
     android:layout_margin="24dp"
     app:cardCornerRadius="24dp"
     app:cardElevation="8dp"
-    android:backgroundTint="#ECFDFF">
+    android:backgroundTint="@color/fondo_app">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_height="80dp"
             android:src="@drawable/ic_meditation"
             android:contentDescription="@string/desc_dialog_activity_icon"
-            app:tint="#5E35B1" />
+            app:tint="@color/lavanda_texto" />
 
         <TextView
             android:id="@+id/dialogTitle"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             tools:text="@string/dialog_activity_placeholder_title"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center"/>
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             tools:text="@string/placeholder_activity_duration"
-            android:textColor="#666666"
+            android:textColor="@color/texto_titulo_card"
             android:textSize="14sp" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             tools:text="@string/dialog_activity_placeholder_desc"
-            android:textColor="#333333"
+            android:textColor="@color/texto_titulo_card"
             android:textSize="16sp"
             android:gravity="center" />
 
@@ -75,7 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#D1C4FF"
+                android:backgroundTint="@color/morado_principal"
                 android:textColor="@color/black"
                 android:text="@string/dialog_activity_btn_play"
                 android:visibility="gone"

@@ -20,7 +20,7 @@
             android:padding="32dp"
             android:text="@string/auth_register_title"
             android:textAlignment="center"
-            android:textColor="#4A148C"
+            android:textColor="@color/lavanda_texto"
             android:textSize="32sp"
             android:fontFamily="sans-serif-medium" />
 
@@ -40,7 +40,7 @@
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:letterSpacing="0.1"
-                android:textColor="#4A148C"
+                android:textColor="@color/lavanda_texto"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"/>
 
@@ -82,12 +82,12 @@
                     android:layout_weight="0.9"
                     android:layout_marginStart="12dp"
                     android:background="@drawable/bg_input_field"
-                    android:backgroundTint="#F3E5F5"
+                    android:backgroundTint="@color/lavanda_claro"
                     android:padding="10dp"
                     android:orientation="vertical">
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="@string/auth_interests_label" android:textSize="11sp" android:textColor="#4A148C" android:textStyle="bold"/>
+                        android:text="@string/auth_interests_label" android:textSize="11sp" android:textColor="@color/lavanda_texto" android:textStyle="bold"/>
                     <CheckBox android:id="@+id/cbEstres" android:layout_width="wrap_content" android:layout_height="32dp" android:text="@string/auth_interest_stress" android:textSize="12sp" />
                     <CheckBox android:id="@+id/cbAnsiedad" android:layout_width="wrap_content" android:layout_height="32dp" android:text="@string/auth_interest_anxiety" android:textSize="12sp" />
                     <CheckBox android:id="@+id/cbSueno" android:layout_width="wrap_content" android:layout_height="32dp" android:text="@string/auth_interest_sleep" android:textSize="12sp" />
@@ -113,7 +113,7 @@
                 android:layout_marginTop="6dp"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="#4A148C"
+                app:passwordToggleTint="@color/lavanda_texto"
                 app:boxBackgroundMode="none"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp">
@@ -145,9 +145,9 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/auth_btn_register"
                 android:textStyle="bold"
-                android:backgroundTint="#D1C4FF"
+                android:backgroundTint="@color/morado_principal"
                 app:cornerRadius="12dp"
-                android:textColor="#4A148C" />
+                android:textColor="@color/lavanda_texto" />
 
             <TextView
                 android:id="@+id/tvGoToLogin"
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/auth_go_to_login"
                 android:textAlignment="center"
-                android:textColor="#4A148C"
+                android:textColor="@color/lavanda_texto"
                 android:layout_marginTop="16dp"
                 android:padding="8dp"
                 android:textStyle="bold"/>

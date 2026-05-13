@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#D1C4FF"
+        android:background="@color/morado_principal"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="8dp">
@@ -32,8 +32,8 @@
             android:hint="@string/chat_hint_input"
             android:padding="12dp"
             android:layout_marginHorizontal="8dp"
-            android:textColor="#2D1B4E"
-            android:background="@android:color/white"
+            android:textColor="@color/black"
+            android:background="@color/white"
             android:inputType="textCapSentences"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -48,7 +48,7 @@
             android:scaleType="centerInside"
             android:padding="8dp"
             android:contentDescription="@string/desc_btn_send"
-            app:tint="#2D1B4E" />
+            app:tint="@color/lavanda_texto" />
     </LinearLayout>
 
 </RelativeLayout>

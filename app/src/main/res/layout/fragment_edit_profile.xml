@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="@string/profile_edit_title"
             android:textAlignment="center"
-            android:textColor="#4A148C"
+            android:textColor="@color/lavanda_texto"
             android:textSize="28sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp" />
@@ -37,7 +37,7 @@
                 android:text="@string/profile_personal_data"
                 android:textAllCaps="true"
                 android:textSize="14sp"
-                android:textColor="#4A148C"
+                android:textColor="@color/lavanda_texto"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"/>
 
@@ -95,7 +95,7 @@
                 android:text="@string/profile_access_data"
                 android:textAllCaps="true"
                 android:textSize="14sp"
-                android:textColor="#4A148C"
+                android:textColor="@color/lavanda_texto"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="8dp"/>
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/auth_interests_label"
                 android:textSize="14sp"
-                android:textColor="#4A148C"
+                android:textColor="@color/lavanda_texto"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"/>
 
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@drawable/bg_input_field"
-                android:backgroundTint="#F3E5F5"
+                android:backgroundTint="@color/morado_principal"
                 android:padding="10dp"
                 android:weightSum="2">
 
@@ -147,8 +147,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-                    <CheckBox android:id="@+id/cbEditEstres" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_stress" android:textSize="14sp" />
-                    <CheckBox android:id="@+id/cbEditAnsiedad" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_anxiety" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/cbEditEstres" android:textColor="@color/lavanda_texto" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_stress" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/cbEditAnsiedad"  android:textColor="@color/lavanda_texto" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_anxiety" android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -156,8 +156,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-                    <CheckBox android:id="@+id/cbEditSueno" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_sleep" android:textSize="14sp" />
-                    <CheckBox android:id="@+id/cbEditAnimo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_mood" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/cbEditSueno"   android:textColor="@color/lavanda_texto" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_sleep" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/cbEditAnimo"  android:textColor="@color/lavanda_texto" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_mood" android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -168,9 +168,9 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/profile_btn_save"
                 android:textStyle="bold"
-                android:backgroundTint="#D1C4FF"
+                android:backgroundTint="@color/morado_principal"
                 app:cornerRadius="12dp"
-                android:textColor="#4A148C" />
+                android:textColor="@color/lavanda_texto" />
 
         </LinearLayout>
     </LinearLayout>

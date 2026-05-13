@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/history_subtitle"
-        android:textColor="#666666"
+        android:textColor="@color/texto_secundario"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/tvHistoryTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvHistoryTitle" />
@@ -58,14 +58,14 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_journal"
             android:contentDescription="@string/desc_history_empty_icon"
-            app:tint="#D1C4FF" />
+            app:tint="@color/morado_principal" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/history_empty_text"
-            android:textColor="#9E9E9E" />
+            android:textColor="@color/texto_secundario" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

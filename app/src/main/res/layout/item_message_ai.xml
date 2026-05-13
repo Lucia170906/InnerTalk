@@ -21,6 +21,6 @@
         android:background="@drawable/bg_bubble_ai"
         android:padding="12dp"
         android:text="¡Hola! Estoy aquí para escucharte."
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="16sp" />
 </LinearLayout>

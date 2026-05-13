@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 tools:text="@string/placeholder_time"
-                android:textColor="#9E9E9E"
+                android:textColor="@color/texto_secundario"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -57,7 +57,7 @@
             android:layout_marginTop="12dp"
             android:lineSpacingExtra="4dp"
             tools:text="@string/placeholder_note_text"
-            android:textColor="#333333"
+            android:textColor="@color/texto_cuerpo"
             android:textSize="14sp" />
 
         <com.google.android.material.card.MaterialCardView
