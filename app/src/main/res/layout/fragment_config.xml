@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,7 +11,7 @@
         android:id="@+id/btnPerfil"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:text="Perfil"
+        android:text="@string/config_btn_profile"
         android:textColor="@color/lavanda_texto"
         android:textAllCaps="false"
         android:gravity="start|center_vertical"
@@ -26,7 +27,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ajustes"
+        android:text="@string/config_label_settings"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/lavanda_texto" />
@@ -49,6 +50,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/notification_icon"
+                android:contentDescription="@string/desc_config_notif_icon"
                 app:tint="@color/lavanda_texto" />
 
             <TextView
@@ -56,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="16dp"
-                android:text="Recordatorio"
+                android:text="@string/config_notif_reminder"
                 android:textColor="@color/lavanda_texto" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -71,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginTop="10dp"
-        android:text="Idioma"
+        android:text="@string/config_btn_language"
         android:textColor="@color/lavanda_texto"
         android:textAllCaps="false"
         android:gravity="start|center_vertical"
@@ -87,7 +89,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Soporte"
+        android:text="@string/config_label_support"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/lavanda_texto" />
@@ -96,7 +98,7 @@
         android:id="@+id/btnIncidencia"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:text="Enviar incidencia"
+        android:text="@string/config_btn_incidence"
         android:textColor="@color/lavanda_texto"
         android:textAllCaps="false"
         android:gravity="start|center_vertical"
@@ -114,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginTop="10dp"
-        android:text="Políticas"
+        android:text="@string/config_btn_policies"
         android:textColor="@color/lavanda_texto"
         android:textAllCaps="false"
         android:gravity="start|center_vertical"
@@ -133,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:text="Cerrar Sesión"
+        android:text="@string/config_btn_logout"
         android:textColor="@color/texto_salir"
         android:textAllCaps="false"
         android:paddingHorizontal="30dp"

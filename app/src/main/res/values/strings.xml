@@ -1,4 +1,48 @@
 <resources>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    texto menu bottom-->
+
+    <string name="chat">Chat</string>
+    <string name="start">Inicio</string>
+    <string name="add_entry">Nueva entrada</string>
+    <string name="statistics">Estadísticas</string>
+
+    <string name="label_start">Inicio</string>
+    <string name="calendar">Calendario</string>
+
+
+    <!--    texto fragment nueva entrada-->
+
+    <string name="label_new_entry">Nueva Entrada</string>
+    <string name="select_text">Selecciona como te sientes</string>
+    <string name="write_here_text">Escribe aquí...</string>
+    <string name="save_button">Guardar</string>
+
+    <!--    texto fragment estadisticas-->
+    <string name="label_statistics">Estadísticas</string>
+
+    <string name="angry">Enfado</string>
+    <string name="sad">Triste</string>
+    <string name="normal">Apático</string>
+    <string name="calm">Calma</string>
+    <string name="happy">Felicidad</string>
+
+    <!--    texto fragment config-->
+    <string name="label_config">Configuración</string>
+
+    <!--    texto fragment chat-->
+    <string name="label_chat">Chat</string>
+
+    <!--    texto fragment lidtado entradas-->
+    <string name="label_entries">Tus entradas</string>
+
+    <!--    texto fragment  editar datos personales-->
+    <string name="label_edit_profile">Edita tus datos personales</string>
+
+    <!--    texto fragment  editar entradas -->
+    <string name="label_edit_entries">Edita tu entrada</string>
+
+
     <string name="app_name">InnerTalk</string>
 
     <string name="menu_chat">Chat</string>
@@ -7,21 +51,13 @@
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_config">Configuración</string>
 
-    <string name="label_start">Inicio</string>
-    <string name="label_config">Configuración</string>
-    <string name="label_chat">Chat con IA</string>
-    <string name="label_statistics">Estadísticas</string>
-    <string name="label_entries">Tus entradas</string>
-    <string name="label_edit_profile">Datos personales</string>
-    <string name="label_edit_entries">Edita tu entrada</string>
+
 
     <string name="start_calendar_title">Calendario de bienestar</string>
     <string name="start_suggested_activities">Actividades sugeridas</string>
     <string name="start_journal_notes">Notas del diario</string>
-    <string name="start_no_activities">No hay actividades para este día</string>
     <string name="start_future_date">No te preocupes por mañana, aún es pronto</string>
 
-    <string name="label_new_entry">Nueva Entrada</string>
     <string name="select_mood">¿Cómo te sientes?</string>
     <string name="hint_write_here">Escribe aquí tus pensamientos...</string>
     <string name="btn_save">Guardar entrada</string>
@@ -43,13 +79,131 @@
     <string name="emotion_angry">Enfadado</string>
 
     <string name="config_notif_switch">Recordatorio diario</string>
-    <string name="config_btn_profile">Editar Perfil</string>
-    <string name="config_btn_policies">Políticas y Privacidad</string>
     <string name="config_btn_support">Enviar Incidencia</string>
-    <string name="config_btn_logout">Cerrar Sesión</string>
     <string name="config_time_picker_title">¿A qué hora quieres el recordatorio?</string>
 
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_accept">Aceptar</string>
     <string name="loading">Cargando...</string>
+
+    <!-- View holder actividades -->
+    <string name="placeholder_activity_title">Título Actividad</string>
+    <string name="placeholder_activity_duration">⏱ -- min</string>
+    <string name="desc_play_activity">Reproducir video de la actividad</string>
+
+    <!--Register layout -->
+    <string name="auth_register_title">InnerTalk</string>
+    <string name="auth_new_account">Nueva Cuenta</string>
+    <string name="auth_hint_name">Nombre</string>
+    <string name="auth_hint_lastname">Apellidos</string>
+    <string name="auth_hint_birth">F. Nacimiento</string>
+    <string name="auth_hint_gender">Género</string>
+    <string name="auth_interests_label">Intereses:</string>
+    <string name="auth_interest_stress">Estrés</string>
+    <string name="auth_interest_anxiety">Ansiedad</string>
+    <string name="auth_interest_sleep">Sueño</string>
+    <string name="auth_interest_mood">Ánimo</string>
+    <string name="auth_hint_email">Correo electrónico</string>
+    <string name="auth_hint_password">Contraseña</string>
+    <string name="auth_accept_policies">He leído y acepto las políticas y términos de uso</string>
+    <string name="auth_btn_register">CREAR CUENTA</string>
+    <string name="auth_go_to_login">¿Ya tienes cuenta? Inicia sesión</string>
+
+    <!-- Log ins layout-->
+    <string name="auth_login_header">InnerTalk</string>
+    <string name="auth_login_title">Iniciar Sesión</string>
+    <string name="auth_btn_login">Entrar</string>
+    <string name="auth_go_to_register">¿No tienes cuenta? Regístrate aquí</string>
+
+    <string name="error_empty_fields">Por favor, rellena todos los campos</string>
+    <string name="error_login_failed">Correo o contraseña incorrectos</string>
+
+
+    <!-- Item entries layput-->
+    <string name="placeholder_date">01 Ene 2026</string>
+    <string name="placeholder_time">00:00</string>
+    <string name="placeholder_note_text">Contenido de la nota del diario…</string>
+    <string name="desc_emotion_icon">Icono de estado de ánimo</string>
+    <string name="desc_note_image">Imagen adjunta a la nota</string>
+
+    <!--Fragment stadisticas layput-->
+    <string name="stats_quote_placeholder">"Un paso a la vez."</string>
+    <string name="stats_label_entries">Entradas</string>
+    <string name="stats_label_streak">Días seguidos</string>
+    <string name="stats_chart_distribution">Distribución Emocional</string>
+    <string name="stats_analyzing_title">Calculando...</string>
+    <string name="stats_analyzing_desc">Recopilando datos de tu diario para crear un perfil.</string>
+    <string name="stats_streak_emoji">🔥</string>
+    <string name="desc_stats_journal_icon">Icono de diario</string>
+
+    <!-- Start fragment layout-->
+    <string name="start_calendar_label">Calendario</string>
+    <string name="start_thoughts_label">Tus pensamientos de este día:</string>
+    <string name="start_suggested_title">Actividades sugeridas</string>
+
+    <string name="start_done_activities">Actividades realizadas el %s</string>
+    <string name="start_future_msg">No te preocupes por mañana, aún es pronto</string>
+    <string name="start_searching_history">Buscando historial de: %s</string>
+    <string name="start_found_count">Se encontró: %d hechas</string>
+    <string name="start_id_error">Error: Las IDs no coinciden</string>
+    <string name="start_no_activities">Día sin actividades</string>
+
+    <!--Fragment entries layput-->
+    <string name="history_title">Mi Viaje</string>
+    <string name="history_subtitle">Repasa tus reflexiones pasadas</string>
+    <string name="history_empty_text">Aún no tienes recuerdos guardados</string>
+    <string name="desc_history_empty_icon">Ilustración de diario vacío</string>
+
+    <!--Edit profile layout-->
+    <string name="profile_edit_title">Editar Perfil</string>
+    <string name="profile_personal_data">Datos Personales</string>
+    <string name="profile_access_data">Datos de Acceso</string>
+    <string name="profile_hint_password_edit">Nueva contraseña (dejar vacío para no cambiar)</string>
+    <string name="profile_btn_save">GUARDAR CAMBIOS</string>
+    <string name="msg_profile_update_success">Perfil actualizado correctamente</string>
+
+    <!--Config fragment layput-->
+    <string name="config_btn_profile">Perfil</string>
+    <string name="config_label_settings">Ajustes</string>
+    <string name="config_label_support">Soporte</string>
+    <string name="config_notif_reminder">Recordatorio</string>
+    <string name="config_btn_language">Idioma</string>
+    <string name="config_btn_incidence">Enviar incidencia</string>
+    <string name="config_btn_policies">Políticas</string>
+    <string name="config_btn_logout">Cerrar Sesión</string>
+    <string name="desc_config_notif_icon">Icono de notificaciones</string>
+
+    <!--chat fragment layout-->
+    <string name="chat_hint_input">Pregúntame algo...</string>
+    <string name="desc_btn_send">Enviar mensaje</string>
+    <string name="chat_welcome_msg">¡Hola! Soy tu asistente de InnerTalk. ¿En qué puedo ayudarte hoy?</string>
+
+    <!--dialog ctivity detail layout-->
+    <string name="dialog_activity_placeholder_title">Título de la actividad</string>
+    <string name="dialog_activity_placeholder_desc">Descripción detallada de la actividad…</string>
+    <string name="dialog_activity_completed">Completado</string>
+    <string name="dialog_activity_btn_play">Play</string>
+    <string name="desc_dialog_activity_icon">Icono representativo de la actividad</string>
+
+    <!--auth layout en casi de querer usarse en un futuro-->
+    <string name="auth_app_name_header">InnerTalk</string>
+
+    <string name="auth_access_title">Acceso de Usuario</string>
+    <string name="auth_hint_username_short">Usuario</string>
+    <string name="auth_hint_password_short">Contraseña</string>
+    <string name="auth_btn_login_short">Entrar</string>
+
+    <string name="auth_new_account_title">Nueva Cuenta</string>
+    <string name="auth_hint_name">Nombre</string>
+    <string name="auth_hint_lastname">Apellidos</string>
+    <string name="auth_hint_birth">F. Nacimiento</string>
+    <string name="auth_hint_gender">Género</string>
+    <string name="auth_label_interests">Intereses:</string>
+    <string name="auth_check_stress">Estrés</string>
+    <string name="auth_check_anxiety">Ansiedad</string>
+    <string name="auth_check_sleep">Sueño</string>
+    <string name="auth_check_mood">Ánimo</string>
+    <string name="auth_hint_email">Correo electrónico</string>
+    <string name="auth_hint_pass_full">Contraseña</string>
+    <string name="auth_btn_create_account">CREAR CUENTA</string>
 </resources>

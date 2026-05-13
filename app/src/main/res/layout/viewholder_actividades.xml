@@ -35,7 +35,7 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Título Actividad"
+                android:text="@string/placeholder_activity_title"
                 android:textColor="#1D1B20"
                 android:textStyle="bold"
                 android:textSize="17sp" />
@@ -44,7 +44,7 @@
                 android:id="@+id/tvDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="⏱ 15 min"
+                android:text="@string/placeholder_activity_duration"
                 android:textColor="#4A4458"
                 android:textSize="13sp"
                 android:layout_marginTop="2dp" />
@@ -67,7 +67,8 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/btn_play"
                 app:tint="#5E35B1"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/desc_play_activity"/>
 
             <CheckBox
                 android:id="@+id/cbDone"

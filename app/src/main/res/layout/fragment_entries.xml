@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Mi Viaje"
+        android:text="@string/history_title"
         android:textColor="@color/lavanda_texto"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -23,7 +23,7 @@
         android:id="@+id/tvHistorySubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Repasa tus reflexiones pasadas"
+        android:text="@string/history_subtitle"
         android:textColor="#666666"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/tvHistoryTitle"
@@ -39,7 +39,7 @@
         android:paddingBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHistorySubtitle"
-        tools:listitem="@layout/item_history_card" />
+        tools:listitem="@layout/items_entries_card" />
 
     <LinearLayout
         android:id="@+id/emptyState"
@@ -57,13 +57,14 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_journal"
+            android:contentDescription="@string/desc_history_empty_icon"
             app:tint="#D1C4FF" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Aún no tienes recuerdos guardados"
+            android:text="@string/history_empty_text"
             android:textColor="#9E9E9E" />
     </LinearLayout>
 

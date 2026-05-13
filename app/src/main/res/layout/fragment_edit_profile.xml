@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fondo_app"
@@ -15,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar Perfil"
+            android:text="@string/profile_edit_title"
             android:textAlignment="center"
             android:textColor="#4A148C"
             android:textSize="28sp"
@@ -33,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Datos Personales"
+                android:text="@string/profile_personal_data"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textColor="#4A148C"
@@ -44,48 +45,54 @@
                 android:id="@+id/etEditName"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Nombre"
+                android:hint="@string/auth_hint_name"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginBottom="12dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:inputType="textPersonName"
+                android:importantForAutofill="no"/>
 
             <EditText
                 android:id="@+id/etEditLastName"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Apellidos"
+                android:hint="@string/auth_hint_lastname"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginBottom="12dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:inputType="textPersonName"
+                android:importantForAutofill="no"/>
 
             <EditText
                 android:id="@+id/etEditBirth"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="F. Nacimiento"
+                android:hint="@string/auth_hint_birth"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginBottom="12dp"
                 android:textSize="14sp"
                 android:focusable="false"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:importantForAutofill="no"/>
 
             <EditText
                 android:id="@+id/etEditGender"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Género"
+                android:hint="@string/auth_hint_gender"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:importantForAutofill="no"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Datos de Acceso"
+                android:text="@string/profile_access_data"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textColor="#4A148C"
@@ -97,28 +104,30 @@
                 android:id="@+id/etEditEmail"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Correo electrónico"
+                android:hint="@string/auth_hint_email"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginBottom="12dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:importantForAutofill="no"/>
 
             <EditText
                 android:id="@+id/etEditPass"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Nueva contraseña (dejar vacío para no cambiar)"
+                android:hint="@string/profile_hint_password_edit"
                 android:inputType="textPassword"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                android:importantForAutofill="no"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Intereses:"
+                android:text="@string/auth_interests_label"
                 android:textSize="14sp"
                 android:textColor="#4A148C"
                 android:textStyle="bold"
@@ -138,8 +147,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-                    <CheckBox android:id="@+id/cbEditEstres" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Estrés" android:textSize="14sp" />
-                    <CheckBox android:id="@+id/cbEditAnsiedad" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ansiedad" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/cbEditEstres" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_stress" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/cbEditAnsiedad" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_anxiety" android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -147,8 +156,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-                    <CheckBox android:id="@+id/cbEditSueno" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sueño" android:textSize="14sp" />
-                    <CheckBox android:id="@+id/cbEditAnimo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ánimo" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/cbEditSueno" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_sleep" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/cbEditAnimo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/auth_interest_mood" android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -157,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"
-                android:text="GUARDAR CAMBIOS"
+                android:text="@string/profile_btn_save"
                 android:textStyle="bold"
                 android:backgroundTint="#D1C4FF"
                 app:cornerRadius="12dp"
@@ -165,4 +174,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

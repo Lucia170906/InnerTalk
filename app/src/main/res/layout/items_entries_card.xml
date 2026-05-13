@@ -27,14 +27,15 @@
                 android:id="@+id/ivHistoryEmoji"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/happy_icon" />
+                android:src="@drawable/happy_icon"
+                android:contentDescription="@string/desc_emotion_icon" />
 
             <TextView
                 android:id="@+id/tvHistoryDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                tools:text="12 Abr 2026"
+                tools:text="@string/placeholder_date"
                 android:textColor="@color/lavanda_texto"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -44,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                tools:text="14:30"
+                tools:text="@string/placeholder_time"
                 android:textColor="#9E9E9E"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -55,25 +56,27 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:lineSpacingExtra="4dp"
-            tools:text="Esta es una nota de ejemplo para ver cómo queda el texto dentro de la tarjeta del historial."
+            tools:text="@string/placeholder_note_text"
             android:textColor="#333333"
             android:textSize="14sp" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardHistoryImage"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_marginTop="12dp"
-        android:visibility="gone"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:cardPreventCornerOverlap="false">
-        <ImageView
-        android:id="@+id/ivHistoryImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardHistoryImage"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <ImageView
+                android:id="@+id/ivHistoryImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/desc_note_image" />
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

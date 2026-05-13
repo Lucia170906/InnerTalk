@@ -5,8 +5,8 @@
     android:background="@color/fondo_app"
     android:fitsSystemWindows="true"
     android:fillViewport="true">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/fondo_app"
@@ -20,7 +20,7 @@
             android:background="@drawable/bg_header_auth"
             android:elevation="4dp"
             android:padding="32dp"
-            android:text="InnerTalk"
+            android:text="@string/auth_login_header"
             android:textAlignment="center"
             android:textColor="#4A148C"
             android:textSize="32sp"
@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Iniciar Sesión"
+                android:text="@string/auth_login_title"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:letterSpacing="0.1"
@@ -51,28 +51,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_input_field"
-                android:hint="Correo electrónico"
+                android:hint="@string/auth_hint_email"
                 android:inputType="textEmailAddress"
                 android:paddingStart="12dp"
                 android:textSize="14sp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:importantForAutofill="no" />
 
-            <EditText
-                android:id="@+id/etLoginPass"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_input_field"
-                android:hint="Contraseña"
-                android:inputType="textPassword"
-                android:paddingStart="12dp"
-                android:textSize="14sp"
-                android:layout_marginBottom="24dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#4A148C"
+                app:boxBackgroundMode="none"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLoginPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="@string/auth_hint_password"
+                    android:inputType="textPassword"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="48dp"
+                    android:textSize="14sp"
+                    android:importantForAutofill="no" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Entrar"
+                android:text="@string/auth_btn_login"
                 android:backgroundTint="#D1C4FF"
                 app:cornerRadius="12dp"
                 android:textColor="#4A148C"
@@ -82,7 +97,7 @@
                 android:id="@+id/tvGoToRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="¿No tienes cuenta? Regístrate aquí"
+                android:text="@string/auth_go_to_register"
                 android:textAlignment="center"
                 android:textColor="#4A148C"
                 android:layout_marginTop="16dp"

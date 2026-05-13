@@ -1,80 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
     app:cardCornerRadius="24dp"
     app:cardElevation="8dp"
-    android:backgroundTint="#ECFDFF"> <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal">
-
-    <ImageView
-        android:id="@+id/dialogIcon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_meditation"
-        app:tint="#5E35B1" /> <TextView
-    android:id="@+id/dialogTitle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:text="Título de la actividad"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    android:textStyle="bold"
-    android:gravity="center"/>
-
-    <TextView
-        android:id="@+id/dialogDuration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="10 min"
-        android:textColor="#666666"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/dialogDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Descripción detallada de lo que tienes que hacer en esta actividad para sentirte mejor."
-        android:textColor="#333333"
-        android:textSize="16sp"
-        android:gravity="center" />
+    android:backgroundTint="#ECFDFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:weightSum="2">
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-        <CheckBox
-            android:id="@+id/dialogCheckBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Completado"
-            android:textSize="16sp"/>
+        <ImageView
+            android:id="@+id/dialogIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_meditation"
+            android:contentDescription="@string/desc_dialog_activity_icon"
+            app:tint="#5E35B1" />
 
-        <Button
-            android:id="@+id/dialogBtnPlay"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/dialogTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#D1C4FF"
-            android:textColor="@color/black"
-            android:text="Play"
-            android:visibility="gone"
-            app:icon="@android:drawable/ic_media_play"
-            app:iconTint="@color/black"/>
+            android:layout_marginTop="16dp"
+            tools:text="@string/dialog_activity_placeholder_title"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/dialogDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            tools:text="@string/placeholder_activity_duration"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/dialogDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="@string/dialog_activity_placeholder_desc"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <CheckBox
+                android:id="@+id/dialogCheckBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dialog_activity_completed"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/dialogBtnPlay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#D1C4FF"
+                android:textColor="@color/black"
+                android:text="@string/dialog_activity_btn_play"
+                android:visibility="gone"
+                app:icon="@android:drawable/ic_media_play"
+                app:iconTint="@color/black"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -1,8 +1,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fondo_app"
+    android:fitsSystemWindows="true"
     android:fillViewport="true">
 
     <LinearLayout
@@ -17,7 +19,7 @@
             android:background="@drawable/bg_header_auth"
             android:elevation="4dp"
             android:padding="32dp"
-            android:text="InnerTalk"
+            android:text="@string/auth_app_name_header"
             android:textAlignment="center"
             android:textColor="#4A148C"
             android:textSize="32sp"
@@ -35,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Acceso de Usuario"
+                android:text="@string/auth_access_title"
                 android:textAllCaps="true"
                 android:textSize="12sp"
                 android:letterSpacing="0.1"
@@ -55,10 +57,12 @@
                     android:layout_height="48dp"
                     android:layout_weight="3.5"
                     android:background="@drawable/bg_input_field"
-                    android:hint="Usuario"
+                    android:hint="@string/auth_hint_username_short"
                     android:paddingStart="12dp"
                     android:textSize="14sp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"/>
 
                 <EditText
                     android:id="@+id/etLoginPass"
@@ -66,25 +70,25 @@
                     android:layout_height="48dp"
                     android:layout_weight="3.5"
                     android:background="@drawable/bg_input_field"
-                    android:hint="Contraseña"
+                    android:hint="@string/auth_hint_password_short"
                     android:inputType="textPassword"
                     android:paddingStart="12dp"
                     android:textSize="14sp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:importantForAutofill="no"/>
 
                 <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="3"
-                    android:text="Entrar"
+                    android:text="@string/auth_btn_login_short"
                     android:textAllCaps="false"
                     android:backgroundTint="#D1C4FF"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     app:cornerRadius="12dp"
-                    android:textColor="#4A148C"
-                    />
+                    android:textColor="#4A148C" />
             </LinearLayout>
         </LinearLayout>
 
@@ -100,7 +104,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nueva Cuenta"
+                android:text="@string/auth_new_account_title"
                 android:textAllCaps="true"
                 android:textSize="12sp"
                 android:letterSpacing="0.1"
@@ -122,23 +126,24 @@
 
                     <EditText android:layout_width="match_parent" android:layout_height="42dp"
                         android:id="@+id/etRegisterName"
-                        android:hint="Nombre" android:background="@drawable/bg_input_field"
-                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
+                        android:hint="@string/auth_hint_name" android:background="@drawable/bg_input_field"
+                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"
+                        android:importantForAutofill="no" android:inputType="textPersonName"/>
 
                     <EditText android:layout_width="match_parent" android:layout_height="42dp"
                         android:id="@+id/etRegisterLastName"
-
-                        android:hint="Apellidos" android:background="@drawable/bg_input_field"
-                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"/>
+                        android:hint="@string/auth_hint_lastname" android:background="@drawable/bg_input_field"
+                        android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"
+                        android:importantForAutofill="no" android:inputType="textPersonName"/>
 
                     <EditText  android:id="@+id/etRegisterBirth" android:layout_width="match_parent" android:layout_height="42dp"
-                        android:hint="F. Nacimiento" android:background="@drawable/bg_input_field"
+                        android:hint="@string/auth_hint_birth" android:background="@drawable/bg_input_field"
                         android:paddingStart="12dp" android:layout_marginBottom="8dp" android:textSize="14sp"
-                        android:focusable="false" android:clickable="true"/>
+                        android:focusable="false" android:clickable="true" android:importantForAutofill="no"/>
 
                     <EditText android:id="@+id/etRegisterGender"  android:layout_width="match_parent" android:layout_height="42dp"
-                        android:hint="Género" android:background="@drawable/bg_input_field"
-                        android:paddingStart="12dp" android:textSize="14sp"/>
+                        android:hint="@string/auth_hint_gender" android:background="@drawable/bg_input_field"
+                        android:paddingStart="12dp" android:textSize="14sp" android:importantForAutofill="no"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -152,11 +157,11 @@
                     android:orientation="vertical">
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="Intereses:" android:textSize="11sp" android:textColor="#4A148C" android:textStyle="bold"/>
-                    <CheckBox android:id="@+id/cbEstres" android:layout_width="wrap_content" android:layout_height="32dp" android:text="Estrés" android:textSize="12sp" />
-                    <CheckBox android:id="@+id/cbAnsiedad" android:layout_width="wrap_content" android:layout_height="32dp" android:text="Ansiedad" android:textSize="12sp" />
-                    <CheckBox android:id="@+id/cbSueno" android:layout_width="wrap_content" android:layout_height="32dp" android:text="Sueño" android:textSize="12sp" />
-                    <CheckBox android:id="@+id/cbAnimo" android:layout_width="wrap_content" android:layout_height="32dp" android:text="Ánimo" android:textSize="12sp" />
+                        android:text="@string/auth_label_interests" android:textSize="11sp" android:textColor="#4A148C" android:textStyle="bold"/>
+                    <CheckBox android:id="@+id/cbEstres" android:layout_width="wrap_content" android:layout_height="32dp" android:text="@string/auth_check_stress" android:textSize="12sp" />
+                    <CheckBox android:id="@+id/cbAnsiedad" android:layout_width="wrap_content" android:layout_height="32dp" android:text="@string/auth_check_anxiety" android:textSize="12sp" />
+                    <CheckBox android:id="@+id/cbSueno" android:layout_width="wrap_content" android:layout_height="32dp" android:text="@string/auth_check_sleep" android:textSize="12sp" />
+                    <CheckBox android:id="@+id/cbAnimo" android:layout_width="wrap_content" android:layout_height="32dp" android:text="@string/auth_check_mood" android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -164,36 +169,36 @@
                 android:id="@+id/etRegisterEmail"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Correo electrónico"
+                android:hint="@string/auth_hint_email"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginTop="12dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:importantForAutofill="no"/>
 
             <EditText
                 android:id="@+id/etRegisterPass"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:hint="Contraseña"
+                android:hint="@string/auth_hint_pass_full"
                 android:inputType="textPassword"
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="12dp"
                 android:layout_marginTop="8dp"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:importantForAutofill="no"/>
 
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="20dp"
-                android:text="CREAR CUENTA"
+                android:text="@string/auth_btn_create_account"
                 android:textStyle="bold"
                 android:backgroundTint="#D1C4FF"
                 app:cornerRadius="12dp"
-                android:textColor="#4A148C"
-                />
+                android:textColor="#4A148C" />
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

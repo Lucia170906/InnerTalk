@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calendario"
+                android:text="@string/start_calendar_label"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Tus pensamientos de este día:"
+            android:text="@string/start_thoughts_label"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -58,10 +58,9 @@
 
         <TextView
             android:id="@+id/tvSugeridasTitulo"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Actividades sugeridas"
+            android:text="@string/start_suggested_title"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"
