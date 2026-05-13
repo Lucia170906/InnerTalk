@@ -1,0 +1,429 @@
+<resources>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chat">Chat</string>
+    <string name="start">Home</string>
+    <string name="add_entry">New entry</string>
+    <string name="statistics">Statistics</string>
+
+    <string name="label_start">Home</string>
+    <string name="calendar">Calendar</string>
+
+
+    <string name="label_new_entry">New Entry</string>
+    <string name="select_text">Select how you feel</string>
+    <string name="write_here_text">Write here...</string>
+    <string name="save_button">Save</string>
+
+    <string name="label_statistics">Statistics</string>
+
+    <string name="angry">Anger</string>
+    <string name="sad">Sad</string>
+    <string name="normal">Apathetic</string>
+    <string name="calm">Calm</string>
+    <string name="happy">Happiness</string>
+
+    <string name="label_config">Settings</string>
+
+    <string name="label_chat">Chat</string>
+
+    <string name="label_entries">Your entries</string>
+
+    <string name="label_edit_profile">Edit your personal data</string>
+
+    <string name="label_edit_entries">Edit your entry</string>
+
+
+    <string name="app_name">InnerTalk</string>
+
+    <string name="menu_chat">Chat</string>
+    <string name="menu_start">Home</string>
+    <string name="menu_add">New entry</string>
+    <string name="menu_stats">Statistics</string>
+    <string name="menu_config">Settings</string>
+
+
+
+    <string name="start_calendar_title">Wellness calendar</string>
+    <string name="start_suggested_activities">Suggested activities</string>
+    <string name="start_journal_notes">Journal notes</string>
+    <string name="start_future_date">Don\'t worry about tomorrow, it\'s still early</string>
+
+    <string name="select_mood">How are you feeling?</string>
+    <string name="hint_write_here">Write your thoughts here...</string>
+    <string name="btn_save">Save entry</string>
+    <string name="btn_update">Update entry</string>
+    <string name="msg_validation_error">Write something and pick an emoji</string>
+    <string name="msg_save_success">Entry saved successfully!</string>
+    <string name="msg_update_success">Entry updated!</string>
+
+    <string name="stats_total_entries">Total Entries</string>
+    <string name="stats_streak_title">Consecutive days</string>
+    <string name="stats_chart_title">Emotional Distribution</string>
+    <string name="stats_quote_default">One step at a time, there is no rush.</string>
+    <string name="stats_streak_flame">🔥</string>
+
+    <string name="emotion_very_happy">Very Happy</string>
+    <string name="emotion_happy">Happy</string>
+    <string name="emotion_neutral">Apathetic</string>
+    <string name="emotion_sad">Sad</string>
+    <string name="emotion_angry">Angry</string>
+
+    <string name="config_notif_switch">Daily reminder</string>
+    <string name="config_btn_support">Send Incident</string>
+    <string name="config_time_picker_title">What time do you want the reminder?</string>
+
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_accept">Accept</string>
+    <string name="loading">Loading...</string>
+
+    <string name="placeholder_activity_title">Activity Title</string>
+    <string name="placeholder_activity_duration">⏱ -- min</string>
+    <string name="desc_play_activity">Play activity video</string>
+
+    <string name="auth_register_title">InnerTalk</string>
+    <string name="auth_new_account">New Account</string>
+    <string name="auth_hint_name">Name</string>
+    <string name="auth_hint_lastname">Last Name</string>
+    <string name="auth_hint_birth">Date of Birth</string>
+    <string name="auth_hint_gender">Gender</string>
+    <string name="auth_interests_label">Interests:</string>
+    <string name="auth_interest_stress">Stress</string>
+    <string name="auth_interest_anxiety">Anxiety</string>
+    <string name="auth_interest_sleep">Sleep</string>
+    <string name="auth_interest_mood">Mood</string>
+    <string name="auth_hint_email">Email</string>
+    <string name="auth_hint_password">Password</string>
+    <string name="auth_accept_policies">I have read and accept the policies and terms of use</string>
+    <string name="auth_btn_register">CREATE ACCOUNT</string>
+    <string name="auth_go_to_login">Already have an account? Log in</string>
+
+    <string name="auth_login_header">InnerTalk</string>
+    <string name="auth_login_title">Log In</string>
+    <string name="auth_btn_login">Enter</string>
+    <string name="auth_go_to_register">Don\'t have an account? Register here</string>
+
+    <string name="error_empty_fields">Please, fill in all fields</string>
+    <string name="error_login_failed">Incorrect email or password</string>
+
+
+    <string name="placeholder_date">Jan 01 2026</string>
+    <string name="placeholder_time">00:00</string>
+    <string name="placeholder_note_text">Journal note content...</string>
+    <string name="desc_emotion_icon">Mood icon</string>
+    <string name="desc_note_image">Image attached to the note</string>
+
+    <string name="stats_quote_placeholder">"One step at a time."</string>
+    <string name="stats_label_entries">Total entries</string>
+    <string name="stats_label_streak">Streak days</string>
+    <string name="stats_chart_distribution">Emotional Distribution</string>
+    <string name="stats_analyzing_title">Calculating...</string>
+    <string name="stats_analyzing_desc">Collecting data from your journal to create a profile.</string>
+    <string name="stats_streak_emoji">🔥</string>
+    <string name="desc_stats_journal_icon">Journal icon</string>
+
+    <string name="start_calendar_label">Calendar</string>
+    <string name="start_thoughts_label">Your thoughts on this day:</string>
+    <string name="start_suggested_title">Suggested activities</string>
+
+    <string name="start_done_activities">Activities completed on %s</string>
+    <string name="start_future_msg">Don\'t worry about tomorrow, it\'s still early</string>
+    <string name="start_searching_history">Searching history for: %s</string>
+    <string name="start_found_count">Found: %d completed</string>
+    <string name="start_id_error">Error: IDs do not match</string>
+    <string name="start_no_activities">Day without activities</string>
+
+    <string name="history_title">My Journey</string>
+    <string name="history_subtitle">Review your past reflections</string>
+    <string name="history_empty_text">You don\'t have saved memories yet</string>
+    <string name="desc_history_empty_icon">Empty journal illustration</string>
+
+    <string name="profile_edit_title">Edit Profile</string>
+    <string name="profile_personal_data">Personal Data</string>
+    <string name="profile_access_data">Access Data</string>
+    <string name="profile_hint_password_edit">New password (leave empty to not change)</string>
+    <string name="profile_btn_save">SAVE CHANGES</string>
+    <string name="msg_profile_update_success">Profile updated correctly</string>
+
+    <string name="config_btn_profile">Profile</string>
+    <string name="config_label_settings">Settings</string>
+    <string name="config_label_support">Support</string>
+    <string name="config_notif_reminder">Reminder</string>
+    <string name="config_btn_language">Language</string>
+    <string name="config_btn_incidence">Send incident</string>
+    <string name="config_btn_policies">Policies</string>
+    <string name="config_btn_logout">Log Out</string>
+    <string name="desc_config_notif_icon">Notifications icon</string>
+
+    <string name="chat_hint_input">Ask me something...</string>
+    <string name="desc_btn_send">Send message</string>
+    <string name="chat_welcome_msg">Hello! I am your InnerTalk assistant. How can I help you today?</string>
+
+    <string name="dialog_activity_placeholder_title">Activity title</string>
+    <string name="dialog_activity_placeholder_desc">Detailed description of the activity...</string>
+    <string name="dialog_activity_completed">Completed</string>
+    <string name="dialog_activity_btn_play">Play</string>
+    <string name="desc_dialog_activity_icon">Representative activity icon</string>
+
+    <string name="auth_app_name_header">InnerTalk</string>
+
+    <string name="auth_access_title">User Access</string>
+    <string name="auth_hint_username_short">User</string>
+    <string name="auth_hint_password_short">Password</string>
+    <string name="auth_btn_login_short">Enter</string>
+
+    <string name="auth_new_account_title">New Account</string>
+    <string name="auth_label_interests">Interests:</string>
+    <string name="auth_check_stress">Stress</string>
+    <string name="auth_check_anxiety">Anxiety</string>
+    <string name="auth_check_sleep">Sleep</string>
+    <string name="auth_check_mood">Mood</string>
+    <string name="auth_hint_pass_full">Password</string>
+    <string name="auth_btn_create_account">CREATE ACCOUNT</string>
+
+    <string name="loading_error">Error loading data</string>
+    <string name="stats_title_happy">You\'re on a roll! ☀️</string>
+    <string name="stats_desc_happy">Your predominant emotion is \"%s\". It seems you\'ve been finding reasons to smile lately. Keep it up!</string>
+    <string name="stats_title_neutral">Days of flat calm ☁️</string>
+    <string name="stats_desc_neutral">Your most frequent emotion is \"%s\". It\'s normal to have calm periods. Try something new!</string>
+    <string name="stats_title_sad">Virtual hug on its way 💚</string>
+    <string name="stats_desc_sad">I\'ve noticed that sadness is present. It\'s okay, lean on the chat if you need it.</string>
+    <string name="stats_title_angry">Accumulated tension 🌩️</string>
+    <string name="stats_desc_angry">Anger is your primary emotion right now. Try to perform some relaxation activity.</string>
+
+    <string name="quote_1">It\'s okay not to be okay always.</string>
+    <string name="quote_2">Your progress doesn\'t have to be perfect.</string>
+    <string name="quote_3">Breathe. You have survived 100% of your bad days.</string>
+    <string name="quote_4">Today is a good day to take care of yourself.</string>
+    <string name="quote_5">Your emotions are valid.</string>
+    <string name="quote_6">One step at a time, there is no rush.</string>
+
+    <string name="error_no_internet">No Internet connection</string>
+    <string name="error_name_required">Name is required</string>
+    <string name="error_birth_required">Date of birth is required</string>
+    <string name="error_email_required">Email is required</string>
+    <string name="error_pass_required">Password is required</string>
+    <string name="error_accept_policies">You must accept the Privacy Policies to register</string>
+    <string name="error_underage">You must be over 18 years old to use InnerTalk</string>
+    <string name="error_email_exists">That email is already registered, please log in</string>
+    <string name="error_general">Error:</string>
+    <string name="auth_msg_success">Account created successfully!</string>
+    <string name="error_db_save">Error saving profile to the database</string>
+
+    <string name="notif_channel_name">InnerTalk</string>
+    <string name="notif_channel_desc">Remember to record how you feel!</string>
+    <string name="notif_title">How are you feeling today? :)</string>
+    <string name="notif_content">It\'s a good time to write in your journal</string>
+
+    <string name="entry_error_no_emotion">At least choose one emotion</string>
+    <string name="entry_save_success">Entry saved!</string>
+    <string name="entry_save_error">Error saving</string>
+    <string name="entry_log_image_error">Error loading preview: %s</string>
+
+    <string name="login_msg_welcome">Welcome back!</string>
+    <string name="login_error_credentials">Incorrect credentials</string>
+    <string name="error_field_required">Required field</string>
+
+
+    <string name="entries_log_data_error">Error reading data from Firebase</string>
+    <string name="entries_empty_state_msg">You don\'t have saved memories yet</string>
+
+    <string name="error_profile_not_found">Profile data not found</string>
+    <string name="error_connection">Connection error</string>
+    <string name="error_underage_edit">You cannot set a date for under 18 years old.</string>
+    <string name="error_db_update">Error updating profile in the database</string>
+    <string name="msg_reauth_email_warning">Notice: Email could not be changed. For security, you need to log out and log in again to do this.</string>
+    <string name="msg_reauth_pass_warning">Notice: Password could not be changed. For security, you need to log out and log in again.</string>
+    <string name="msg_profile_updated">Profile updated successfully!</string>
+
+    <string name="edit_entry_btn_update">Update entry</string>
+    <string name="edit_entry_error_id">Error: Note ID not found</string>
+    <string name="edit_entry_error_image">Error processing the new image</string>
+    <string name="edit_entry_success">Note updated!</string>
+    <string name="edit_entry_db_error">Error connecting to the database</string>
+    <string name="edit_entry_log_photo_error">Error loading old photo: %s</string>
+
+    <string name="config_error_permission">You need to give permission to receive reminders</string>
+    <string name="config_picker_title">What time do you want the reminder?</string>
+    <string name="config_notif_scheduled">Reminder scheduled at %s</string>
+    <string name="config_notif_canceled">Notification canceled</string>
+
+    <string name="config_policies_title">Policies and privacy</string>
+    <string name="config_policies_content">Welcome to InnerTalk.\n\n1. Data collection:\nWe save your basic information and your daily emotion log to offer you a personalized service.\n\n2. Privacy:\nYour journal entries are private and stored securely in our database. We do not share them with third parties.\n\n3. Minimum age:\nAs verified during registration, you must be at least 18 years old to use this application.\n\n4. Proper use:\nInnerTalk is an emotional support tool, but it does not in any case replace professional psychological help.</string>
+    <string name="config_policies_btn">Understood</string>
+
+    <string name="config_email_subject">Usage incidence</string>
+    <string name="config_email_error">We have not found any email application</string>
+
+    <string name="chat_default_username">User</string>
+    <string name="chat_error_connection">Connection error: %s</string>
+    <string name="chat_log_api_error">Cannot read API Key: %s</string>
+    <string name="chat_log_firestore_error">Error reading profile: %s</string>
+
+    <string name="chat_system_prompt">You are a virtual assistant specialized in emotional support and psychological wellness. Your tone should be warm, empathetic, validating, and judgment-free. Use conversational responses. Do not diagnose medical conditions; suggest seeking professional help if you detect serious danger. The user has indicated that their main concerns are: %1$s. Please adapt your advice to these conditions. You are speaking with %2$s.</string>
+
+    <string name="chat_dialog_care_title">InnerTalk takes care of you 🌿</string>
+    <string name="chat_dialog_btn_activities">Go to Activities</string>
+    <string name="chat_dialog_btn_later">Later</string>
+    <string name="chat_suggestion_sad">It looks like you need a virtual hug. How about writing in your Gratitude Journal?</string>
+    <string name="chat_suggestion_anxiety">I\'ve noticed some restlessness. I recommend 5 minutes of Meditation right now.</string>
+
+    <string name="auth_error_underage">Sorry, you must be over 18 years old to use InnerTalk</string>
+    <string name="auth_error_fill_fields">Please, fill in at least name, email, and password</string>
+    <string name="auth_error_login_email">Enter your email</string>
+    <string name="auth_error_login_pass">Enter your password</string>
+    <string name="auth_msg_welcome">Welcome back!</string>
+    <string name="auth_error_credentials">Error: credentials are incorrect</string>
+    <string name="auth_error_db">Database error: %s</string>
+    <string name="auth_msg_register_success">Account created successfully!</string>
+    <string name="auth_error_general">Error: </string>
+
+    <string name="act_title_1">Guided Meditation</string>
+    <string name="act_desc_1">Reduce cortisol and calm anxiety through a professional guide that quiets your thoughts.</string>
+
+    <string name="act_title_2">Mindful Walking</string>
+    <string name="act_desc_2">Improve mind-body connection and reduce mental rumination by focusing on your physical sensations.</string>
+
+    <string name="act_title_3">4-7-8 Breathing</string>
+    <string name="act_desc_3">Activate the parasympathetic nervous system for immediate stress relief and help falling asleep.</string>
+
+    <string name="act_title_4">Body Scan</string>
+    <string name="act_desc_4">Identify and release tension accumulated in the muscles, promoting deep relaxation before sleeping.</string>
+
+    <string name="act_title_5">5-4-3-2-1 Technique</string>
+    <string name="act_desc_5">Stop panic attacks or intense anxiety through sensory grounding in the present moment.</string>
+
+    <string name="act_title_6">Mindful Eating</string>
+    <string name="act_desc_6">Improve digestion and your relationship with food by reducing impulsivity and increasing sensory pleasure.</string>
+
+    <string name="act_title_7">Stargazing</string>
+    <string name="act_desc_7">Foster a sense of \'awe\', which reduces ego and perceived personal problems.</string>
+
+    <string name="act_title_8">Sound Bath</string>
+    <string name="act_desc_8">Use frequencies to synchronize brain waves, facilitating deep meditation states effortlessly.</string>
+
+    <string name="act_title_9">Box Breathing</string>
+    <string name="act_desc_9">Technique used by Navy SEALs to maintain calm and mental clarity under extreme pressure.</string>
+
+    <string name="act_title_10">Active Listening</string>
+    <string name="act_desc_10">Train concentration ability and reduce mental noise by focusing on the external environment.</string>
+
+    <string name="act_title_11">Express Stretching</string>
+    <string name="act_desc_11">Improve circulation and brain oxygenation, eliminating stiffness caused by a sedentary lifestyle.</string>
+
+    <string name="act_title_12">Gentle Yoga</string>
+    <string name="act_desc_12">Increase flexibility and release emotional blocks physically stored in the joints.</string>
+
+    <string name="act_title_13">Free Dance</string>
+    <string name="act_desc_13">Release endorphins and dopamine, improving mood almost instantly.</string>
+
+    <string name="act_title_14">Butterfly Hug</string>
+    <string name="act_desc_14">Bilateral stimulation that helps the brain process difficult emotions and regain calm.</string>
+
+    <string name="act_title_15">Barefoot</string>
+    <string name="act_desc_15">Reduce body inflammation and improve balance thanks to direct contact with the earth.</string>
+
+    <string name="act_title_16">Cold Water</string>
+    <string name="act_desc_16">Stimulate the vagus nerve, lowering the heart rate and resetting the nervous system in the face of stress.</string>
+
+    <string name="act_title_17">Progressive Relaxation</string>
+    <string name="act_desc_17">Teach the brain to recognize the difference between tension and relaxation, reducing insomnia.</string>
+
+    <string name="act_title_18">Aimless Walking</string>
+    <string name="act_desc_18">Stimulate creativity and lateral thinking by removing the pressure of a goal or destination.</string>
+
+    <string name="act_title_19">Self-massage</string>
+    <string name="act_desc_19">Reduce tension levels in soft tissues and improve lymphatic flow in critical areas.</string>
+
+    <string name="act_title_20">Power Posture</string>
+    <string name="act_desc_20">Change hormonal chemistry by increasing testosterone and lowering cortisol for greater confidence.</string>
+
+    <string name="act_title_21">Gratitude Journal</string>
+    <string name="act_desc_21">Train the brain to detect the positive, increasing long-term happiness according to science.</string>
+
+    <string name="act_title_22">Letter to my Future Self</string>
+    <string name="act_desc_22">Help clarify goals and values, creating a motivating and coherent vision of life.</string>
+
+    <string name="act_title_23">Record of Achievements</string>
+    <string name="act_desc_23">Combat imposter syndrome and strengthen self-efficacy by recognizing your small victories.</string>
+
+    <string name="act_title_24">Free Venting</string>
+    <string name="act_desc_24">Emotional drainage that allows externalizing traumas or frustrations without external judgment.</string>
+
+    <string name="act_title_25">Worry Time</string>
+    <string name="act_desc_25">Prevent anxiety from taking over your whole day by assigning it a limited time and space.</string>
+
+    <string name="act_title_26">Reframing Thoughts</string>
+    <string name="act_desc_26">Cognitive Behavioral Therapy technique to break cycles of self-criticism and irrational thoughts.</string>
+
+    <string name="act_title_27">Forgiveness List</string>
+    <string name="act_desc_27">Release the emotional burden of the past and improve self-esteem by accepting our humanity.</string>
+
+    <string name="act_title_28">\'I Am\' Affirmations</string>
+    <string name="act_desc_28">Reprogram limiting beliefs in the subconscious through the repetition of positive truths.</string>
+
+    <string name="act_title_29">The Good Jar</string>
+    <string name="act_desc_29">Create a bank of positive memories that serve as emotional support in future crisis moments.</string>
+
+    <string name="act_title_30">Letter to a Loved One</string>
+    <string name="act_desc_30">Strengthen emotional bonds and empathy by processing your feelings towards others.</string>
+
+    <string name="act_title_31">Digital Disconnect</string>
+    <string name="act_desc_31">Allow the brain to rest from dopamine overstimulation, improving focus.</string>
+
+    <string name="act_title_32">Drawing Mandalas</string>
+    <string name="act_desc_32">Induce a state of flow similar to meditation, balancing both brain hemispheres.</string>
+
+    <string name="act_title_33">Lofi Music Therapy</string>
+    <string name="act_desc_33">Create an atmosphere of calm that reduces environmental anxiety and improves concentration.</string>
+
+    <string name="act_title_34">Writing a Haiku</string>
+    <string name="act_desc_34">Force the mind to synthesize emotions into few words, fostering mental presence.</string>
+
+    <string name="act_title_35">Tidying a Space</string>
+    <string name="act_desc_35">External order generates internal order, reducing visual stress and increasing calm.</string>
+
+    <string name="act_title_36">Mindful Photography</string>
+    <string name="act_desc_36">Train the eye to find beauty in the everyday, changing your perspective of the day.</string>
+
+    <string name="act_title_37">Learn Something New</string>
+    <string name="act_desc_37">Stimulate brain neuroplasticity, keeping the mind agile and young.</string>
+
+    <string name="act_title_38">Origami</string>
+    <string name="act_desc_38">Improve hand-eye coordination and patience through a repetitive and artistic activity.</string>
+
+    <string name="act_title_39">Mindful Cooking</string>
+    <string name="act_desc_39">Transform a routine task into an act of self-care and nourishment with all the senses.</string>
+
+    <string name="act_title_40">Mental Puzzle</string>
+    <string name="act_desc_40">Prevent cognitive decline and improve problem-solving ability under calm conditions.</string>
+
+    <string name="act_title_41">Social Contact</string>
+    <string name="act_desc_41">Reduce the feeling of loneliness and release oxytocin, the hormone of bonding and trust.</string>
+
+    <string name="act_title_42">Gratitude Message</string>
+    <string name="act_desc_42">Improve not only your well-being but that of another person, creating a positive circle of affection.</string>
+
+    <string name="act_title_43">Date with Yourself</string>
+    <string name="act_desc_43">Reinforce emotional independence and self-knowledge by enjoying your own company.</string>
+
+    <string name="act_title_44">Skincare Routine</string>
+    <string name="act_desc_44">An act of self-love that marks the beginning or end of the day with conscious physical care.</string>
+
+    <string name="act_title_45">Planning an Excitement</string>
+    <string name="act_desc_45">Generate anticipatory dopamine, which helps overcome difficult weeks with optimism.</string>
+
+    <string name="act_title_46">Mindful Shower</string>
+    <string name="act_desc_46">Symbolically clean the day\'s burdens while relaxing your muscles with the water.</string>
+
+    <string name="act_title_47">Compliment Someone</string>
+    <string name="act_desc_47">Foster kindness and improve the social climate around you immediately.</string>
+
+    <string name="act_title_48">Looking at Old Photos</string>
+    <string name="act_desc_48">Connect with your personal history and relive moments of joy to improve mood.</string>
+
+    <string name="act_title_49">Glass of Water</string>
+    <string name="act_desc_49">Improve cognitive function and energy, as mild dehydration causes fatigue and confusion.</string>
+
+    <string name="act_title_50">Total Pause</string>
+    <string name="act_desc_50">Necessary mental reset to avoid emotional exhaustion and regain presence.</string>
+</resources>

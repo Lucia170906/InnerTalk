@@ -97,6 +97,19 @@ class ConfigFragment : Fragment() {
                 preferencia.edit().putBoolean("notif_active", false).apply()
             }
         }
+        binding.btnIdioma.setOnClickListener {
+            val opciones = arrayOf("Español", "English")
+            val builder = android.app.AlertDialog.Builder(requireContext())
+            builder.setTitle(getString(R.string.config_btn_language)) // Usa el string de "Idioma"
+
+            builder.setItems(opciones) { _, which ->
+                when (which) {
+                    0 -> cambiarIdioma("es") // Español
+                    1 -> cambiarIdioma("en") // Inglés
+                }
+            }
+            builder.show()
+        }
 
 
         //Listener para el botón de politicas
@@ -107,6 +120,7 @@ class ConfigFragment : Fragment() {
         binding.btnIncidencia.setOnClickListener {
             abrirAppDeCorreo()
         }
+
 
         //Listener para el boton de cerrar sesión
         binding.btnCerrarSesion.setOnClickListener {
@@ -245,6 +259,26 @@ class ConfigFragment : Fragment() {
 
         }
 
+    }
+
+    private fun cambiarIdioma(codigoIdioma: String) {
+        val locale = java.util.Locale(codigoIdioma)
+        java.util.Locale.setDefault(locale)
+        val config = android.content.res.Configuration()
+        config.setLocale(locale)
+
+        // Actualizamos los recursos de la aplicación
+        requireContext().resources.updateConfiguration(
+            config,
+            requireContext().resources.displayMetrics
+        )
+
+        // Guardamos la preferencia para que al abrir la app de nuevo siga en inglés
+        val prefs = requireContext().getSharedPreferences("config_prefs", android.content.Context.MODE_PRIVATE)
+        prefs.edit().putString("idioma_seleccionado", codigoIdioma).apply()
+
+        // Para que los cambios surtan efecto, debemos reiniciar la actividad actual
+        activity?.recreate()
     }
 
 

@@ -35,6 +35,15 @@ class MainActivity : AppCompatActivity() {
         //configuramos toolbar
         setSupportActionBar(binding.toolbar)
 
+        val prefs = getSharedPreferences("config_prefs", MODE_PRIVATE)
+        val idioma = prefs.getString("idioma_seleccionado", "es") ?: "es"
+
+        val locale = java.util.Locale(idioma)
+        java.util.Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
         //Obtenemos el NavController
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -62,6 +71,8 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView,
             navController
         )
+
+
 
 
     }
