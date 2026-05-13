@@ -42,7 +42,8 @@ class NewEntryFragment : Fragment() {
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 binding.ivPreview.setImageBitmap(bitmap)
             } catch (e: Exception) {
-                Log.e("NewEntry", "Error al cargar preview: ${e.message}")
+                // Log con string dinámico
+                Log.e("NewEntry", getString(R.string.entry_log_image_error, e.message))
                 // Fallback por si acaso
                 binding.ivPreview.setImageURI(uri)
             }
@@ -106,7 +107,8 @@ class NewEntryFragment : Fragment() {
         val uid = auth.currentUser?.uid ?: return
 
         if ( emocionSeleccionada == 0) {
-            Toast.makeText(requireContext(), "Al menos elije una emoción", Toast.LENGTH_SHORT).show()
+            // Toast con string de recurso
+            Toast.makeText(requireContext(), getString(R.string.entry_error_no_emotion), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -127,11 +129,13 @@ class NewEntryFragment : Fragment() {
         database.child("usuarios").child(uid).child("diario").child(entradaId).setValue(entrada)
             .addOnSuccessListener {
                 actualizarEstadisticas(uid)
-                Toast.makeText(requireContext(), "¡Entrada guardada!", Toast.LENGTH_SHORT).show()
+                // Toast de éxito desde strings
+                Toast.makeText(requireContext(), getString(R.string.entry_save_success), Toast.LENGTH_SHORT).show()
                 limpiarPantalla()
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error al guardar", Toast.LENGTH_SHORT).show()
+                // Toast de error desde strings
+                Toast.makeText(requireContext(), getString(R.string.entry_save_error), Toast.LENGTH_SHORT).show()
             }
     }
 

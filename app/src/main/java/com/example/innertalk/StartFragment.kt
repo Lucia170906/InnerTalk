@@ -20,6 +20,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -101,7 +102,8 @@ class StartFragment : Fragment() {
                 //  Muestro las actividades realizadas ese día
                 binding.recyclerView.visibility = View.VISIBLE
 
-                binding.tvSugeridasTitulo.text = "Actividades realizadas el $fechaFormateada"
+                // Usamos el string con parámetro para la fecha
+                binding.tvSugeridasTitulo.text = getString(R.string.start_done_activities, fechaFormateada)
                 buscarSoloRealizadas(fechaFormateada)
                 buscarNotaDiario(fechaFormateada)
 
@@ -109,7 +111,7 @@ class StartFragment : Fragment() {
             } else if(pulsado.after(hoy)){
                 // He decicdo usar View GONE y cambio en la lista por tener un respaldo por si una falla
 
-                binding.tvSugeridasTitulo.text= "No te preocupes por mañana, aún es pronto"
+                binding.tvSugeridasTitulo.text = getString(R.string.start_future_msg)
                 binding.recyclerView.visibility = View.GONE // Escondemos la lista de actividades
 
                 // Limpiamos el ViewModel para que no intente mostrar nada
@@ -123,7 +125,7 @@ class StartFragment : Fragment() {
 
 
                 // Si es hoy , muestro todo el catálogo de sugerencias
-                binding.tvSugeridasTitulo.text = "Actividades sugeridas"
+                binding.tvSugeridasTitulo.text = getString(R.string.start_suggested_title)
                 cargarActividadesDeHoy()
             }
 
@@ -165,10 +167,7 @@ class StartFragment : Fragment() {
     //usamos onResume para que si hay cehacks se actualicen al volver al fragment
     override fun onResume() {
         super.onResume()
-        val sfd = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-
-        binding.tvSugeridasTitulo.text = "Actividades sugeridas"
-
+        binding.tvSugeridasTitulo.text = getString(R.string.start_suggested_title)
         cargarActividadesDeHoy()
     }
 
@@ -200,6 +199,7 @@ class StartFragment : Fragment() {
         //5.Configuramos el botón de play si este es pulsado desde el modal
         if(!activity.url.isNullOrEmpty()){
             btnPlay.visibility = View.VISIBLE
+            btnPlay.text = getString(R.string.dialog_activity_btn_play)
             btnPlay.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(activity.url))
                 startActivity(intent)
@@ -210,6 +210,7 @@ class StartFragment : Fragment() {
         }
 
         //6. Configuramos el check box
+        checkBox.text = getString(R.string.dialog_activity_completed)
         checkBox.setOnClickListener {
             viewModel.activityCompletion(activity.id)
             dialog.dismiss() //cerramos al marcas como hecha
@@ -224,8 +225,8 @@ class StartFragment : Fragment() {
         val dbRef = FirebaseDatabase.getInstance("https://innertalk-ca928-default-rtdb.europe-west1.firebasedatabase.app/")
             .reference.child("usuarios").child(uid).child("actividades_diarias").child(fecha)
 
-        // Toasts  para saber qué está haciendo por debajo
-        android.widget.Toast.makeText(context, "Buscando historial de: $fecha", android.widget.Toast.LENGTH_SHORT).show()
+        // Toasts usando strings del recurso
+        Toast.makeText(context, getString(R.string.start_searching_history, fecha), Toast.LENGTH_SHORT).show()
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -235,7 +236,7 @@ class StartFragment : Fragment() {
                     it.key?.trim()?.lowercase() // Añadimos el lowercase por si acaso en el duuro usamos letras en los id
                 }
 
-                android.widget.Toast.makeText(context, "Se encontró: ${idsHechasFirebase.size} hechas", android.widget.Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.start_found_count, idsHechasFirebase.size), Toast.LENGTH_SHORT).show()
 
                 // 2. Le pido al ViewModel el catálogo entero limpio
                 val catalogoCompleto = viewModel.getCatalogoLimpio()
@@ -254,9 +255,9 @@ class StartFragment : Fragment() {
 
                 // Mensajes de error por si algo falla en la comparación de las IDs
                 if (idsHechasFirebase.isNotEmpty() && soloHechas.isEmpty()) {
-                    android.widget.Toast.makeText(context, "Error: Las IDs no coinciden", android.widget.Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.start_id_error), Toast.LENGTH_LONG).show()
                 } else if (soloHechas.isEmpty()) {
-                    android.widget.Toast.makeText(context, "Día sin actividades", android.widget.Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.start_no_activities), Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onCancelled(error: DatabaseError) {}
@@ -272,7 +273,7 @@ class StartFragment : Fragment() {
         try {
             // Como Firebase guarda las notas por "milisegundos", tengo que crear un rango:
             // Saco los milisegundos del principio del día (00:00:00) y del final (23:59:59)
-            val sdf = java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.getDefault())
+            val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val date = sdf.parse(fecha.trim()) ?: return
             val calendar = java.util.Calendar.getInstance()
 
@@ -295,7 +296,6 @@ class StartFragment : Fragment() {
                         val listaNotasDelDia = mutableListOf<EntryModel>()
 
                         // Recorro todas mis notas...
-                        // Recorro todas mis notas...
                         for (data in snapshot.children) {
                             try {
                                 val entry = data.getValue(EntryModel::class.java)
@@ -314,16 +314,16 @@ class StartFragment : Fragment() {
                             }
                         }
 
-                            if (listaNotasDelDia.isNotEmpty()) {
-                                // Muestro la lista si hay notas
-                                binding.tvTituloNotasDiario.visibility = View.VISIBLE
-                                binding.rvNotasCalendario.visibility = View.VISIBLE
-                                notasAdapter.updateList(listaNotasDelDia)
-                            } else {
-                                // Escondo todo si está vacío
-                                binding.tvTituloNotasDiario.visibility = View.GONE
-                                binding.rvNotasCalendario.visibility = View.GONE
-                            }
+                        if (listaNotasDelDia.isNotEmpty()) {
+                            // Muestro la lista si hay notas
+                            binding.tvTituloNotasDiario.visibility = View.VISIBLE
+                            binding.rvNotasCalendario.visibility = View.VISIBLE
+                            notasAdapter.updateList(listaNotasDelDia)
+                        } else {
+                            // Escondo todo si está vacío
+                            binding.tvTituloNotasDiario.visibility = View.GONE
+                            binding.rvNotasCalendario.visibility = View.GONE
+                        }
 
                     } else {
                         // Si directamente no hay nada en Firebase
@@ -341,7 +341,7 @@ class StartFragment : Fragment() {
     // FUNCIÓN PARA HOY: Muestra las activides guardando las que ya se han hecho
     private fun cargarActividadesDeHoy() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val sdf = java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.getDefault())
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         val fechaHoy = sdf.format(java.util.Date())
 
         val dbRef = FirebaseDatabase.getInstance("https://innertalk-ca928-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -351,7 +351,7 @@ class StartFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 //Si la pantalla no esta visible (binding nulo) cortamos y no hacemos nada
                 //para evitar crasheos
-                if (_binding ==null) return
+                if (_binding == null) return
                 // 1. Obtenemos la lista de IDs que ya marqué hoy
                 val idsHechasHoy = snapshot.children.mapNotNull { it.key }
 

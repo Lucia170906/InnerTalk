@@ -42,9 +42,8 @@ class ChatFragment : Fragment() {
     private val modeloGroq = "llama-3.1-8b-instant"
 
     //3. Datos del usuario
-    private var nombreUsuario: String = "Usuario"
+    private var nombreUsuario: String = ""
     private var interesesUsuario: List<String> = listOf()
-    //private var generoUsuario: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +56,9 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Inicializamos el nombre por defecto desde strings
+        nombreUsuario = getString(R.string.chat_default_username)
 
         //Cargamos los datos del usuario:
         cargarDatosPerfilFirestore()
@@ -84,14 +86,12 @@ class ChatFragment : Fragment() {
         db.collection("users").document(uid).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    nombreUsuario = document.getString("name") ?: "Usuario"
-                    //generoUsuario = document.getString("gender") ?: "" // de momento no voy a usar el género, pero asi sería la lína para la ampliación en el futuro
-                    // Extraemos la lista de intereses
+                    nombreUsuario = document.getString("name") ?: getString(R.string.chat_default_username)
                     interesesUsuario = document.get("intereses") as? List<String> ?: listOf()
                 }
             }
             .addOnFailureListener { e ->
-                Log.e("FirestoreError", "Error al leer perfil: ${e.message}")
+                Log.e("FirestoreError", getString(R.string.chat_log_firestore_error, e.message))
             }
     }
 
@@ -110,14 +110,13 @@ class ChatFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     val aiMsg = Message(respuestaTexto, isUser = false)
                     chatAdapter.addMessage(aiMsg)
-                   //analizarSentimientosYRecomendar(respuestaTexto)
                     binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
                 }
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e("GroqError", "Error técnico detallado: ", e)
-                    chatAdapter.addMessage(Message("Error de conexión: ${e.message}", false))
+                    Log.e("GroqError", "Error técnico: ", e)
+                    chatAdapter.addMessage(Message(getString(R.string.chat_error_connection, e.message), false))
                 }
             }
         }
@@ -138,21 +137,15 @@ class ChatFragment : Fragment() {
             // Creamos el JSON con los datos que espera Groq
             val jsonBody = JSONObject()
             jsonBody.put("model", modeloGroq)
-            jsonBody.put("temperature", 0.6) // 0.6 para equilibrar empatía y coherencia
+            jsonBody.put("temperature", 0.6)
 
             val messagesArray = JSONArray()
 
-            // A. EL SYSTEM PROMPT (La personalidad del psicólogo)
+            // A. EL SYSTEM PROMPT (Usando el recurso de strings con formato)
+            val interesesStr = interesesUsuario.joinToString(", ")
             val systemMsg = JSONObject()
             systemMsg.put("role", "system")
-            systemMsg.put("content", "Eres un asistente virtual especializado en " +
-                    "apoyo emocional y bienestar psicológico. Tu tono debe ser cálido," +
-                    " empático, validante y libre de juicios. " +
-                    "Usa respuestas conversacionales. " +
-                    "No diagnostiques condiciones médicas, sugiere buscar ayuda profesional si detectas peligro grave." +
-                    "El usuario ha indicado que sus principales preocupaciones son: ${interesesUsuario.joinToString {(", ")  }}." +
-                     "Por favor, adapta tus consejos a estas condiciones." +
-                    "Estás hablando con $nombreUsuario")
+            systemMsg.put("content", getString(R.string.chat_system_prompt, interesesStr, nombreUsuario))
             messagesArray.put(systemMsg)
 
             // B. EL HISTORIAL DE CHAT (Para que tenga memoria)
@@ -179,14 +172,12 @@ class ChatFragment : Fragment() {
                 val responseString = reader.readText()
                 reader.close()
 
-                // Extraemos el texto exacto que dijo la IA del JSON de respuesta
                 val jsonResponse = JSONObject(responseString)
                 val choices = jsonResponse.getJSONArray("choices")
                 val firstChoice = choices.getJSONObject(0)
                 val message = firstChoice.getJSONObject("message")
                 return message.getString("content")
             } else {
-                // Si falla (por ejemplo, cuota excedida), leemos el error
                 val errorReader = BufferedReader(InputStreamReader(connection.errorStream))
                 val errorString = errorReader.readText()
                 errorReader.close()
@@ -200,7 +191,6 @@ class ChatFragment : Fragment() {
     //FUNCIÓN PARA LEER EL TXT CON LA APIKEY
     private fun leerApiKey():String{
         return try{
-            //abrimos el archivo que esta en assets
             val inputStream = requireContext().assets.open("config.txt")
             val size = inputStream.available()
             val buffer = ByteArray(size)
@@ -208,42 +198,21 @@ class ChatFragment : Fragment() {
             inputStream.read(buffer)
             inputStream.close()
 
-            //Convertimos los bytes del Array a un String y quitamos posibles espacios
             String(buffer).trim()
         }catch (e : Exception){
-            Log.e("ApiKeyError", "No se puede leer la API Key: ${e.message}")
-            "" //Devolvemos vacío si falla
+            Log.e("ApiKeyError", getString(R.string.chat_log_api_error, e.message))
+            ""
         }
     }
 
-//    private fun analizarSentimientosYRecomendar (respuestaIA : String){
-//        val respuestaMinusculas = respuestaIA.lowercase()
-//
-//        //1.Definimos los trigegrs (disparadores)
-//         val esTriste = respuestaMinusculas.contains("triste")|| respuestaMinusculas.contains("ánimo") || respuestaMinusculas.contains("llorar") || respuestaMinusculas.contains("frustración")
-//         val esAnsioso = respuestaMinusculas.contains("respira") || respuestaMinusculas.contains("calma") || respuestaMinusculas.contains("ansiedad")
-//
-//        //2.Lógica de recomendación visual
-//        when{
-//            esTriste->{
-//                mostrarSugerencia("Parece que necesitas un abrazo virtual. ¿Qué tal si escribes en tu Diario de Gratitud?")
-//            }
-//            esAnsioso -> {
-//                mostrarSugerencia("He notado algo de inquietud. Te recomiendo 5 minutos de Meditación ahora mismo.")
-//            }
-//        }
-//    }
-
     private fun mostrarSugerencia(mensaje: String) {
-        // Aquí puedes usar un Toast, un SnackBar o un cuadro de diálogo bonito
         androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setTitle("InnerTalk te cuida 🌿")
+            .setTitle(getString(R.string.chat_dialog_care_title))
             .setMessage(mensaje)
-            .setPositiveButton("Ir a Actividades") { _, _ ->
-
+            .setPositiveButton(getString(R.string.chat_dialog_btn_activities)) { _, _ ->
                 findNavController().navigate(R.id.action_chatFragment_to_startFragment)
             }
-            .setNegativeButton("Luego", null)
+            .setNegativeButton(getString(R.string.chat_dialog_btn_later), null)
             .show()
     }
 

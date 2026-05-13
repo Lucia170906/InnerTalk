@@ -9,6 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.innertalk.R
+
 class NotificationWorker (context :Context, params : WorkerParameters ): Worker(context, params){
 
     override fun doWork(): Result {
@@ -17,8 +18,9 @@ class NotificationWorker (context :Context, params : WorkerParameters ): Worker(
     }
 
     private fun lanzarNotificacion(){
-        val name ="InnerTalk"
-        val descriptionText = "¡Recuerda registrar como te sientes!"
+        // Sustituimos los textos por recursos del sistema strings.xml
+        val name = applicationContext.getString(R.string.notif_channel_name)
+        val descriptionText = applicationContext.getString(R.string.notif_channel_desc)
         val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channelId = "RECORDATORIO_DIARIO"
 
@@ -33,9 +35,9 @@ class NotificationWorker (context :Context, params : WorkerParameters ): Worker(
         }
 
         val builder = NotificationCompat.Builder(applicationContext, channelId)
-            .setContentTitle("¿Cómo te sientes hoy? :)")
+            .setContentTitle(applicationContext.getString(R.string.notif_title))
             .setSmallIcon(R.drawable.notification_icon)
-            .setContentText("Es un buen momento para escribir en tu diario")
+            .setContentText(applicationContext.getString(R.string.notif_content))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
 

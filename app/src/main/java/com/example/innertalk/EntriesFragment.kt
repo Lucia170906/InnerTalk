@@ -2,6 +2,7 @@ package com.example.innertalk
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +34,7 @@ class EntriesFragment : Fragment(R.layout.fragment_entries) {
         // Inicializamos el adapter y le pasamos nuestra lista al principio vacía y la funcion de click
 
         adapter = EntriesAdapter(entriesList){
-             notaPulsada ->
+                notaPulsada ->
             //Cuando se pulse preparamos ls datos para enviarlos
             val bundle = Bundle().apply {
                 putString("id_nota", notaPulsada.id)
@@ -95,6 +96,10 @@ class EntriesFragment : Fragment(R.layout.fragment_entries) {
             }
 
             override fun onCancelled(error: DatabaseError) {
+                // Añadimos un pequeño aviso por si la lectura falla
+                if (_binding != null) {
+                    Toast.makeText(requireContext(), getString(R.string.entries_log_data_error), Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }

@@ -1,5 +1,7 @@
 package com.example.innertalk.viewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,9 +10,9 @@ import com.example.innertalk.repository.ActivityRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class ActivityViewModel : ViewModel() {
+class ActivityViewModel(application: Application) : AndroidViewModel(application){
 
-    private val repository = ActivityRepository() //variable para el repository
+    private val repository =ActivityRepository(application.applicationContext) //variable para el repository
     private val _activities = MutableLiveData<List<ActivityModel>>()
     val activities : LiveData<List<ActivityModel>> get() = _activities
 

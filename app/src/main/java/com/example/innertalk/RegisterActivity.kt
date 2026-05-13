@@ -11,7 +11,6 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.innertalk.databinding.RegisterLayoutBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -45,13 +44,14 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
-        // Al pulsar el campo de fecha, abro  calendario
+        // Al pulsar el campo de fecha, abro calendario
         binding.etRegisterBirth.setOnClickListener { showDatePicker() }
 
-        // Lógica para crear lacuenta
+        // Lógica para crear la cuenta
         binding.btnRegister.setOnClickListener {
             if (!isNetworkAvailable()) {
-                Toast.makeText(this, "No hay internet", Toast.LENGTH_LONG).show()
+                // Texto de "No hay internet" desde strings
+                Toast.makeText(this, getString(R.string.error_no_internet), Toast.LENGTH_LONG).show()
                 return@setOnClickListener // Cortamos la ejecución aquí, no intentamos hacer login
             }
 
@@ -72,22 +72,22 @@ class RegisterActivity : AppCompatActivity() {
             if (name.isEmpty()) {
                 marcarError(binding.etRegisterName)
                 camposValidos = false
-                mensajeError = "El nombre es obligatorio."
+                mensajeError = getString(R.string.error_name_required)
             }
             if (fechaSeleccionada == null) {
                 marcarError(binding.etRegisterBirth)
                 camposValidos = false
-                if (mensajeError.isEmpty()) mensajeError = "La fecha de nacimiento es obligatoria."
+                if (mensajeError.isEmpty()) mensajeError = getString(R.string.error_birth_required)
             }
             if (email.isEmpty()) {
                 marcarError(binding.etRegisterEmail)
                 camposValidos = false
-                if (mensajeError.isEmpty()) mensajeError = "El email es obligatorio."
+                if (mensajeError.isEmpty()) mensajeError = getString(R.string.error_email_required)
             }
             if (pass.isEmpty()) {
                 marcarError(binding.etRegisterPass)
                 camposValidos = false
-                if (mensajeError.isEmpty()) mensajeError = "La contraseña es obligatoria."
+                if (mensajeError.isEmpty()) mensajeError = getString(R.string.error_pass_required)
             }
 
             // Si hay algo vacío, aviso con un Toast y corto la ejecución aquí
@@ -96,13 +96,15 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (!binding.cbPoliticas.isChecked) {
-                Toast.makeText(this, "Debes aceptar las Políticas de Privacidad para registrarte.", Toast.LENGTH_LONG).show()
+                // Texto de aviso de políticas
+                Toast.makeText(this, getString(R.string.error_accept_policies), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             // 4. Verifico que el usuario sea mayor de edad con la fecha que he guardado
             if (!esMayorDeEdad(fechaSeleccionada!!)) {
-                Toast.makeText(this, "Debes ser mayor de 18 años para usar InnerTalk", Toast.LENGTH_LONG).show()
+                // Texto de mayoría de edad
+                Toast.makeText(this, getString(R.string.error_underage), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -119,10 +121,10 @@ class RegisterActivity : AppCompatActivity() {
                     // Si falla, compruebo si es porque el correo ya está registrado
                     if (task.exception is FirebaseAuthUserCollisionException) {
                         marcarError(binding.etRegisterEmail) // Pinto el correo de rojo
-                        Toast.makeText(this, "Ese correo ya está registrado, inicia sesión", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, getString(R.string.error_email_exists), Toast.LENGTH_LONG).show()
                     } else {
                         // Para cualquier otro error (ej. contraseña muy corta...)
-                        Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "${getString(R.string.error_general)} ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -152,22 +154,24 @@ class RegisterActivity : AppCompatActivity() {
         db.collection("users").document(uid)
             .set(userMap)
             .addOnSuccessListener {
-                Toast.makeText(this, "¡Cuenta creada con éxito!", Toast.LENGTH_SHORT).show()
+                // Texto de éxito
+                Toast.makeText(this, getString(R.string.auth_msg_success), Toast.LENGTH_SHORT).show()
                 goToHome() // Si se guarda bien en base de datos, lo mando a la pantalla principal
             }
             .addOnFailureListener { e ->
                 Log.e("FirestoreError", "Error al guardar en BD: ${e.message}")
-                Toast.makeText(this, "Error guardando el perfil: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.error_db_save), Toast.LENGTH_LONG).show()
             }
     }
 
     // Función para recoger qué checkboxes ha marcado el usuario
     private fun obtenerInteresesSeleccionados(): List<String> {
         val intereses = mutableListOf<String>()
-        if (binding.cbEstres.isChecked) intereses.add("Estrés")
-        if (binding.cbAnsiedad.isChecked) intereses.add("Ansiedad")
-        if (binding.cbSueno.isChecked) intereses.add("Sueño")
-        if (binding.cbAnimo.isChecked) intereses.add("Ánimo")
+        // Usamos los strings del sistema para los nombres de los intereses si es necesario
+        if (binding.cbEstres.isChecked) intereses.add(getString(R.string.auth_interest_stress))
+        if (binding.cbAnsiedad.isChecked) intereses.add(getString(R.string.auth_interest_anxiety))
+        if (binding.cbSueno.isChecked) intereses.add(getString(R.string.auth_interest_sleep))
+        if (binding.cbAnimo.isChecked) intereses.add(getString(R.string.auth_interest_mood))
         return intereses
     }
 

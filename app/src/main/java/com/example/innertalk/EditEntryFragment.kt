@@ -55,9 +55,6 @@ class EditEntryFragment : Fragment() {
         }
     }
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,7 +66,8 @@ class EditEntryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnSave.text = "Actualizar entrada"
+        // Sustituimos texto del botón por string
+        binding.btnSave.text = getString(R.string.edit_entry_btn_update)
 
         //Configuramos los clicks para las emociones
         setupEmotions()
@@ -131,7 +129,7 @@ class EditEntryFragment : Fragment() {
             binding.cardPreview.visibility = View.VISIBLE
             binding.ivPreview.setImageBitmap(decodedImage)
         }catch (e : Exception){
-            Log.e("EditEntry", "Error al cargar foto vieja: ${e.message}")
+            Log.e("EditEntry", getString(R.string.edit_entry_log_photo_error, e.message))
             binding.cardPreview.visibility = View.GONE
         }
     }
@@ -149,11 +147,6 @@ class EditEntryFragment : Fragment() {
         }
     }
 
-
-
-
-
-
     fun actualizarEnFirebase (){
         val nuevoTexto = binding.editTextNote.text.toString().trim()
         val uid = auth.currentUser?.uid ?: return
@@ -165,14 +158,14 @@ class EditEntryFragment : Fragment() {
             //si hay foto nueva la comprimimos
             fotoFinalBase64 = comprimirImagen(nuevaImagenUri!!)
 
-            if (fotoBase64Actual == null){
-                Toast.makeText(requireContext(), "Error al procesar la nueva imagen", Toast.LENGTH_SHORT).show()
+            if (fotoFinalBase64 == null){
+                Toast.makeText(requireContext(), getString(R.string.edit_entry_error_image), Toast.LENGTH_SHORT).show()
                 return
             }
         }
 
         if (idNotaActual.isEmpty()) {
-            Toast.makeText(requireContext(), "Error: No se encontró el ID de la nota", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), getString(R.string.edit_entry_error_id), Toast.LENGTH_LONG).show()
             return // Cortamos la ejecución aquí, ¡no guardamos nada!
         }
 
@@ -188,13 +181,13 @@ class EditEntryFragment : Fragment() {
         database.child("usuarios").child(uid).child("diario").child(idNotaActual)
             .updateChildren(actualizaciones)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "¡Nota actualizada!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.edit_entry_success), Toast.LENGTH_SHORT).show()
 
                 // 5. Volvemos atrás automáticamente al terminar
                 findNavController().popBackStack()
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error al conectar con la base de datos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.edit_entry_db_error), Toast.LENGTH_SHORT).show()
             }
     }
 

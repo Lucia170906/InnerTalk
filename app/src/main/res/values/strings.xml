@@ -128,8 +128,8 @@
 
     <!--Fragment stadisticas layput-->
     <string name="stats_quote_placeholder">"Un paso a la vez."</string>
-    <string name="stats_label_entries">Entradas</string>
-    <string name="stats_label_streak">Días seguidos</string>
+    <string name="stats_label_entries">Entradas totales</string>
+    <string name="stats_label_streak">Días de racha</string>
     <string name="stats_chart_distribution">Distribución Emocional</string>
     <string name="stats_analyzing_title">Calculando...</string>
     <string name="stats_analyzing_desc">Recopilando datos de tu diario para crear un perfil.</string>
@@ -194,16 +194,270 @@
     <string name="auth_btn_login_short">Entrar</string>
 
     <string name="auth_new_account_title">Nueva Cuenta</string>
-    <string name="auth_hint_name">Nombre</string>
-    <string name="auth_hint_lastname">Apellidos</string>
-    <string name="auth_hint_birth">F. Nacimiento</string>
-    <string name="auth_hint_gender">Género</string>
     <string name="auth_label_interests">Intereses:</string>
     <string name="auth_check_stress">Estrés</string>
     <string name="auth_check_anxiety">Ansiedad</string>
     <string name="auth_check_sleep">Sueño</string>
     <string name="auth_check_mood">Ánimo</string>
-    <string name="auth_hint_email">Correo electrónico</string>
     <string name="auth_hint_pass_full">Contraseña</string>
     <string name="auth_btn_create_account">CREAR CUENTA</string>
+
+    <!--Statistics fragment-->
+    <string name="loading_error">Error al cargar los datos</string>
+    <string name="stats_title_happy">¡Estás en una buena racha! ☀️</string>
+    <string name="stats_desc_happy">Tu emoción predominante es \"%s\". Parece que últimamente encuentras motivos para sonreír. ¡Sigue así!</string>
+    <string name="stats_title_neutral">Días de calma plana ☁️</string>
+    <string name="stats_desc_neutral">Tu emoción más frecuente es \"%s\". Es normal tener temporadas de calma. ¡Prueba algo nuevo!</string>
+    <string name="stats_title_sad">Abrazo virtual en camino 💚</string>
+    <string name="stats_desc_sad">He notado que la tristeza está presente. No pasa nada, apóyate en el chat si lo necesitas.</string>
+    <string name="stats_title_angry">Tensión acumulada 🌩️</string>
+    <string name="stats_desc_angry">El enfado es tu emoción principal ahora. Intenta realizar alguna actividad de relajación.</string>
+
+    <string name="quote_1">Está bien no estar bien siempre.</string>
+    <string name="quote_2">Tu progreso no tiene que ser perfecto.</string>
+    <string name="quote_3">Respira. Has superado el 100% de tus días malos.</string>
+    <string name="quote_4">Hoy es un buen día para cuidarte.</string>
+    <string name="quote_5">Tus emociones son válidas.</string>
+    <string name="quote_6">Un paso a la vez, no hay prisa.</string>
+
+    <!--register activity-->
+    <string name="error_no_internet">No hay conexión a Internet</string>
+    <string name="error_name_required">El nombre es obligatorio</string>
+    <string name="error_birth_required">La fecha de nacimiento es obligatoria</string>
+    <string name="error_email_required">El email es obligatorio</string>
+    <string name="error_pass_required">La contraseña es obligatoria</string>
+    <string name="error_accept_policies">Debes aceptar las Políticas de Privacidad para registrarte</string>
+    <string name="error_underage">Debes ser mayor de 18 años para usar InnerTalk</string>
+    <string name="error_email_exists">Ese correo ya está registrado, inicia sesión</string>
+    <string name="error_general">Error:</string>
+    <string name="auth_msg_success">¡Cuenta creada con éxito!</string>
+    <string name="error_db_save">Error al guardar el perfil en la base de datos</string>
+
+    <!--notification worker-->
+    <string name="notif_channel_name">InnerTalk</string>
+    <string name="notif_channel_desc">¡Recuerda registrar cómo te sientes!</string>
+    <string name="notif_title">¿Cómo te sientes hoy? :)</string>
+    <string name="notif_content">Es un buen momento para escribir en tu diario</string>
+
+    <!--new entry fragment-->
+    <string name="entry_error_no_emotion">Al menos elige una emoción</string>
+    <string name="entry_save_success">¡Entrada guardada!</string>
+    <string name="entry_save_error">Error al guardar</string>
+    <string name="entry_log_image_error">Error al cargar preview: %s</string>
+
+    <!--log in activity-->
+    <string name="login_msg_welcome">¡Bienvenido de nuevo!</string>
+    <string name="login_error_credentials">Credenciales incorrectas</string>
+    <string name="error_field_required">Campo obligatorio</string>
+
+
+    <!--entries fragment-->
+    <string name="entries_log_data_error">Error al leer datos de Firebase</string>
+    <string name="entries_empty_state_msg">Aún no tienes recuerdos guardados</string>
+
+    <!-- edit profile fragment-->
+    <string name="error_profile_not_found">No se encontraron datos del perfil</string>
+    <string name="error_connection">Error de conexión</string>
+    <string name="error_underage_edit">No puedes poner una fecha de menor de 18 años.</string>
+    <string name="error_db_update">Error al actualizar perfil en la base de datos</string>
+    <string name="msg_reauth_email_warning">Aviso: No se pudo cambiar el correo. Por seguridad, necesitas cerrar sesión y volver a entrar para hacer esto.</string>
+    <string name="msg_reauth_pass_warning">Aviso: No se pudo cambiar la contraseña. Por seguridad, necesitas cerrar sesión y volver a entrar.</string>
+    <string name="msg_profile_updated">¡Perfil actualizado con éxito!</string>
+
+    <!--Edit entry fragment-->
+    <string name="edit_entry_btn_update">Actualizar entrada</string>
+    <string name="edit_entry_error_id">Error: No se encontró el ID de la nota</string>
+    <string name="edit_entry_error_image">Error al procesar la nueva imagen</string>
+    <string name="edit_entry_success">¡Nota actualizada!</string>
+    <string name="edit_entry_db_error">Error al conectar con la base de datos</string>
+    <string name="edit_entry_log_photo_error">Error al cargar foto vieja: %s</string>
+
+    <!--cONFIG FRAGMENT-->
+    <string name="config_error_permission">Necesitas dar permiso para recibir los recordatorios</string>
+    <string name="config_picker_title">¿A qué hora quieres el recordatorio?</string>
+    <string name="config_notif_scheduled">Recordatorio programado a las %s</string>
+    <string name="config_notif_canceled">Notificación cancelada</string>
+
+    <string name="config_policies_title">Políticas y privacidad</string>
+    <string name="config_policies_content">Bienvenido a InnerTalk.\n\n1. Recopilación de datos:\nGuardamos tu información básica y tu registro diario de emociones para ofrecerte un servicio personalizado.\n\n2. Privacidad:\nTus entradas de diario son privadas y se almacenan de forma segura en nuestra base de datos. No las compartimos con terceros.\n\n3. Edad mínima:\nComo se verifica en el registro, debes tener al menos 18 años para utilizar esta aplicación.\n\n4. Uso adecuado:\nInnerTalk es una herramienta de apoyo emocional, pero no sustituye en ningún caso a la ayuda psicológica profesional.</string>
+    <string name="config_policies_btn">Entendido</string>
+
+    <string name="config_email_subject">Incidencia de uso</string>
+    <string name="config_email_error">No hemos encontrado ninguna aplicación de correo</string>
+
+    <!-- Chat fargment-->
+    <string name="chat_default_username">Usuario</string>
+    <string name="chat_error_connection">Error de conexión: %s</string>
+    <string name="chat_log_api_error">No se puede leer la API Key: %s</string>
+    <string name="chat_log_firestore_error">Error al leer perfil: %s</string>
+
+    <string name="chat_system_prompt">Eres un asistente virtual especializado en apoyo emocional y bienestar psicológico. Tu tono debe ser cálido, empático, validante y libre de juicios. Usa respuestas conversacionales. No diagnostiques condiciones médicas, sugiere buscar ayuda profesional si detectas peligro grave. El usuario ha indicado que sus principales preocupaciones son: %1$s. Por favor, adapta tus consejos a estas condiciones. Estás hablando con %2$s.</string>
+
+    <string name="chat_dialog_care_title">InnerTalk te cuida 🌿</string>
+    <string name="chat_dialog_btn_activities">Ir a Actividades</string>
+    <string name="chat_dialog_btn_later">Luego</string>
+    <string name="chat_suggestion_sad">Parece que necesitas un abrazo virtual. ¿Qué tal si escribes en tu Diario de Gratitud?</string>
+    <string name="chat_suggestion_anxiety">He notado algo de inquietud. Te recomiendo 5 minutos de Meditación ahora mismo.</string>
+
+    <!-- auth activity-->
+    <string name="auth_error_underage">Lo sentimos, debes ser mayor de 18 años para usar InnerTalk</string>
+    <string name="auth_error_fill_fields">Por favor, rellena al menos nombre, email y clave</string>
+    <string name="auth_error_login_email">Introduce tu correo</string>
+    <string name="auth_error_login_pass">Introduce tu contraseña</string>
+    <string name="auth_msg_welcome">¡Bienvenido de nuevo!</string>
+    <string name="auth_error_credentials">Error: las credenciales son incorrectas</string>
+    <string name="auth_error_db">Error en base de datos: %s</string>
+    <string name="auth_msg_register_success">¡Cuenta creada con éxito!</string>
+    <string name="auth_error_general">Error: </string>
+
+    <!--repository-->
+        <string name="act_title_1">Meditación Guiada</string>
+        <string name="act_desc_1">Reduce el cortisol y calma la ansiedad mediante una guía profesional que aquieta tus pensamientos.</string>
+
+        <string name="act_title_2">Caminar Consciente</string>
+        <string name="act_desc_2">Mejora la conexión mente-cuerpo y reduce la rumiación mental al enfocarte en tus sensaciones físicas.</string>
+
+        <string name="act_title_3">Respiración 4-7-8</string>
+        <string name="act_desc_3">Activa el sistema nervioso parasimpático para un alivio inmediato del estrés y ayuda a conciliar el sueño.</string>
+
+        <string name="act_title_4">Escaneo Corporal</string>
+        <string name="act_desc_4">Identifica y libera tensiones acumuladas en los músculos, promoviendo una relajación profunda antes de dormir.</string>
+
+        <string name="act_title_5">Técnica 5-4-3-2-1</string>
+        <string name="act_desc_5">Detiene ataques de pánico o ansiedad intensa mediante el anclaje sensorial en el momento presente.</string>
+
+        <string name="act_title_6">Comer con Atención</string>
+        <string name="act_desc_6">Mejora la digestión y la relación con la comida al reducir la impulsividad y aumentar el placer sensorial.</string>
+
+        <string name="act_title_7">Mirar las Estrellas</string>
+        <string name="act_desc_7">Fomenta la sensación de \'asombro\' (awe), lo que reduce el ego y los problemas personales percibidos.</string>
+
+        <string name="act_title_8">Baño de Sonido</string>
+        <string name="act_desc_8">Utiliza frecuencias para sincronizar las ondas cerebrales, facilitando estados de meditación profunda sin esfuerzo.</string>
+
+        <string name="act_title_9">Respiración de Caja</string>
+        <string name="act_desc_9">Técnica usada por los Navy SEALs para mantener la calma y la claridad mental bajo presión extrema.</string>
+
+        <string name="act_title_10">Escucha Activa</string>
+        <string name="act_desc_10">Entrena la capacidad de concentración y reduce el ruido mental al enfocarte en el entorno externo.</string>
+
+        <string name="act_title_11">Estiramiento Exprés</string>
+        <string name="act_desc_11">Mejora la circulación y oxigenación cerebral, eliminando la rigidez causada por el sedentarismo.</string>
+
+        <string name="act_title_12">Yoga Suave</string>
+        <string name="act_desc_12">Aumenta la flexibilidad y libera bloqueos emocionales almacenados físicamente en las articulaciones.</string>
+
+        <string name="act_title_13">Baile Libre</string>
+        <string name="act_desc_13">Libera endorfinas y dopamina, mejorando el estado de ánimo de forma casi instantánea.</string>
+
+        <string name="act_title_14">Abrazo de Mariposa</string>
+        <string name="act_desc_14">Estimulación bilateral que ayuda al cerebro a procesar emociones difíciles y recuperar la calma.</string>
+
+        <string name="act_title_15">Pies Descalzos</string>
+        <string name="act_desc_15">Reduce la inflamación corporal y mejora el equilibrio gracias al contacto directo con la tierra.</string>
+
+        <string name="act_title_16">Agua Fría</string>
+        <string name="act_desc_16">Estimula el nervio vago, bajando las pulsaciones y reiniciando el sistema nervioso ante el estrés.</string>
+
+        <string name="act_title_17">Relajación Progresiva</string>
+        <string name="act_desc_17">Enseña al cerebro a reconocer la diferencia entre tensión y relajación, reduciendo el insomnio.</string>
+
+        <string name="act_title_18">Caminar sin Rumbo</string>
+        <string name="act_desc_18">Estimula la creatividad y el pensamiento lateral al quitar la presión de un objetivo o destino.</string>
+
+        <string name="act_title_19">Automasaje</string>
+        <string name="act_desc_19">Reduce los niveles de tensión en los tejidos blandos y mejora el flujo linfático en zonas críticas.</string>
+
+        <string name="act_title_20">Postura de Poder</string>
+        <string name="act_desc_20">Cambia la química hormonal aumentando la testosterona y bajando el cortisol para mayor confianza.</string>
+
+        <string name="act_title_21">Diario de Gratitud</string>
+        <string name="act_desc_21">Entrena al cerebro para detectar lo positivo, aumentando la felicidad a largo plazo según la ciencia.</string>
+
+        <string name="act_title_22">Carta a mi Yo Futuro</string>
+        <string name="act_desc_22">Ayuda a clarificar metas y valores, creando una visión de vida motivadora y coherente.</string>
+
+        <string name="act_title_23">Registro de Logros</string>
+        <string name="act_desc_23">Combate el síndrome del impostor y fortalece la autoeficacia al reconocer tus pequeñas victorias.</string>
+
+        <string name="act_title_24">Desahogo Libre</string>
+        <string name="act_desc_24">Drenaje emocional que permite exteriorizar traumas o frustraciones sin juicio externo.</string>
+
+        <string name="act_title_25">Tiempo de Preocupación</string>
+        <string name="act_desc_25">Evita que la ansiedad tome control de todo tu día al asignarle un horario y espacio limitado.</string>
+
+        <string name="act_title_26">Reformular Pensamientos</string>
+        <string name="act_desc_26">Técnica de Terapia Cognitivo Conductual para romper ciclos de autocrítica y pensamientos irracionales.</string>
+
+        <string name="act_title_27">Lista de Perdón</string>
+        <string name="act_desc_27">Libera la carga emocional del pasado y mejora la autoestima al aceptar nuestra humanidad.</string>
+
+        <string name="act_title_28">Afirmaciones \'Yo Soy\'</string>
+        <string name="act_desc_28">Reprograma creencias limitantes en el subconsciente mediante la repetición de verdades positivas.</string>
+
+        <string name="act_title_29">El Frasco de lo Bueno</string>
+        <string name="act_desc_29">Crea un banco de memoria positiva que sirve como apoyo emocional en momentos de crisis futura.</string>
+
+        <string name="act_title_30">Carta a un Ser Querido</string>
+        <string name="act_desc_30">Fortalece los vínculos emocionales y la empatía al procesar tus sentimientos hacia los demás.</string>
+
+        <string name="act_title_31">Desconexión Digital</string>
+        <string name="act_desc_31">Permite que el cerebro descanse de la sobreestimulación de dopamina, mejorando la atención.</string>
+
+        <string name="act_title_32">Dibujar Mandalas</string>
+        <string name="act_desc_32">Induce un estado de flujo (flow) similar al de la meditación, equilibrando ambos hemisferios cerebrales.</string>
+
+        <string name="act_title_33">Musicoterapia Lofi</string>
+        <string name="act_desc_33">Crea una atmósfera de calma que reduce la ansiedad ambiental y mejora la concentración.</string>
+
+        <string name="act_title_34">Escribir un Haiku</string>
+        <string name="act_desc_34">Obliga a la mente a sintetizar emociones en pocas palabras, fomentando la presencia mental.</string>
+
+        <string name="act_title_35">Ordenar un Espacio</string>
+        <string name="act_desc_35">El orden externo genera orden interno, reduciendo el estrés visual y aumentando la calma.</string>
+
+        <string name="act_title_36">Fotografía Consciente</string>
+        <string name="act_desc_36">Entrena el ojo para buscar la belleza en lo cotidiano, cambiando tu perspectiva del día.</string>
+
+        <string name="act_title_37">Aprender algo Nuevo</string>
+        <string name="act_desc_37">Estimula la neuroplasticidad cerebral, manteniendo la mente ágil y joven.</string>
+
+        <string name="act_title_38">Origami</string>
+        <string name="act_desc_38">Mejora la coordinación mano-ojo y la paciencia mediante una actividad repetitiva y artística.</string>
+
+        <string name="act_title_39">Cocina Consciente</string>
+        <string name="act_desc_39">Transforma una tarea rutinaria en un acto de autocuidado y nutrición con todos los sentidos.</string>
+
+        <string name="act_title_40">Rompecabezas Mental</string>
+        <string name="act_desc_40">Previene el deterioro cognitivo y mejora la capacidad de resolución de problemas bajo calma.</string>
+
+        <string name="act_title_41">Contacto Social</string>
+        <string name="act_desc_41">Reduce la sensación de soledad y libera oxitocina, la hormona del vínculo y la confianza.</string>
+
+        <string name="act_title_42">Mensaje de Gratitud</string>
+        <string name="act_desc_42">Mejora no solo tu bienestar, sino el de otra persona, creando un círculo de afecto positivo.</string>
+
+        <string name="act_title_43">Cita Contigo Mismo</string>
+        <string name="act_desc_43">Refuerza la independencia emocional y el autoconocimiento al disfrutar de tu propia compañía.</string>
+
+        <string name="act_title_44">Rutina de Skincare</string>
+        <string name="act_desc_44">Un acto de amor propio que marca el inicio o fin del día con un cuidado físico consciente.</string>
+
+        <string name="act_title_45">Planear una Ilusión</string>
+        <string name="act_desc_45">Genera dopamina anticipatoria, lo cual ayuda a superar semanas difíciles con optimismo.</string>
+
+        <string name="act_title_46">Ducha Consciente</string>
+        <string name="act_desc_46">Limpia simbólicamente las cargas del día mientras relajas los músculos con el agua.</string>
+
+        <string name="act_title_47">Elogiar a Alguien</string>
+        <string name="act_desc_47">Fomenta la amabilidad y mejora el clima social a tu alrededor de forma inmediata.</string>
+
+        <string name="act_title_48">Mirar Fotos Antiguas</string>
+        <string name="act_desc_48">Conecta con tu historia personal y revive momentos de alegría para mejorar el humor.</string>
+
+        <string name="act_title_49">Vaso de Agua</string>
+        <string name="act_desc_49">Mejora la función cognitiva y la energía, ya que una leve deshidratación causa fatiga y confusión.</string>
+
+        <string name="act_title_50">Pausa Total</string>
+        <string name="act_desc_50">Reset mental necesario para evitar el agotamiento emocional y recuperar la presencia.</string>
 </resources>

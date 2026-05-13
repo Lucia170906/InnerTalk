@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.material3.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -41,7 +40,7 @@ class ConfigFragment : Fragment() {
             abrirRelojYProgramar()
         } else {
             // Si nos rechaza, le avisamos y apagamos el switch
-            Toast.makeText(requireContext(), "Necesitas dar permiso para recibir los recordatorios", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), getString(R.string.config_error_permission), Toast.LENGTH_LONG).show()
             binding.switchNotificaciones.isChecked = false
         }
     }
@@ -133,7 +132,7 @@ class ConfigFragment : Fragment() {
             .setTimeFormat(TimeFormat.CLOCK_24H) // Formato de 24 horas
             .setHour(20) // Hora por defecto: 20:00
             .setMinute(0)
-            .setTitleText("¿A qué hora quieres el recordatorio?")
+            .setTitleText(getString(R.string.config_picker_title))
             .build()
 
         // Mostramos el selector de hora
@@ -148,7 +147,8 @@ class ConfigFragment : Fragment() {
             requireContext().getSharedPreferences("config_prefs", 0)
                 .edit().putBoolean("notif_active", true).apply()
 
-            Toast.makeText(context, "Recordatorio programado a las ${String.format("%02d:%02d", picker.hour, picker.minute)}", Toast.LENGTH_SHORT).show()
+            val horaFormateada = String.format("%02d:%02d", picker.hour, picker.minute)
+            Toast.makeText(context, getString(R.string.config_notif_scheduled, horaFormateada), Toast.LENGTH_SHORT).show()
         }
 
         picker.addOnNegativeButtonClickListener {
@@ -206,26 +206,18 @@ class ConfigFragment : Fragment() {
 
     private fun cancelarNotificacion() {
         WorkManager.getInstance(requireContext()).cancelUniqueWork("notificacion_diaria")
-        Toast.makeText(context, "Notificación cancelada", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.config_notif_canceled), Toast.LENGTH_SHORT).show()
     }
 
     //Funcion para mostarr el pop up de las políticas
     private fun mostrarPoliticasPopUp(){
         val builder = android.app.AlertDialog.Builder(requireContext())
-        builder.setTitle("Políticas y privacidad")
-        //Añadimos el mensaje
-        builder.setMessage("Bienvenido a InnerTalk.\n\n" +
-                "1. Recopilación de datos:\n" +
-                "Guardamos tu información básica y tu registro diario de emociones para ofrecerte un servicio personalizado.\n\n" +
-                "2. Privacidad:\n" +
-                "Tus entradas de diario son privadas y se almacenan de forma segura en nuestra base de datos. No las compartimos con terceros.\n\n" +
-                "3. Edad mínima:\n" +
-                "Como se verifica en el registro, debes tener al menos 18 años para utilizar esta aplicación.\n\n" +
-                "4. Uso adecuado:\n" +
-                "InnerTalk es una herramienta de apoyo emocional, pero no sustituye en ningún caso a la ayuda psicológica profesional.")
+        builder.setTitle(getString(R.string.config_policies_title))
+        //Añadimos el mensaje desde strings
+        builder.setMessage(getString(R.string.config_policies_content))
 
         //El suauri oya ha aceptado las politicas en el registro, pro lo que aquí solo necesita cerrar el pop up
-        builder.setPositiveButton("Entendido"){
+        builder.setPositiveButton(getString(R.string.config_policies_btn)){
                 dialog, _ ->
             dialog.dismiss()
         }
@@ -242,14 +234,14 @@ class ConfigFragment : Fragment() {
             data = Uri.parse("mailto:")
             //Ponemos nuestro correo
             putExtra(Intent.EXTRA_EMAIL, arrayOf("innertalk@gmail.com"))
-            //Ponemos un asunto en el correo
-            putExtra(Intent.EXTRA_SUBJECT, "Incidencia de uso")
+            //Ponemos un asunto en el correo desde strings
+            putExtra(Intent.EXTRA_SUBJECT, getString(R.string.config_email_subject))
         }
         try{
             //Intentamos abrir el correo
             startActivity(intent)
         }catch(e : Exception){
-            Toast.makeText(requireContext(), "No hemos encontrado ninguna aplicación de correo ", LENGTH_SHORT)
+            Toast.makeText(requireContext(), getString(R.string.config_email_error), LENGTH_SHORT).show()
 
         }
 

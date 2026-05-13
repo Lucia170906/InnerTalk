@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             //primero comprobamo si hay internet para hacer la consulta a firebase
             if (!isNetworkAvailable()) {
-                Toast.makeText(this, "No hay internet", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.error_no_internet), Toast.LENGTH_LONG).show()
                 return@setOnClickListener // Cortamos la ejecución aquí, no intentamos hacer login
             }
             // Restaurar fondos
@@ -54,12 +54,12 @@ class LoginActivity : AppCompatActivity() {
 
             if (email.isEmpty()) {
                 binding.etLoginUser.setBackgroundResource(R.drawable.bg_input_field_error)
-                binding.etLoginUser.error = "Campo obligatorio"
+                binding.etLoginUser.error = getString(R.string.error_field_required)
                 isValid = false
             }
             if (pass.isEmpty()) {
                 binding.etLoginPass.setBackgroundResource(R.drawable.bg_input_field_error)
-                binding.etLoginPass.error = "Campo obligatorio"
+                binding.etLoginPass.error = getString(R.string.error_field_required)
                 isValid = false
             }
 
@@ -67,10 +67,10 @@ class LoginActivity : AppCompatActivity() {
 
             auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "¡Bienvenido de nuevo!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.login_msg_welcome), Toast.LENGTH_SHORT).show()
                     goToHome()
                 } else {
-                    Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.login_error_credentials), Toast.LENGTH_LONG).show()
                 }
             }
         }

@@ -80,20 +80,20 @@ class EditProfileFragment : Fragment() {
                     val intereses = document.get("intereses") as? List<String> ?: emptyList() // si no hay intereses dejamos la lista vacía
 
                     //Marcamos los checkbox si los nombres están en la lista
-                    binding.cbEditEstres.isChecked = intereses.contains("Estrés")
-                    binding.cbEditAnsiedad.isChecked = intereses.contains("Ansiedad")
-                    binding.cbEditSueno.isChecked = intereses.contains("Sueño")
-                    binding.cbEditAnimo.isChecked = intereses.contains("Ánimo")
+                    binding.cbEditEstres.isChecked = intereses.contains(getString(R.string.auth_interest_stress))
+                    binding.cbEditAnsiedad.isChecked = intereses.contains(getString(R.string.auth_interest_anxiety))
+                    binding.cbEditSueno.isChecked = intereses.contains(getString(R.string.auth_interest_sleep))
+                    binding.cbEditAnimo.isChecked = intereses.contains(getString(R.string.auth_interest_mood))
                 }else{
                     //Si no encontramos datos del usuario hacemos un Toast
-                    Toast.makeText(requireContext(), "No se encontraron datos del perfil", LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.error_profile_not_found), LENGTH_SHORT).show()
 
                 }
             }
             //Por si da error
             .addOnFailureListener { e ->
                 Log.e("EditProfile", "Error al cargar los datos", e)
-                Toast.makeText(requireContext(), "Error de conexión", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.error_connection), Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -132,7 +132,7 @@ class EditProfileFragment : Fragment() {
         // Si fechaSeleccionada NO es nula, significa que el usuario ha tocado el calendario para cambiarla
         if (fechaSeleccionada != null) {
             if (!esMayorDeEdad(fechaSeleccionada!!)) {
-                Toast.makeText(appContext, "No puedes poner una fecha de menor de 18 años.", Toast.LENGTH_LONG).show()
+                Toast.makeText(appContext, getString(R.string.error_underage_edit), Toast.LENGTH_LONG).show()
                 return // Cortamos de raíz, no guardamos nada
             }
         }
@@ -148,10 +148,10 @@ class EditProfileFragment : Fragment() {
 
         //Recogemos los checks
         val intereses = mutableListOf<String>()
-        if (binding.cbEditEstres.isChecked) intereses.add("Estrés")
-        if (binding.cbEditAnsiedad.isChecked) intereses.add("Ansiedad")
-        if (binding.cbEditSueno.isChecked) intereses.add("Sueño")
-        if (binding.cbEditAnimo.isChecked) intereses.add("Ánimo")
+        if (binding.cbEditEstres.isChecked) intereses.add(getString(R.string.auth_interest_stress))
+        if (binding.cbEditAnsiedad.isChecked) intereses.add(getString(R.string.auth_interest_anxiety))
+        if (binding.cbEditSueno.isChecked) intereses.add(getString(R.string.auth_interest_sleep))
+        if (binding.cbEditAnimo.isChecked) intereses.add(getString(R.string.auth_interest_mood))
 
         updates["intereses"] = intereses
 
@@ -167,7 +167,7 @@ class EditProfileFragment : Fragment() {
 
             }
             .addOnFailureListener {
-                Toast.makeText(appContext, "Error al actualizar perfil en la base de datos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(appContext, getString(R.string.error_db_update), Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -179,7 +179,7 @@ class EditProfileFragment : Fragment() {
         if(nuevoEmail != user.email && nuevoEmail.isNotEmpty()){
             user.updateEmail(nuevoEmail).addOnCompleteListener{ task ->
                 if(!task.isSuccessful){
-                    Toast.makeText(appContext, "Aviso: No se pudo cambiar el correo. Por seguridad, necesitas cerrar sesión y volver a entrar para hacer esto.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(appContext, getString(R.string.msg_reauth_email_warning), Toast.LENGTH_LONG).show()
                 }
 
             }
@@ -188,11 +188,11 @@ class EditProfileFragment : Fragment() {
         if(nuevaPass.isNotEmpty()){
             user.updatePassword(nuevaPass).addOnCompleteListener { task ->
                 if(!task.isSuccessful){
-                    Toast.makeText(requireContext(), "Aviso: No se pudo cambiar la contraseña. Por seguridad, necesitas cerrar sesión y volver a entrar.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.msg_reauth_pass_warning), Toast.LENGTH_LONG).show()
                 }
-             }
+            }
         }
-        Toast.makeText(requireContext(), "¡Perfil actualizado con éxito!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), getString(R.string.msg_profile_updated), Toast.LENGTH_SHORT).show()
 
         // Volvemos a la pantalla anterior automáticamente
         //parentFragmentManager.popBackStack()
