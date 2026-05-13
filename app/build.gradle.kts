@@ -21,7 +21,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -89,4 +90,9 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     // Kapt es necesario para procesar las anotaciones de Glide (opcional pero recomendado)
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
+
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+
+
 }

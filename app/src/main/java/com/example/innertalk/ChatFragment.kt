@@ -25,6 +25,8 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
+import androidx.fragment.app.activityViewModels
+import com.example.innertalk.viewModel.ChatViewModel
 
 
 class ChatFragment : Fragment() {
@@ -33,7 +35,9 @@ class ChatFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var chatAdapter: ChatAdapter
-    private val messageList = mutableListOf<Message>()
+    //Usamos el activity viewmodel para que este vinculadoa la activity
+    //y asi si el fragment muere la conversacion se mantiene
+    private  val viewModel : ChatViewModel by activityViewModels()
 
     // 1. LA APIKEY
     private val apiKey by lazy { leerApiKey() }
@@ -60,16 +64,24 @@ class ChatFragment : Fragment() {
         // Inicializamos el nombre por defecto desde strings
         nombreUsuario = getString(R.string.chat_default_username)
 
-        //Cargamos los datos del usuario:
-        cargarDatosPerfilFirestore()
-
-        chatAdapter = ChatAdapter(messageList)
+        if(!viewModel.datosCargados){
+            //Cargamos los datos del usuario solo si no se han cargado antes
+            cargarDatosPerfilFirestore()
+        }
+        //Usamos la lista del viewModel para el adapter
+        chatAdapter = ChatAdapter(viewModel.messageList)
         binding.rvChat.apply {
             layoutManager = LinearLayoutManager(requireContext()).apply {
                 stackFromEnd = true
             }
             adapter = chatAdapter
+
+            //Si ya habia mensajes hacemos scroll hasta el final
+            if(chatAdapter.itemCount >0){
+                scrollToPosition(chatAdapter.itemCount -1 )
+            }
         }
+
 
         binding.btnSend.setOnClickListener {
             val userText = binding.etMessage.text.toString().trim()
@@ -86,8 +98,9 @@ class ChatFragment : Fragment() {
         db.collection("users").document(uid).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    nombreUsuario = document.getString("name") ?: getString(R.string.chat_default_username)
-                    interesesUsuario = document.get("intereses") as? List<String> ?: listOf()
+                    viewModel.nombreUsuario = document.getString("name") ?: getString(R.string.chat_default_username)
+                    viewModel.interesesUsuario = document.get("intereses") as? List<String> ?: listOf()
+                    viewModel.datosCargados = true
                 }
             }
             .addOnFailureListener { e ->
@@ -97,7 +110,10 @@ class ChatFragment : Fragment() {
 
     private fun enviarMensaje(texto: String) {
         val userMsg = Message(texto, isUser = true)
-        chatAdapter.addMessage(userMsg)
+
+        //Guardams en el viewModel y notificamos al adapter
+        viewModel.addMessag(userMsg)
+        chatAdapter.notifyItemInserted(viewModel.messageList.size -1)
         binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
 
         // Hacemos la llamada a la red en un hilo secundario
@@ -109,7 +125,10 @@ class ChatFragment : Fragment() {
                 // Volvemos al hilo principal para actualizar la pantalla
                 withContext(Dispatchers.Main) {
                     val aiMsg = Message(respuestaTexto, isUser = false)
-                    chatAdapter.addMessage(aiMsg)
+
+                    //Guardamos en el viewModel
+                    viewModel.addMessag(aiMsg)
+                    chatAdapter.notifyItemInserted(viewModel.messageList.size -1)
                     binding.rvChat.smoothScrollToPosition(chatAdapter.itemCount - 1)
                 }
 
@@ -149,7 +168,7 @@ class ChatFragment : Fragment() {
             messagesArray.put(systemMsg)
 
             // B. EL HISTORIAL DE CHAT (Para que tenga memoria)
-            for (msg in messageList) {
+            for (msg in viewModel.messageList) {
                 val role = if (msg.isUser) "user" else "assistant"
                 val msgJson = JSONObject()
                 msgJson.put("role", role)
