@@ -280,6 +280,10 @@
     <string name="edit_entry_success">¡Nota actualizada!</string>
     <string name="edit_entry_db_error">Error al conectar con la base de datos</string>
     <string name="edit_entry_log_photo_error">Error al cargar foto vieja: %s</string>
+    <string name="edit_entry_delete_photo_confirm">¿Quieres eliminar la foto de esta nota?</string>
+    <string name="edit_entry_delete_photo_btn">Eliminar</string>
+    <string name="config_dialog_cancel">Cancelar</string>
+
 
     <!--cONFIG FRAGMENT-->
     <string name="config_error_permission">Necesitas dar permiso para recibir los recordatorios</string>

@@ -52,10 +52,11 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
+                R.id.startFragment,
                 R.id.chatFragment,
                 R.id.newEntryFragment,
                 R.id.statisticsFragment,
-                R.id.startFragment
+
             )
         )
 

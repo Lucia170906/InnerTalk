@@ -1,5 +1,6 @@
 package com.example.innertalk
 
+import android.app.AlertDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.material3.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.innertalk.databinding.FragmentNewEntryBinding
@@ -22,20 +24,23 @@ class EditEntryFragment : Fragment() {
     //Usamos el binding de new entry
     private var _binding: FragmentNewEntryBinding? = null
     private val binding get() = _binding!!
+
     //Variables de firebase
-    private val database = FirebaseDatabase.getInstance("https://innertalk-ca928-default-rtdb.europe-west1.firebasedatabase.app/").reference
+    private val database =
+        FirebaseDatabase.getInstance("https://innertalk-ca928-default-rtdb.europe-west1.firebasedatabase.app/").reference
     private val auth = FirebaseAuth.getInstance()
 
     //Variables para mostrar la informacion de las notas
-    private  var  idNotaActual : String = ""
-    private  var  textoNota : String = ""
+    private var idNotaActual: String = ""
+    private var textoNota: String = ""
 
-    private  var emocionSeleccionada: Int = 0
+    private var emocionSeleccionada: Int = 0
 
     //Variable para la imagen
-    private var nuevaImagenUri : Uri?= null
+    private var nuevaImagenUri: Uri? = null
+
     //Guardamos la foto vieja por si el usuario no la cambia
-    private var fotoBase64Actual : String ?=null
+    private var fotoBase64Actual: String? = null
 
 
     //Selector de imagen
@@ -82,17 +87,24 @@ class EditEntryFragment : Fragment() {
             binding.editTextNote.setText(textoNota)
 
             // Disparamos animación para marcar la carita correcta al entrar
-            val listaCaritas = listOf(binding.face1, binding.face2, binding.face3, binding.face4, binding.face5)
+            val listaCaritas =
+                listOf(binding.face1, binding.face2, binding.face3, binding.face4, binding.face5)
             actualizarDisenoCaritas(listaCaritas, emocionSeleccionada)
 
             //Cargamo la imagen
-            if (!fotoBase64Actual.isNullOrEmpty()){
+            if (!fotoBase64Actual.isNullOrEmpty()) {
                 cargarFotoActualEnPreview(fotoBase64Actual!!)
             }
         }
 
         binding.btnAdd.setOnClickListener {
             pickMedia.launch("image/*")
+        }
+        binding.ivPreview.setOnLongClickListener {
+            if (fotoBase64Actual != null || nuevaImagenUri != null) {
+                mostrarDialogoEliminarFoto()
+            }
+            true
         }
 
         //Preparamos el boton para guaradar
@@ -102,8 +114,10 @@ class EditEntryFragment : Fragment() {
 
 
     }
+
     private fun setupEmotions() {
-        val listaCaritas = listOf(binding.face1, binding.face2, binding.face3, binding.face4, binding.face5)
+        val listaCaritas =
+            listOf(binding.face1, binding.face2, binding.face3, binding.face4, binding.face5)
         listaCaritas.forEachIndexed { index, imageButton ->
             imageButton.setOnClickListener {
                 val numeroEmocion = index + 1
@@ -118,7 +132,7 @@ class EditEntryFragment : Fragment() {
         }
     }
 
-    private fun cargarFotoActualEnPreview(base64String: String){
+    private fun cargarFotoActualEnPreview(base64String: String) {
         try {
             //Convertimos el texto en Base 64 de Firebadr  vuelta a bytes
             val imageBytes = Base64.decode(base64String, Base64.DEFAULT)
@@ -128,12 +142,16 @@ class EditEntryFragment : Fragment() {
             //Mostramos el contenedor y la foto
             binding.cardPreview.visibility = View.VISIBLE
             binding.ivPreview.setImageBitmap(decodedImage)
-        }catch (e : Exception){
+        } catch (e: Exception) {
             Log.e("EditEntry", getString(R.string.edit_entry_log_photo_error, e.message))
             binding.cardPreview.visibility = View.GONE
         }
     }
-    private fun actualizarDisenoCaritas(caritas: List<android.widget.ImageButton>, seleccionada: Int) {
+
+    private fun actualizarDisenoCaritas(
+        caritas: List<android.widget.ImageButton>,
+        seleccionada: Int
+    ) {
         val colores = listOf("#4CAF50", "#FFEB3B", "#9E9E9E", "#FF9800", "#F44336")
         caritas.forEachIndexed { index, button ->
             val numeroBoton = index + 1
@@ -147,25 +165,37 @@ class EditEntryFragment : Fragment() {
         }
     }
 
-    fun actualizarEnFirebase (){
+    fun actualizarEnFirebase() {
         val nuevoTexto = binding.editTextNote.text.toString().trim()
         val uid = auth.currentUser?.uid ?: return
 
-        var fotoFinalBase64 : String ?= fotoBase64Actual //Por defecto mantenemos al vieja
-
-        //el usuario ha elegido una foto nueva ==
-        if( nuevaImagenUri != null){
-            //si hay foto nueva la comprimimos
-            fotoFinalBase64 = comprimirImagen(nuevaImagenUri!!)
-
-            if (fotoFinalBase64 == null){
-                Toast.makeText(requireContext(), getString(R.string.edit_entry_error_image), Toast.LENGTH_SHORT).show()
-                return
-            }
+        var fotoFinalBase64: String? = when{
+            nuevaImagenUri != null -> comprimirImagen(nuevaImagenUri!!)//foto nueva
+            fotoBase64Actual != null -> fotoBase64Actual//mantener foto vieja
+            else -> null//no hay foto
         }
 
+//        //el usuario ha elegido una foto nueva ==
+//        if (nuevaImagenUri != null) {
+//            //si hay foto nueva la comprimimos
+//            fotoFinalBase64 = comprimirImagen(nuevaImagenUri!!)
+//
+//            if (fotoFinalBase64 == null) {
+//                Toast.makeText(
+//                    requireContext(),
+//                    getString(R.string.edit_entry_error_image),
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                return
+//            }
+//        }
+
         if (idNotaActual.isEmpty()) {
-            Toast.makeText(requireContext(), getString(R.string.edit_entry_error_id), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.edit_entry_error_id),
+                Toast.LENGTH_LONG
+            ).show()
             return // Cortamos la ejecución aquí, ¡no guardamos nada!
         }
 
@@ -181,13 +211,21 @@ class EditEntryFragment : Fragment() {
         database.child("usuarios").child(uid).child("diario").child(idNotaActual)
             .updateChildren(actualizaciones)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), getString(R.string.edit_entry_success), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.edit_entry_success),
+                    Toast.LENGTH_SHORT
+                ).show()
 
                 // 5. Volvemos atrás automáticamente al terminar
                 findNavController().popBackStack()
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), getString(R.string.edit_entry_db_error), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.edit_entry_db_error),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 
@@ -205,6 +243,31 @@ class EditEntryFragment : Fragment() {
             Log.e("EditEntry", "Error comprimiendo: ${e.message}")
             null
         }
+    }
+
+    //Funciones para eliminar la imagen
+
+    private fun mostrarDialogoEliminarFoto() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.edit_entry_delete_photo_btn))
+            .setMessage(getString(R.string.edit_entry_delete_photo_confirm))
+            .setPositiveButton(getString(R.string.edit_entry_delete_photo_btn)) { _, _ ->
+                eliminarFotoDeLaVista()
+            }
+            .setNegativeButton(getString(R.string.config_dialog_cancel), null)
+            .show()
+    }
+
+    private fun eliminarFotoDeLaVista(){
+        //Limpiamos la referencia
+        fotoBase64Actual = null
+        nuevaImagenUri = null
+        //Ovultamos la UI
+        // 2. Ocultamos la UI
+        binding.ivPreview.setImageDrawable(null)
+        binding.cardPreview.visibility = View.GONE
+
+        Toast.makeText(requireContext(), "Foto marcada para eliminar", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

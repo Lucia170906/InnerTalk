@@ -161,6 +161,10 @@
     <string name="config_btn_policies">Policies</string>
     <string name="config_btn_logout">Log Out</string>
     <string name="desc_config_notif_icon">Notifications icon</string>
+    <string name="edit_entry_delete_photo_confirm">Do you want to delete the photo from this note?</string>
+    <string name="edit_entry_delete_photo_btn">Delete</string>
+    <string name="config_dialog_cancel">Cancel</string>
+
 
     <string name="chat_hint_input">Ask me something...</string>
     <string name="desc_btn_send">Send message</string>
