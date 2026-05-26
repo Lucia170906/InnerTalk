@@ -1,9 +1,14 @@
 # InnerTalk 🧠📱 - Botiquín Emocional de Bolsillo
 
+
+
+
 [![Android Native](https://img.shields.io/badge/Platform-Android%20Native-brightgreen.svg?style=flat-square)](https://developer.android.com/)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin-blue.svg?style=flat-square)](https://kotlinlang.org/)
 [![Firebase](https://img.shields.io/badge/Backend-Firebase-orange.svg?style=flat-square)](https://firebase.google.com/)
 [![Groq AI](https://img.shields.io/badge/AI-Groq%20API%20%28Llama%203.1%29-blueviolet.svg?style=flat-square)](https://groq.com/)
+
+<img width="352" height="764" alt="InnerTalkDemo" src="https://github.com/user-attachments/assets/08feeac3-6c95-46c9-a970-54b7965e759c" />
 
 **InnerTalk** es una aplicación móvil nativa para Android diseñada como una solución tecnológica ante la brecha de inmediatez en el soporte de la salud mental juvenil. El proyecto transforma el *smartphone* de un agente estresor pasivo (redes sociales, dinámicas adictivas) en una herramienta activa, privada y accesible 24/7 para el auto-registro y la contención emocional.
 
